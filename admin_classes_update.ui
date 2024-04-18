@@ -1110,9 +1110,26 @@ QComboBox QAbstractItemView {
     background-color: #000F2A;
 }
 
+QComboBox QScrollBar:vertical {
+    background-color: #000F2A;
+	width: 4px;
+}
+
+QComboBox QScrollBar::handle:vertical {
+    background-color: #FFFFFF;
+}
+
+QComboBox QScrollBar::add-line:vertical,
+QComboBox QScrollBar::sub-line:vertical {
+    border: none;
+    background: none;
+    height: 0px;
+}
+
 QComboBox QScrollBar::add-page:vertical,
 QComboBox QScrollBar::sub-page:vertical {
-    background: none;
+    background-color: #000F2A;
+	background: none;
 	border-style: solid;
 }</string>
        </property>
@@ -1177,9 +1194,26 @@ QComboBox QAbstractItemView {
     background-color: #000F2A;
 }
 
+QComboBox QScrollBar:vertical {
+    background-color: #000F2A;
+	width: 4px;
+}
+
+QComboBox QScrollBar::handle:vertical {
+    background-color: #FFFFFF;
+}
+
+QComboBox QScrollBar::add-line:vertical,
+QComboBox QScrollBar::sub-line:vertical {
+    border: none;
+    background: none;
+    height: 0px;
+}
+
 QComboBox QScrollBar::add-page:vertical,
 QComboBox QScrollBar::sub-page:vertical {
-    background: none;
+    background-color: #000F2A;
+	background: none;
 	border-style: solid;
 }</string>
        </property>
@@ -1244,9 +1278,26 @@ QComboBox QAbstractItemView {
     background-color: #000F2A;
 }
 
+QComboBox QScrollBar:vertical {
+    background-color: #000F2A;
+	width: 4px;
+}
+
+QComboBox QScrollBar::handle:vertical {
+    background-color: #FFFFFF;
+}
+
+QComboBox QScrollBar::add-line:vertical,
+QComboBox QScrollBar::sub-line:vertical {
+    border: none;
+    background: none;
+    height: 0px;
+}
+
 QComboBox QScrollBar::add-page:vertical,
 QComboBox QScrollBar::sub-page:vertical {
-    background: none;
+    background-color: #000F2A;
+	background: none;
 	border-style: solid;
 }</string>
        </property>
@@ -1347,9 +1398,26 @@ QComboBox QAbstractItemView {
     background-color: #000F2A;
 }
 
+QComboBox QScrollBar:vertical {
+    background-color: #000F2A;
+	width: 4px;
+}
+
+QComboBox QScrollBar::handle:vertical {
+    background-color: #FFFFFF;
+}
+
+QComboBox QScrollBar::add-line:vertical,
+QComboBox QScrollBar::sub-line:vertical {
+    border: none;
+    background: none;
+    height: 0px;
+}
+
 QComboBox QScrollBar::add-page:vertical,
 QComboBox QScrollBar::sub-page:vertical {
-    background: none;
+    background-color: #000F2A;
+	background: none;
 	border-style: solid;
 }</string>
        </property>
@@ -1414,9 +1482,26 @@ QComboBox QAbstractItemView {
     background-color: #000F2A;
 }
 
+QComboBox QScrollBar:vertical {
+    background-color: #000F2A;
+	width: 4px;
+}
+
+QComboBox QScrollBar::handle:vertical {
+    background-color: #FFFFFF;
+}
+
+QComboBox QScrollBar::add-line:vertical,
+QComboBox QScrollBar::sub-line:vertical {
+    border: none;
+    background: none;
+    height: 0px;
+}
+
 QComboBox QScrollBar::add-page:vertical,
 QComboBox QScrollBar::sub-page:vertical {
-    background: none;
+    background-color: #000F2A;
+	background: none;
 	border-style: solid;
 }</string>
        </property>
@@ -1481,9 +1566,26 @@ QComboBox QAbstractItemView {
     background-color: #000F2A;
 }
 
+QComboBox QScrollBar:vertical {
+    background-color: #000F2A;
+	width: 4px;
+}
+
+QComboBox QScrollBar::handle:vertical {
+    background-color: #FFFFFF;
+}
+
+QComboBox QScrollBar::add-line:vertical,
+QComboBox QScrollBar::sub-line:vertical {
+    border: none;
+    background: none;
+    height: 0px;
+}
+
 QComboBox QScrollBar::add-page:vertical,
 QComboBox QScrollBar::sub-page:vertical {
-    background: none;
+    background-color: #000F2A;
+	background: none;
 	border-style: solid;
 }</string>
        </property>
