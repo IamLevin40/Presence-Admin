@@ -14,6 +14,11 @@
    <string>Admin Classes List</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">QWidget #centralwidget {
+	background-color: #FFFFFF;
+}</string>
+   </property>
    <widget class="QGroupBox" name="headerGroup">
     <property name="geometry">
      <rect>
@@ -691,7 +696,7 @@
 }
 
 QComboBox QAbstractItemView {
-    margin-top: 4px;
+    background-color: #000F2A;
 }
 
 QComboBox QScrollBar::add-page:vertical,
@@ -764,7 +769,7 @@ QComboBox QScrollBar::sub-page:vertical {
 }
 
 QComboBox QAbstractItemView {
-    margin-top: 4px;
+    background-color: #000F2A;
 }
 
 QComboBox QScrollBar::add-page:vertical,
@@ -837,7 +842,7 @@ QComboBox QScrollBar::sub-page:vertical {
 }
 
 QComboBox QAbstractItemView {
-    margin-top: 4px;
+    background-color: #000F2A;
 }
 
 QComboBox QScrollBar::add-page:vertical,
@@ -910,7 +915,7 @@ QComboBox QScrollBar::sub-page:vertical {
 }
 
 QComboBox QAbstractItemView {
-    margin-top: 4px;
+    background-color: #000F2A;
 }
 
 QComboBox QScrollBar::add-page:vertical,
@@ -1076,7 +1081,7 @@ QComboBox QScrollBar::sub-page:vertical {
 }
 
 QComboBox QAbstractItemView {
-    margin-top: 4px;
+	background-color: #000F2A;
 }
 
 QComboBox QScrollBar::add-page:vertical,
@@ -1100,6 +1105,9 @@ QComboBox QScrollBar::sub-page:vertical {
       <height>330</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
     <property name="widgetResizable">
      <bool>true</bool>
     </property>
@@ -1111,6 +1119,11 @@ QComboBox QScrollBar::sub-page:vertical {
        <width>308</width>
        <height>328</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QWidget {
+	background-color: #FFFFFF;
+}</string>
      </property>
     </widget>
    </widget>

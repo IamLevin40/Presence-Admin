@@ -21,6 +21,7 @@ SOURCES += \
     admin_students_enroll.cpp \
     admin_students_list.cpp \
     admin_students_update.cpp \
+    global_variables.cpp \
     main.cpp
 
 HEADERS += \
@@ -35,7 +36,8 @@ HEADERS += \
     admin_login_form.h \
     admin_students_enroll.h \
     admin_students_list.h \
-    admin_students_update.h
+    admin_students_update.h \
+    global_variables.h
 
 FORMS += \
     admin_classes_create.ui \

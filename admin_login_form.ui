@@ -14,12 +14,14 @@
    <string>Admin Login Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget {
-	background-color: #000F2A;
-}
-</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">QWidget #centralwidget {
+	background-color: #000F2A;
+}</string>
+   </property>
    <widget class="QGroupBox" name="appGroup">
     <property name="geometry">
      <rect>
@@ -128,39 +130,6 @@
       <string notr="true">KEEP IN TRACK EVERYTIME</string>
      </property>
     </widget>
-   </widget>
-   <widget class="QPushButton" name="backButton">
-    <property name="geometry">
-     <rect>
-      <x>15</x>
-      <y>15</y>
-      <width>30</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-	border: 0px;
-	border-radius: 0px;
-	background: none;
-}</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="icon">
-     <iconset resource="resources.qrc">
-      <normaloff>:/res/assets/back.png</normaloff>:/res/assets/back.png</iconset>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>30</width>
-      <height>30</height>
-     </size>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
    </widget>
    <widget class="QGroupBox" name="formGroup">
     <property name="geometry">
@@ -291,7 +260,7 @@
       </property>
      </widget>
     </widget>
-    <widget class="QGroupBox" name="pinGroup">
+    <widget class="QGroupBox" name="adminPinGroup">
      <property name="enabled">
       <bool>true</bool>
      </property>
@@ -319,7 +288,7 @@
      <property name="flat">
       <bool>true</bool>
      </property>
-     <widget class="QLabel" name="pinHud">
+     <widget class="QLabel" name="adminPinHud">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -346,7 +315,7 @@
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QLineEdit" name="pinTextbox">
+     <widget class="QLineEdit" name="adminPinTextbox">
       <property name="geometry">
        <rect>
         <x>15</x>
@@ -417,6 +386,36 @@
      </property>
      <property name="flat">
       <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="errorLabel">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>25</x>
+       <y>310</y>
+       <width>310</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+	background: none;
+	color: #FF003D;
+	font-family: Poppins;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </widget>

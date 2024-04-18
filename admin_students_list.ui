@@ -13,7 +13,17 @@
   <property name="windowTitle">
    <string>Admin Students List</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget #centralwidget {
+	background-color: #FFFFFF;
+}</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">QWidget #centralwidget {
+	background-color: #FFFFFF;
+}</string>
+   </property>
    <widget class="QGroupBox" name="headerGroup">
     <property name="geometry">
      <rect>
@@ -27,6 +37,7 @@
      <string notr="true">QGroupBox {
 	border: 0px;
 	border-radius: 0px;
+	background: none;
 }</string>
     </property>
     <property name="title">
@@ -168,6 +179,7 @@
      </property>
      <property name="styleSheet">
       <string notr="true">QLabel {
+	background: none;
 	color: #FFFFFF;
 	text-align: right;
 	font-family: Poppins;
@@ -195,6 +207,7 @@
      </property>
      <property name="styleSheet">
       <string notr="true">QLabel {
+	background: none;
 	color: #FFFFFF;
 	text-align: right;
 	font-family: Poppins;
@@ -412,7 +425,7 @@
 }
 
 QComboBox QAbstractItemView {
-    margin-top: 4px;
+    background-color: #000F2A;
 }
 
 QComboBox QScrollBar::add-page:vertical,
@@ -485,7 +498,7 @@ QComboBox QScrollBar::sub-page:vertical {
 }
 
 QComboBox QAbstractItemView {
-    margin-top: 4px;
+    background-color: #000F2A;
 }
 
 QComboBox QScrollBar::add-page:vertical,
@@ -558,7 +571,7 @@ QComboBox QScrollBar::sub-page:vertical {
 }
 
 QComboBox QAbstractItemView {
-    margin-top: 4px;
+    background-color: #000F2A;
 }
 
 QComboBox QScrollBar::add-page:vertical,
@@ -631,7 +644,7 @@ QComboBox QScrollBar::sub-page:vertical {
 }
 
 QComboBox QAbstractItemView {
-    margin-top: 4px;
+    background-color: #000F2A;
 }
 
 QComboBox QScrollBar::add-page:vertical,
@@ -752,6 +765,7 @@ QComboBox QScrollBar::sub-page:vertical {
      <string notr="true">QGroupBox {
 	border: 0px;
 	border-radius: 0px;
+	background: none;
 }</string>
     </property>
     <property name="title">
@@ -1038,6 +1052,11 @@ QComboBox QScrollBar::sub-page:vertical {
        <width>308</width>
        <height>328</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QWidget {
+	background-color: #FFFFFF
+}</string>
      </property>
     </widget>
    </widget>

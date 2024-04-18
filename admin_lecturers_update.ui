@@ -14,6 +14,11 @@
    <string>Admin Lecturers Update</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">QWidget #centralwidget {
+	background-color: #FFFFFF;
+}</string>
+   </property>
    <widget class="QGroupBox" name="headerGroup">
     <property name="geometry">
      <rect>
@@ -732,7 +737,7 @@
 }
 
 QComboBox QAbstractItemView {
-    margin-top: 4px;
+    background-color: #000F2A;
 }
 
 QComboBox QScrollBar::add-page:vertical,
