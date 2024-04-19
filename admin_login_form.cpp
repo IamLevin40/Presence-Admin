@@ -1,21 +1,36 @@
-#include "global_variables.h"
+#include "global_main.h"
 
 #include "admin_login_form.h"
 #include "ui_admin_login_form.h"
+
+
+// Include header files for forward declaration
+#include "admin_students_list.h"
+
 
 Admin_Login_Form::Admin_Login_Form(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Admin_Login_Form)
 {
     ui->setupUi(this);
+
+    // Give function to buttons
+    connect(ui->loginButton, &QPushButton::clicked, this, &Admin_Login_Form::loginCall);
+
+    // Load window position
+    QPoint windowPos = WindowPositionManager::loadWindowPosition();
+    windowPos.setY(windowPos.y() - 31);
+    move(windowPos);
 }
+
 
 Admin_Login_Form::~Admin_Login_Form()
 {
     delete ui;
 }
 
-void Admin_Login_Form::on_loginButton_clicked()
+
+void Admin_Login_Form::loginCall()
 {
     // Fetch string input text() from textboxes
     QString adminId = ui->adminIdTextbox->text();
@@ -24,39 +39,27 @@ void Admin_Login_Form::on_loginButton_clicked()
     // Must return result in QString from authentication function
     QString result = authenticateAdmin(adminId, adminPin);
 
-    // Indicate successful if the result is empty
-    if (result.isEmpty())
-    {
-        switchWindow_AdminStudentsList();
-    }
-    // Otherwise, display error message
-    else
+    // Return error if the result is not empty
+    if (!result.isEmpty())
     {
         ui->errorLabel->setText(result);
+        return;
     }
+
+    Admin_Login_Form::switchWindow_AdminStudentsList();
 }
+
 
 QString Admin_Login_Form::authenticateAdmin(const QString &adminId, const QString &adminPin)
 {
     // Return message if any conditions met true, otherwise return empty string
-    if (adminId == "")
-    {
-        return Messages::emptyAdminId();
-    }
-    if (adminId != $adminId)
-    {
-        return Messages::invalidAdminId();
-    }
-    if (adminPin == "")
-    {
-        return Messages::emptyAdminPin();
-    }
-    if (adminPin != $adminPin)
-    {
-        return Messages::invalidAdminPin();
-    }
+    if (adminId == "") { return Messages::emptyAdminId(); }
+    if (adminId != $adminId) { return Messages::invalidAdminId(); }
+    if (adminPin == "") { return Messages::emptyAdminPin(); }
+    if (adminPin != $adminPin) { return Messages::invalidAdminPin(); }
     return "";
 }
+
 
 void Admin_Login_Form::switchWindow_AdminStudentsList()
 {
@@ -64,4 +67,12 @@ void Admin_Login_Form::switchWindow_AdminStudentsList()
     admin_students_list = new Admin_Students_List;
     admin_students_list->show();
     this->hide();
+}
+
+
+void Admin_Login_Form::moveEvent(QMoveEvent *event)
+{
+    // Saves window position every movement instance of a window
+    QMainWindow::moveEvent(event);
+    WindowPositionManager::saveWindowPosition(event->pos());
 }

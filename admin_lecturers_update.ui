@@ -730,7 +730,7 @@
 	border: 0px;
 	color: #FFFFFF;
 	font-family: Poppins;
-	font-size: 12px;
+	font-size: 10px;
 	font-style: normal;
 	font-weight: 500;
 	line-height: normal;
@@ -740,9 +740,26 @@ QComboBox QAbstractItemView {
     background-color: #000F2A;
 }
 
+QComboBox QScrollBar:vertical {
+    background-color: #000F2A;
+	width: 12px;
+}
+
+QComboBox QScrollBar::handle:vertical {
+    background-color: #FFFFFF;
+}
+
+QComboBox QScrollBar::add-line:vertical,
+QComboBox QScrollBar::sub-line:vertical {
+    border: none;
+    background: none;
+    height: 0px;
+}
+
 QComboBox QScrollBar::add-page:vertical,
 QComboBox QScrollBar::sub-page:vertical {
-    background: none;
+    background-color: #000F2A;
+	background: none;
 	border-style: solid;
 }</string>
       </property>
@@ -810,6 +827,36 @@ QComboBox QScrollBar::sub-page:vertical {
        <string>Pin</string>
       </property>
      </widget>
+    </widget>
+    <widget class="QLabel" name="errorLabel">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>380</y>
+       <width>310</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+	background: none;
+	color: #FF003D;
+	font-family: Poppins;
+	font-size: 10px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
    </widget>
   </widget>

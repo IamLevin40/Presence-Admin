@@ -397,7 +397,7 @@
        <x>25</x>
        <y>310</y>
        <width>310</width>
-       <height>16</height>
+       <height>20</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -405,7 +405,7 @@
 	background: none;
 	color: #FF003D;
 	font-family: Poppins;
-	font-size: 12px;
+	font-size: 10px;
 	font-style: normal;
 	font-weight: 600;
 	line-height: normal;

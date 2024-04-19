@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -21,7 +21,7 @@ SOURCES += \
     admin_students_enroll.cpp \
     admin_students_list.cpp \
     admin_students_update.cpp \
-    global_variables.cpp \
+    global_main.cpp \
     main.cpp
 
 HEADERS += \
@@ -37,7 +37,7 @@ HEADERS += \
     admin_students_enroll.h \
     admin_students_list.h \
     admin_students_update.h \
-    global_variables.h
+    global_main.h
 
 FORMS += \
     admin_classes_create.ui \

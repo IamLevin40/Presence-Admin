@@ -1,3 +1,4 @@
+#include "global_main.h"
 #include "admin_classes_create.h"
 #include "admin_classes_list.h"
 #include "admin_classes_students_add.h"
@@ -13,10 +14,12 @@
 
 #include <QApplication>
 
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     Admin_Login_Form w;
     w.show();
+
     return a.exec();
 }

@@ -1023,7 +1023,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>270</y>
+       <y>260</y>
        <width>310</width>
        <height>60</height>
       </rect>
@@ -1311,7 +1311,7 @@ QComboBox QScrollBar::sub-page:vertical {
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>330</y>
+       <y>320</y>
        <width>310</width>
        <height>60</height>
       </rect>
@@ -1594,6 +1594,36 @@ QComboBox QScrollBar::sub-page:vertical {
        </property>
       </widget>
      </widget>
+    </widget>
+    <widget class="QLabel" name="errorLabel">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>380</y>
+       <width>310</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+	background: none;
+	color: #FF003D;
+	font-family: Poppins;
+	font-size: 10px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
    </widget>
   </widget>

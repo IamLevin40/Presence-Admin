@@ -203,12 +203,12 @@ public:
         errorLabel = new QLabel(formGroup);
         errorLabel->setObjectName("errorLabel");
         errorLabel->setEnabled(true);
-        errorLabel->setGeometry(QRect(25, 310, 310, 16));
+        errorLabel->setGeometry(QRect(25, 310, 310, 20));
         errorLabel->setStyleSheet(QString::fromUtf8("QLabel {\n"
 "	background: none;\n"
 "	color: #FF003D;\n"
 "	font-family: Poppins;\n"
-"	font-size: 12px;\n"
+"	font-size: 10px;\n"
 "	font-style: normal;\n"
 "	font-weight: 600;\n"
 "	line-height: normal;\n"
