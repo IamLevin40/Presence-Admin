@@ -3,8 +3,15 @@
 
 #include <QString>
 #include <QPoint>
+#include <QList>
 #include <QStringList>
 #include <QTime>
+#include <QTimer>
+#include <QSettings>
+#include <QObject>
+#include <QLabel>
+#include <QComboBox>
+#include <QLineEdit>
 
 
 // Global variables
@@ -16,6 +23,9 @@ extern QString $adminPin;
 extern short $studentIdLength;
 extern short $lecturerIdLength;
 extern short $pinLength;
+extern short $minPage;
+extern short $maxPage;
+extern short $dataLimitPerPage;
 
 
 // Global database
@@ -26,15 +36,21 @@ extern QString $db_Password;
 extern QString $db_Database;
 extern int $db_Port;
 
+extern QString $updateKey_StudentInfo;
+extern QString $updateKey_LecturerInfo;
+extern QString $updateKey_ClassInfo;
+extern QString $selectKey_ClassInfo;
+
 
 // Global colleges and its corresponding programs
 namespace Colleges
 {
-    // Define colleges, programs, years, and sections
+    // Define colleges, programs, years, sections, and regular/irregular
     extern const QStringList $colleges;
     extern const QStringList $programs;
     extern const QStringList $years;
     extern const QStringList $sections;
+    extern const QStringList $isRegular;
 
     // Define colleges and its corresponding programs offered
     extern const QMap<QString, QStringList> $offeredPrograms;
@@ -61,6 +77,8 @@ namespace Messages
     inline QString unaccessDatabase() { return "Unable to access database. Try again."; }
     inline QString errorInsertData() { return "Unable to insert data to the database."; }
     inline QString errorSelectData() { return "Unable to select data from the database."; }
+    inline QString errorDeleteData() { return "Unable to delete data from the database."; }
+    inline QString errorUpdateData() { return "Unable to update data from the database."; }
 
     inline QString emptyAdminId() { return "Admin number is required."; }
     inline QString invalidAdminId() { return "Admin number is invalid."; }
@@ -71,11 +89,11 @@ namespace Messages
     inline QString emptyStudentId() { return "Student number is required."; }
     inline QString incompleteLengthStudentId() { return "Student number should be exactly 9 characters long."; }
     inline QString invalidStudentId() { return "Student number is invalid."; }
-    inline QString alreadyExistStudentId() { return "Student number already exist in database."; }
+    inline QString alreadyExistStudentId() { return "Student number already exist in the database."; }
     inline QString emptyLecturerId() { return "Lecturer number is required."; }
     inline QString incompleteLengthLecturerId() { return "Lecturer number should be exactly 4 characters long."; }
     inline QString invalidLecturerId() { return "Lecturer number is invalid."; }
-    inline QString alreadyExistLecturerId() { return "Lecturer number already exist in database."; }
+    inline QString alreadyExistLecturerId() { return "Lecturer number already exist in the database."; }
     inline QString emptyPin() { return "Pin is required."; }
     inline QString incompleteLengthPin() { return "Pin should be exactly 6 digits long"; }
     inline QString invalidPin() { return "Pin is invalid. Must only consist digits."; }
@@ -102,6 +120,31 @@ namespace Messages
     inline QString noSelectedStartTimeSecondDay() { return "No selected start time on the second day."; }
     inline QString noSelectedEndTimeSecondDay() { return "No selected end time on the second day."; }
 }
+
+
+// Global timer
+class GlobalTimer : public QObject
+{
+    Q_OBJECT
+
+    public:
+        static QTimer* timer();
+        static void displayTextForDuration(QObject* object, const QString& text, int duration);
+
+    private:
+        static QTimer* m_timer;
+};
+
+
+// Filtering manager
+class FilteringManager
+{
+    public:
+        static void checkComboboxIndex(QObject *object);
+        static void incrementPage(QObject *object, const int &index);
+        static void validatePageEdit(QObject *object);
+        static void selectOptionByText(QComboBox *comboBox, const QString &textToSelect);
+};
 
 
 // Window position manager

@@ -16,7 +16,7 @@ Admin_Lecturers_Add::Admin_Lecturers_Add(QWidget *parent)
 {
     ui->setupUi(this);
 
-    // Give function to buttons
+    // Connect ui objects to functions based on user interaction
     connect(ui->backButton, &QPushButton::clicked, this, &Admin_Lecturers_Add::switchWindow_AdminLecturersList);
     connect(ui->studentListButton, &QPushButton::clicked, this, &Admin_Lecturers_Add::switchWindow_AdminStudentsList);
     connect(ui->classListButton, &QPushButton::clicked, this, &Admin_Lecturers_Add::switchWindow_AdminClassesList);

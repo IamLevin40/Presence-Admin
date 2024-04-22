@@ -14,7 +14,7 @@ Admin_Login_Form::Admin_Login_Form(QWidget *parent)
 {
     ui->setupUi(this);
 
-    // Give function to buttons
+    // Connect ui objects to functions based on user interaction
     connect(ui->loginButton, &QPushButton::clicked, this, &Admin_Login_Form::loginCall);
 
     // Load window position
@@ -37,12 +37,12 @@ void Admin_Login_Form::loginCall()
     QString adminPin = ui->adminPinTextbox->text();
 
     // Must return result in QString from authentication function
-    QString result = authenticateAdmin(adminId, adminPin);
+    QString result = Admin_Login_Form::authenticateAdmin(adminId, adminPin);
 
     // Return error if the result is not empty
     if (!result.isEmpty())
     {
-        ui->errorLabel->setText(result);
+        GlobalTimer::displayTextForDuration(ui->errorLabel, result, 5000);
         return;
     }
 

@@ -6,6 +6,7 @@
 #include <QtSql>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QSqlError>
 #include <QRandomGenerator>
 
 
@@ -26,8 +27,7 @@ class Admin_Students_Enroll : public QMainWindow
     public:
         explicit Admin_Students_Enroll(QWidget *parent = nullptr);
         ~Admin_Students_Enroll();
-
-        QString isRegular;
+        QString regularity;
 
     protected:
         void moveEvent(QMoveEvent *event) override;
@@ -49,9 +49,9 @@ class Admin_Students_Enroll : public QMainWindow
         QString verifyStudentEnroll(const QString &studentId, const QString &lastName, const QString &firstName,
                                     const QString &college, const QString &program,
                                     const QString &year, const QString &section);
-        void connectToDatabase(const QString &studentId, const QString &lastName, const QString &firstName,
-                               const QString &college, const QString &program,
-                               const QString &year, const QString &section);
+        void insertDataToDatabase(const QString &studentId, const QString &lastName, const QString &firstName,
+                                  const QString &college, const QString &program,
+                                  const QString &year, const QString &section);
         void handleIsRegularRadio(const QString &option);
         void populateCombobox();
         void switchWindow_AdminStudentsList();

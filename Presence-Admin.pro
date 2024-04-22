@@ -51,7 +51,8 @@ FORMS += \
     admin_login_form.ui \
     admin_students_enroll.ui \
     admin_students_list.ui \
-    admin_students_update.ui
+    admin_students_update.ui \
+    design_area.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

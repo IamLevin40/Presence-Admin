@@ -11,6 +11,7 @@
 #include "admin_students_enroll.h"
 #include "admin_students_list.h"
 #include "admin_students_update.h"
+#include "ui_design_area.h"
 
 #include <QApplication>
 

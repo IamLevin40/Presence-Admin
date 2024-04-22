@@ -266,34 +266,7 @@
     <property name="title">
      <string/>
     </property>
-    <widget class="QLabel" name="pageNumberLabel">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>5</y>
-       <width>30</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel {
-	color: #000F2A;
-	text-align: center;
-	font-family: Poppins;
-	font-size: 13px;
-	font-style: normal;
-	font-weight: 700;
-	line-height: normal;
-}</string>
-     </property>
-     <property name="text">
-      <string>0</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pageNextButton">
+    <widget class="QPushButton" name="nextPageButton">
      <property name="geometry">
       <rect>
        <x>55</x>
@@ -320,7 +293,7 @@
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QPushButton" name="pagePrevButton">
+    <widget class="QPushButton" name="prevPageButton">
      <property name="geometry">
       <rect>
        <x>15</x>
@@ -345,6 +318,34 @@
      </property>
      <property name="flat">
       <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="numberPageTextbox">
+     <property name="geometry">
+      <rect>
+       <x>31</x>
+       <y>5</y>
+       <width>30</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+	background-color: transparent;
+	border: 0px;
+	color: #000F2A;
+	font-family: Poppins;
+	font-size: 13px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+}</string>
+     </property>
+     <property name="text">
+      <string>1</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </widget>
@@ -451,6 +452,9 @@ QComboBox QScrollBar::sub-page:vertical {
 	border-style: solid;
 }</string>
       </property>
+      <property name="sizeAdjustPolicy">
+       <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
+      </property>
       <property name="placeholderText">
        <string>College</string>
       </property>
@@ -540,6 +544,9 @@ QComboBox QScrollBar::sub-page:vertical {
 	background: none;
 	border-style: solid;
 }</string>
+      </property>
+      <property name="sizeAdjustPolicy">
+       <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
       </property>
       <property name="placeholderText">
        <string>Program</string>
@@ -673,7 +680,7 @@ QComboBox QScrollBar::sub-page:vertical {
        <set>Qt::AlignHCenter|Qt::AlignTop</set>
       </property>
      </widget>
-     <widget class="QComboBox" name="sectionCombox">
+     <widget class="QComboBox" name="sectionCombobox">
       <property name="geometry">
        <rect>
         <x>2</x>
@@ -791,7 +798,7 @@ QComboBox QScrollBar::sub-page:vertical {
        <string>Search</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="searchButton">
       <property name="geometry">
        <rect>
         <x>80</x>
@@ -816,6 +823,96 @@ QComboBox QScrollBar::sub-page:vertical {
       </property>
       <property name="flat">
        <bool>true</bool>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="isRegularGroup">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>0</y>
+       <width>100</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QGroupBox {
+	border: 0px;
+	border-radius: 0px;
+}</string>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <widget class="QLabel" name="isRegularHud">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>100</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="resources.qrc">:/res/assets/search_field_short.png</pixmap>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignHCenter|Qt::AlignTop</set>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="isRegularCombobox">
+      <property name="geometry">
+       <rect>
+        <x>2</x>
+        <y>0</y>
+        <width>96</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QComboBox {
+	background-color: transparent;
+	border: 0px;
+	color: #FFFFFF;
+	font-family: Poppins;
+	font-size: 8px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #000F2A;
+}
+
+QComboBox QScrollBar:vertical {
+    background-color: #000F2A;
+	width: 4px;
+}
+
+QComboBox QScrollBar::handle:vertical {
+    background-color: #FFFFFF;
+}
+
+QComboBox QScrollBar::add-line:vertical,
+QComboBox QScrollBar::sub-line:vertical {
+    border: none;
+    background: none;
+    height: 0px;
+}
+
+QComboBox QScrollBar::add-page:vertical,
+QComboBox QScrollBar::sub-page:vertical {
+    background-color: #000F2A;
+	background: none;
+	border-style: solid;
+}</string>
+      </property>
+      <property name="placeholderText">
+       <string>Is Regular?</string>
       </property>
      </widget>
     </widget>
@@ -1090,6 +1187,36 @@ QComboBox QScrollBar::sub-page:vertical {
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
+    <widget class="QLabel" name="errorLabel">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>25</x>
+       <y>5</y>
+       <width>310</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+	background: none;
+	color: #FF003D;
+	font-family: Poppins;
+	font-size: 10px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
     <zorder>whiteBox</zorder>
     <zorder>footerHud</zorder>
     <zorder>studentListButton</zorder>
@@ -1099,8 +1226,9 @@ QComboBox QScrollBar::sub-page:vertical {
     <zorder>enrollStudentButton</zorder>
     <zorder>lecturerListButton</zorder>
     <zorder>lecturerListLabel</zorder>
+    <zorder>errorLabel</zorder>
    </widget>
-   <widget class="QScrollArea" name="studentsListArea">
+   <widget class="QGroupBox" name="studentsListArea">
     <property name="geometry">
      <rect>
       <x>25</x>
@@ -1109,24 +1237,16 @@ QComboBox QScrollBar::sub-page:vertical {
       <height>330</height>
      </rect>
     </property>
-    <property name="widgetResizable">
-     <bool>true</bool>
-    </property>
-    <widget class="QWidget" name="contents">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>308</width>
-       <height>328</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QWidget {
-	background-color: #FFFFFF
+    <property name="styleSheet">
+     <string notr="true">QGroupBox {
+	border: 0px;
+	border-radius: 0px;
+	background: none;
 }</string>
-     </property>
-    </widget>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
    </widget>
    <zorder>headerGroup</zorder>
    <zorder>titleLabel</zorder>

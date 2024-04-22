@@ -24,10 +24,10 @@ Admin_Students_Enroll::Admin_Students_Enroll(QWidget *parent)
     database.setDatabaseName($db_Database);
     database.setPort($db_Port);
 
-    // Initiate functions
+    // Initiate functions on awake
     Admin_Students_Enroll::populateCombobox();
 
-    // Give function to buttons
+    // Connect ui objects to functions based on user interaction
     connect(ui->confirmButton, &QPushButton::clicked, this, &Admin_Students_Enroll::studentEnrollCall);
 
     connect(ui->backButton, &QPushButton::clicked, this, &Admin_Students_Enroll::switchWindow_AdminStudentsList);
@@ -36,8 +36,8 @@ Admin_Students_Enroll::Admin_Students_Enroll(QWidget *parent)
     connect(ui->lecturerListButton, &QPushButton::clicked, this, &Admin_Students_Enroll::switchWindow_AdminLecturersList);
 
     // Connect clicked signal of the radio buttons to function
-    connect(ui->regularRadio, &QRadioButton::clicked, this, [=](){ handleIsRegularRadio("regular"); });
-    connect(ui->irregularRadio, &QRadioButton::clicked, this, [=](){ handleIsRegularRadio("irregular"); });
+    connect(ui->regularRadio, &QRadioButton::clicked, this, [=](){ Admin_Students_Enroll::handleIsRegularRadio("Regular"); });
+    connect(ui->irregularRadio, &QRadioButton::clicked, this, [=](){ Admin_Students_Enroll::handleIsRegularRadio("Irregular"); });
 
     // Load window position
     QPoint windowPos = WindowPositionManager::loadWindowPosition();
@@ -55,7 +55,7 @@ Admin_Students_Enroll::~Admin_Students_Enroll()
 void Admin_Students_Enroll::studentEnrollCall()
 {
     // Fetch string input text() from textboxes and comboboxes
-    QString studentId = ui->studentIdTextbox->text();
+    QString studentId = ui->studentIdTextbox->text().toUpper();
     QString lastName = ui->lastNameTextbox->text().toUpper();
     QString firstName = ui->firstNameTextbox->text().toUpper();
     QString college = ui->collegeCombobox->currentText();
@@ -70,16 +70,17 @@ void Admin_Students_Enroll::studentEnrollCall()
     program = program.left(programIndex).trimmed();
 
     // Must return result in QString from verify function
-    QString result = verifyStudentEnroll(studentId, lastName, firstName, college, program, year, section);
+    QString result = Admin_Students_Enroll::verifyStudentEnroll(studentId, lastName, firstName, college, program, year, section);
 
     // Return error if the result is not empty
     if (!result.isEmpty())
     {
-        ui->errorLabel->setText(result);
+        GlobalTimer::displayTextForDuration(ui->errorLabel, result, 5000);
         return;
     }
 
-    Admin_Students_Enroll::connectToDatabase(studentId, lastName, firstName, college, program, year, section);
+    // Proceed to inserting data to database
+    Admin_Students_Enroll::insertDataToDatabase(studentId, lastName, firstName, college, program, year, section);
 }
 
 
@@ -87,7 +88,7 @@ QString Admin_Students_Enroll::verifyStudentEnroll(const QString &studentId, con
                                                    const QString &college, const QString &program,
                                                    const QString &year, const QString &section)
 {
-    if (isRegular == "") { return Messages::noSelectedIsRegular(); }
+    if (regularity == "") { return Messages::noSelectedIsRegular(); }
     if (studentId == "") { return Messages::emptyStudentId(); }
     if (studentId.length() != $studentIdLength) { return Messages::incompleteLengthStudentId(); }
     if (studentId.contains(" ")) { return Messages::invalidStudentId(); }
@@ -101,17 +102,14 @@ QString Admin_Students_Enroll::verifyStudentEnroll(const QString &studentId, con
 }
 
 
-void Admin_Students_Enroll::connectToDatabase(const QString &studentId, const QString &lastName, const QString &firstName,
-                                              const QString &college, const QString &program,
-                                              const QString &year, const QString &section)
+void Admin_Students_Enroll::insertDataToDatabase(const QString &studentId, const QString &lastName, const QString &firstName,
+                                                 const QString &college, const QString &program,
+                                                 const QString &year, const QString &section)
 {
-    // qDebug() << isRegular << ", " << studentId << ", " << lastName << ", " << firstName << ", "
-    //          << college << ", " << program << ", " << year << ", " << section;
-
     // Return error if unable to access the database
     if (!database.open())
     {
-        ui->errorLabel->setText(Messages::unaccessDatabase());
+        GlobalTimer::displayTextForDuration(ui->errorLabel, Messages::unaccessDatabase(), 5000);
         return;
     }
 
@@ -119,15 +117,17 @@ void Admin_Students_Enroll::connectToDatabase(const QString &studentId, const QS
     int generatedPin = QRandomGenerator::global()->bounded(111111, 1000000);
 
     // Convert QString to bool in short form
-    short isRegularBool = (isRegular == "true" ? 1 : 0);
+    short isRegularBool = (regularity == "true" ? 1 : 0);
 
     // Set up queries for database
     QSqlDatabase::database().transaction();
     QSqlQuery query(database);
 
-    // Prepare sql command for inserting data and bind values to corresponding column
+    // Prepare sql command for inserting data
     query.prepare("INSERT INTO StudentInfo(StudentId, Pin, LastName, FirstName, College, Program, Year, Section, IsRegular) \
                   VALUES(:studentId, :pin, :lastName, :firstName, :college, :program, :year, :section, :isRegular)");
+
+    // Bind values to the query
     query.bindValue(":studentId", studentId);
     query.bindValue(":pin", generatedPin);
     query.bindValue(":lastName", lastName);
@@ -142,10 +142,20 @@ void Admin_Students_Enroll::connectToDatabase(const QString &studentId, const QS
     if (!query.exec())
     {
         QSqlDatabase::database().rollback();
-        ui->errorLabel->setText(Messages::errorInsertData());
+        QString errorText = query.lastError().databaseText();
+
+        // Return error if student number already exist
+        if (errorText.contains("UNIQUE", Qt::CaseInsensitive) || errorText.contains("duplicate", Qt::CaseInsensitive))
+        {
+            GlobalTimer::displayTextForDuration(ui->errorLabel, Messages::alreadyExistStudentId(), 5000);
+            return;
+        }
+
+        GlobalTimer::displayTextForDuration(ui->errorLabel, Messages::errorInsertData(), 5000);
         return;
     }
 
+    // Close the database after using
     QSqlDatabase::database().commit();
     database.close();
 
@@ -156,7 +166,7 @@ void Admin_Students_Enroll::connectToDatabase(const QString &studentId, const QS
 void Admin_Students_Enroll::handleIsRegularRadio(const QString &option)
 {
     // Return true if option selected is regular, otherwise false
-    isRegular = (option == "regular" ? QString("true") : QString("false"));
+    regularity = (option == "Regular" ? QString("true") : QString("false"));
 }
 
 
@@ -171,6 +181,12 @@ void Admin_Students_Enroll::populateCombobox()
     // Connect collegeComboBox's currentIndexChanged signal to collegeIndexChanged()
     connect(ui->collegeCombobox, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &Admin_Students_Enroll::collegeIndexChanged);
+
+    // Connect comboboxes to checkComboboxIndex()
+    connect(ui->collegeCombobox, &QComboBox::currentIndexChanged, this, [=](){ FilteringManager::checkComboboxIndex(ui->collegeCombobox); });
+    connect(ui->programCombobox, &QComboBox::currentIndexChanged, this, [=](){ FilteringManager::checkComboboxIndex(ui->programCombobox); });
+    connect(ui->yearCombobox, &QComboBox::currentIndexChanged, this, [=](){ FilteringManager::checkComboboxIndex(ui->yearCombobox); });
+    connect(ui->sectionCombobox, &QComboBox::currentIndexChanged, this, [=](){ FilteringManager::checkComboboxIndex(ui->sectionCombobox); });
 }
 
 
