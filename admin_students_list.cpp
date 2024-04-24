@@ -32,6 +32,7 @@ Admin_Students_List::Admin_Students_List(QWidget *parent)
 
     // Connect ui objects to functions based on user interaction
     connect(ui->searchButton, &QPushButton::clicked, this, &Admin_Students_List::filterSearchCall);
+    connect(ui->searchTextbox, &QLineEdit::textChanged, this, &Admin_Students_List::filterSearchCall);
     connect(ui->prevPageButton, &QPushButton::clicked, this, [=](){ FilteringManager::incrementPage(ui->numberPageTextbox, -1); });
     connect(ui->nextPageButton, &QPushButton::clicked, this, [=](){ FilteringManager::incrementPage(ui->numberPageTextbox, 1); });
     connect(ui->numberPageTextbox, &QLineEdit::textChanged, this, [=](){

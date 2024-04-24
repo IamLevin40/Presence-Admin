@@ -45,6 +45,9 @@ public:
         if (Admin_Login_Form->objectName().isEmpty())
             Admin_Login_Form->setObjectName("Admin_Login_Form");
         Admin_Login_Form->resize(360, 640);
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/res/assets/presence_logo.png"), QSize(), QIcon::Normal, QIcon::Off);
+        Admin_Login_Form->setWindowIcon(icon);
         Admin_Login_Form->setStyleSheet(QString::fromUtf8(""));
         centralwidget = new QWidget(Admin_Login_Form);
         centralwidget->setObjectName("centralwidget");
@@ -195,9 +198,9 @@ public:
 "	border-radius: 0px;\n"
 "	background: none;\n"
 "}"));
-        QIcon icon;
-        icon.addFile(QString::fromUtf8(":/res/assets/login_button.png"), QSize(), QIcon::Normal, QIcon::Off);
-        loginButton->setIcon(icon);
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8(":/res/assets/login_button.png"), QSize(), QIcon::Normal, QIcon::Off);
+        loginButton->setIcon(icon1);
         loginButton->setIconSize(QSize(210, 40));
         loginButton->setFlat(true);
         errorLabel = new QLabel(formGroup);

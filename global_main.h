@@ -2,6 +2,7 @@
 #define GLOBAL_MAIN_H
 
 #include <QString>
+#include <QVector>
 #include <QPoint>
 #include <QList>
 #include <QStringList>
@@ -38,8 +39,8 @@ extern int $db_Port;
 
 extern QString $updateKey_StudentInfo;
 extern QString $updateKey_LecturerInfo;
-extern QString $updateKey_ClassInfo;
-extern QString $selectKey_ClassInfo;
+extern QStringList $updateKeys_ClassInfo;
+extern QStringList $selectKeys_ClassInfo;
 
 
 // Global colleges and its corresponding programs
@@ -94,6 +95,7 @@ namespace Messages
     inline QString incompleteLengthLecturerId() { return "Lecturer number should be exactly 4 characters long."; }
     inline QString invalidLecturerId() { return "Lecturer number is invalid."; }
     inline QString alreadyExistLecturerId() { return "Lecturer number already exist in the database."; }
+    inline QString notExistLecturerId() { return "Lecturer number does not exist."; }
     inline QString emptyPin() { return "Pin is required."; }
     inline QString incompleteLengthPin() { return "Pin should be exactly 6 digits long"; }
     inline QString invalidPin() { return "Pin is invalid. Must only consist digits."; }
@@ -119,6 +121,9 @@ namespace Messages
     inline QString noSelectedSecondDay() { return "No selected second day."; }
     inline QString noSelectedStartTimeSecondDay() { return "No selected start time on the second day."; }
     inline QString noSelectedEndTimeSecondDay() { return "No selected end time on the second day."; }
+    inline QString noSelectedThirdDay() { return "No selected third day."; }
+    inline QString noSelectedStartTimeThirdDay() { return "No selected start time on the third day."; }
+    inline QString noSelectedEndTimeThirdDay() { return "No selected end time on the third day."; }
 }
 
 
@@ -144,6 +149,7 @@ class FilteringManager
         static void incrementPage(QObject *object, const int &index);
         static void validatePageEdit(QObject *object);
         static void selectOptionByText(QComboBox *comboBox, const QString &textToSelect);
+        static void setupComboboxDependency(const QVector<QComboBox *> &comboBoxes);
 };
 
 

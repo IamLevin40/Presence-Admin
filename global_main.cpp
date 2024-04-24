@@ -18,15 +18,15 @@ short $dataLimitPerPage = 5;
 // Global database
 QString $sql_Driver= "QMYSQL";
 QString $db_Hostname = "sql6.freesqldatabase.com";
-QString $db_Username = "sql6697818";
-QString $db_Password = "Q6EyY2gasJ";
-QString $db_Database = "sql6697818";
+QString $db_Username = "sql6701487";
+QString $db_Password = "6adX9UfkzD";
+QString $db_Database = "sql6701487";
 int $db_Port = 3306;
 
 QString $updateKey_StudentInfo = "";
 QString $updateKey_LecturerInfo = "";
-QString $updateKey_ClassInfo = "";
-QString $$selectKey_ClassInfo = "";
+QStringList $updateKeys_ClassInfo;
+QStringList $selectKeys_ClassInfo;
 
 
 // Global colleges and its corresponding programs
@@ -213,10 +213,10 @@ namespace Schedules
     QStringList generateTimeOptions()
     {
         QStringList times;
-        QTime time(0, 0);
+        QTime time(7, 0);
 
         // Generate and add time options from 0, 0 with 15 minutes interval
-        while (time < QTime(24, 0))
+        while (time < QTime(19, 15))
         {
             times.append(time.toString("h:mmAP"));
             time = time.addSecs(15 * 60);
@@ -329,6 +329,29 @@ void FilteringManager::selectOptionByText(QComboBox *comboBox, const QString &te
             comboBox->setCurrentIndex(i);
             break;
         }
+    }
+}
+
+
+// Disable combobox if the previous one has not been selected
+void FilteringManager::setupComboboxDependency(const QVector<QComboBox *> &comboBoxes)
+{
+    // Connect each combobox to the next one in the list
+    for (int i = 0; i < comboBoxes.size() - 1; ++i) {
+        QComboBox *currentComboBox = comboBoxes[i];
+        QComboBox *nextComboBox = comboBoxes[i + 1];
+
+        QObject::connect(currentComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
+            // Enable the next combobox if an item is selected in the current combobox, otherwise disable it
+            qDebug() << index;
+            nextComboBox->setCurrentIndex(-1);
+            nextComboBox->setEnabled(index != -1);
+            qDebug() << nextComboBox->isEnabled();
+        });
+
+        // Initialize the state of the next combobox based on the initial selection of the current combobox
+        bool enableNextComboBox = (currentComboBox->currentIndex() != -1);
+        nextComboBox->setEnabled(enableNextComboBox);
     }
 }
 

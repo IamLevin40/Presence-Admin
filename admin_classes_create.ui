@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Admin Classes Create</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/res/assets/presence_logo.png</normaloff>:/res/assets/presence_logo.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
     <string notr="true">QWidget #centralwidget{
@@ -466,7 +470,7 @@
       <x>25</x>
       <y>130</y>
       <width>310</width>
-      <height>440</height>
+      <height>450</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -1175,9 +1179,9 @@ QComboBox QScrollBar::sub-page:vertical {
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>260</y>
+       <y>255</y>
        <width>310</width>
-       <height>60</height>
+       <height>50</height>
       </rect>
      </property>
      <property name="title">
@@ -1210,7 +1214,7 @@ QComboBox QScrollBar::sub-page:vertical {
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>20</y>
+        <y>15</y>
         <width>100</width>
         <height>40</height>
        </rect>
@@ -1294,7 +1298,7 @@ QComboBox QScrollBar::sub-page:vertical {
       <property name="geometry">
        <rect>
         <x>105</x>
-        <y>20</y>
+        <y>15</y>
         <width>100</width>
         <height>40</height>
        </rect>
@@ -1378,7 +1382,7 @@ QComboBox QScrollBar::sub-page:vertical {
       <property name="geometry">
        <rect>
         <x>210</x>
-        <y>20</y>
+        <y>15</y>
         <width>100</width>
         <height>40</height>
        </rect>
@@ -1463,9 +1467,9 @@ QComboBox QScrollBar::sub-page:vertical {
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>320</y>
+       <y>300</y>
        <width>310</width>
-       <height>60</height>
+       <height>50</height>
       </rect>
      </property>
      <property name="title">
@@ -1498,7 +1502,7 @@ QComboBox QScrollBar::sub-page:vertical {
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>20</y>
+        <y>15</y>
         <width>100</width>
         <height>40</height>
        </rect>
@@ -1582,7 +1586,7 @@ QComboBox QScrollBar::sub-page:vertical {
       <property name="geometry">
        <rect>
         <x>105</x>
-        <y>20</y>
+        <y>15</y>
         <width>100</width>
         <height>40</height>
        </rect>
@@ -1666,7 +1670,7 @@ QComboBox QScrollBar::sub-page:vertical {
       <property name="geometry">
        <rect>
         <x>210</x>
-        <y>20</y>
+        <y>15</y>
         <width>100</width>
         <height>40</height>
        </rect>
@@ -1754,7 +1758,7 @@ QComboBox QScrollBar::sub-page:vertical {
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>380</y>
+       <y>430</y>
        <width>310</width>
        <height>20</height>
       </rect>
@@ -1776,6 +1780,294 @@ QComboBox QScrollBar::sub-page:vertical {
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
+    </widget>
+    <widget class="QGroupBox" name="thirdScheduleGroup">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>345</y>
+       <width>310</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <widget class="QLabel" name="thirdScheduleLabel">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>100</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel {
+	color: #000F2A;
+	font-family: Poppins;
+	font-size: 9px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+}</string>
+      </property>
+      <property name="text">
+       <string>THIRD (optional)</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="thirdDayGroup">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>15</y>
+        <width>100</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="thirdDayHud">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>100</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="resources.qrc">:/res/assets/data_field_short.png</pixmap>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="thirdDayCombobox">
+       <property name="geometry">
+        <rect>
+         <x>7</x>
+         <y>0</y>
+         <width>86</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QComboBox {
+	background-color: transparent;
+	border: 0px;
+	color: #FFFFFF;
+	font-family: Poppins;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #000F2A;
+}
+
+QComboBox QScrollBar:vertical {
+    background-color: #000F2A;
+	width: 4px;
+}
+
+QComboBox QScrollBar::handle:vertical {
+    background-color: #FFFFFF;
+}
+
+QComboBox QScrollBar::add-line:vertical,
+QComboBox QScrollBar::sub-line:vertical {
+    border: none;
+    background: none;
+    height: 0px;
+}
+
+QComboBox QScrollBar::add-page:vertical,
+QComboBox QScrollBar::sub-page:vertical {
+    background-color: #000F2A;
+	background: none;
+	border-style: solid;
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string>Day</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="thirdStartGroup">
+      <property name="geometry">
+       <rect>
+        <x>105</x>
+        <y>15</y>
+        <width>100</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="thirdStartHud">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>100</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="resources.qrc">:/res/assets/data_field_short.png</pixmap>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="thirdStartCombobox">
+       <property name="geometry">
+        <rect>
+         <x>7</x>
+         <y>0</y>
+         <width>86</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QComboBox {
+	background-color: transparent;
+	border: 0px;
+	color: #FFFFFF;
+	font-family: Poppins;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #000F2A;
+}
+
+QComboBox QScrollBar:vertical {
+    background-color: #000F2A;
+	width: 4px;
+}
+
+QComboBox QScrollBar::handle:vertical {
+    background-color: #FFFFFF;
+}
+
+QComboBox QScrollBar::add-line:vertical,
+QComboBox QScrollBar::sub-line:vertical {
+    border: none;
+    background: none;
+    height: 0px;
+}
+
+QComboBox QScrollBar::add-page:vertical,
+QComboBox QScrollBar::sub-page:vertical {
+    background-color: #000F2A;
+	background: none;
+	border-style: solid;
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string>Start</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="thirdEndGroup">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>15</y>
+        <width>100</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="thirdEndHud">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>100</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="resources.qrc">:/res/assets/data_field_short.png</pixmap>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="thirdEndCombobox">
+       <property name="geometry">
+        <rect>
+         <x>7</x>
+         <y>0</y>
+         <width>86</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QComboBox {
+	background-color: transparent;
+	border: 0px;
+	color: #FFFFFF;
+	font-family: Poppins;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #000F2A;
+}
+
+QComboBox QScrollBar:vertical {
+    background-color: #000F2A;
+	width: 4px;
+}
+
+QComboBox QScrollBar::handle:vertical {
+    background-color: #FFFFFF;
+}
+
+QComboBox QScrollBar::add-line:vertical,
+QComboBox QScrollBar::sub-line:vertical {
+    border: none;
+    background: none;
+    height: 0px;
+}
+
+QComboBox QScrollBar::add-page:vertical,
+QComboBox QScrollBar::sub-page:vertical {
+    background-color: #000F2A;
+	background: none;
+	border-style: solid;
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string>End</string>
+       </property>
+      </widget>
+     </widget>
     </widget>
    </widget>
   </widget>

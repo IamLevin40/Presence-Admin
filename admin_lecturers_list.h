@@ -3,6 +3,19 @@
 
 #include <QMainWindow>
 #include <QMoveEvent>
+#include <QtSql>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QVariant>
+
+#include <QLabel>
+#include <QPushButton>
+#include <QGroupBox>
+#include <QVBoxLayout>
+#include <QScrollArea>
+#include <QLayout>
+#include <QLayoutItem>
 
 
 // Forward declaration of class files
@@ -10,6 +23,7 @@ class Admin_Login_Form;
 class Admin_Students_List;
 class Admin_Classes_List;
 class Admin_Lecturers_Add;
+class Admin_Lecturers_Update;
 
 
 namespace Ui {
@@ -29,18 +43,27 @@ class Admin_Lecturers_List : public QMainWindow
 
     private:
         Ui::Admin_Lecturers_List *ui;
+        QSqlDatabase database;
+        QList<QGroupBox*> groupBoxList;
 
         // Reference the class files here
         Admin_Login_Form *admin_login_form;
         Admin_Students_List *admin_students_list;
         Admin_Classes_List *admin_classes_list;
         Admin_Lecturers_Add *admin_lecturers_add;
+        Admin_Lecturers_Update *admin_lecturers_update;
 
         // All custom functions() should be recognized upon here
+        void filterSearchCall();
+        void selectDataFromDatabase(const int &pageNumber, const QString &college, const QString &searchText);
+        void displayDataFromDatabase(const QList<QStringList> &dataList);
+        void deleteDataFromDatabase(const QString &key_lecturerId);
+        void populateCombobox();
         void switchWindow_AdminLoginForm();
         void switchWindow_AdminStudentsList();
         void switchWindow_AdminClassesList();
         void switchWindow_AdminLecturersAdd();
+        void switchWindow_AdminLecturersUpdate(const QString &key_lecturerId);
 };
 
 #endif // ADMIN_LECTURERS_LIST_H

@@ -3,6 +3,10 @@
 
 #include <QMainWindow>
 #include <QMoveEvent>
+#include <QtSql>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
 
 
 // Forward declaration of class files
@@ -28,6 +32,7 @@ class Admin_Lecturers_Update : public QMainWindow
 
     private:
         Ui::Admin_Lecturers_Update *ui;
+        QSqlDatabase database;
 
         // Reference the class files here
         Admin_Students_List *admin_students_list;
@@ -35,6 +40,12 @@ class Admin_Lecturers_Update : public QMainWindow
         Admin_Lecturers_List *admin_lecturers_list;
 
         // All custom functions() should be recognized upon here
+        void selectDataFromDatabase(const QString &key_lecturerId);
+        void displayDataFromDatabase(const QStringList &dataList);
+        void lecturerUpdateCall();
+        QString verifyLecturerUpdate(const QString &lastName, const QString &firstName, const QString &college, const QString &pin);
+        void updateDataToDatabase(const QString &lastName, const QString &firstName, const QString &college, const QString &pin);
+        void populateCombobox();
         void switchWindow_AdminStudentsList();
         void switchWindow_AdminClassesList();
         void switchWindow_AdminLecturersList();

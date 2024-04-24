@@ -16,8 +16,6 @@ Admin_Students_Update::Admin_Students_Update(QWidget *parent)
 {
     ui->setupUi(this);
 
-    qDebug() << $updateKey_StudentInfo;
-
     // Set up sql online database with connection parameters
     database = QSqlDatabase::addDatabase($sql_Driver);
     database.setHostName($db_Hostname);
@@ -214,7 +212,7 @@ void Admin_Students_Update::updateDataFromDatabase(const QString &lastname, cons
     QSqlDatabase::database().transaction();
     QSqlQuery query(database);
 
-    // Prepare sql command for inserting data
+    // Prepare sql command for updating data
     query.prepare("UPDATE StudentInfo SET \
                   Pin = :pin, LastName = :lastName, FirstName = :firstName, College = :college, Program = :program, \
                   Year = :year, Section = :section, IsRegular = :isRegular \
@@ -231,7 +229,7 @@ void Admin_Students_Update::updateDataFromDatabase(const QString &lastname, cons
     query.bindValue(":isRegular", isRegularBool);
     query.bindValue(":studentId", $updateKey_StudentInfo);
 
-    // Return error if unable to delete data
+    // Return error if unable to update data
     if (!query.exec())
     {
         QSqlDatabase::database().rollback();

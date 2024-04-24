@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Admin Classes Students List</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/res/assets/presence_logo.png</normaloff>:/res/assets/presence_logo.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
     <string notr="true">QWidget #centralwidget {
@@ -710,57 +714,6 @@
      </property>
     </widget>
    </widget>
-   <widget class="QScrollArea" name="classesStudentsListArea">
-    <property name="geometry">
-     <rect>
-      <x>24</x>
-      <y>190</y>
-      <width>312</width>
-      <height>332</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="widgetResizable">
-     <bool>true</bool>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-    <widget class="QWidget" name="contents">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>310</width>
-       <height>330</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QWidget #contents {
-	background-color: #FFFFFF;
-}</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <property name="spacing">
-       <number>0</number>
-      </property>
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-     </layout>
-    </widget>
-   </widget>
    <widget class="QGroupBox" name="pageGroup">
     <property name="geometry">
      <rect>
@@ -895,13 +848,33 @@
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QGroupBox" name="classesStudentsListArea">
+    <property name="geometry">
+     <rect>
+      <x>25</x>
+      <y>190</y>
+      <width>310</width>
+      <height>330</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QGroupBox {
+	border: 0px;
+	border-radius: 0px;
+	background: none;
+}</string>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+   </widget>
    <zorder>headerGroup</zorder>
    <zorder>titleLabel</zorder>
    <zorder>classInfoGroup</zorder>
-   <zorder>classesStudentsListArea</zorder>
-   <zorder>footerGroup</zorder>
    <zorder>pageGroup</zorder>
    <zorder>downloadButton</zorder>
+   <zorder>classesStudentsListArea</zorder>
+   <zorder>footerGroup</zorder>
   </widget>
  </widget>
  <resources>
