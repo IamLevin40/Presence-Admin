@@ -713,6 +713,29 @@
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
+    <widget class="QLabel" name="schoolYearLabel">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>32</y>
+       <width>190</width>
+       <height>15</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+	color: #000F2A;
+	font-family: Poppins;
+	font-size: 7px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal
+}</string>
+     </property>
+     <property name="text">
+      <string>SY &lt;?&gt; SEM &lt;?&gt;</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="pageGroup">
     <property name="geometry">

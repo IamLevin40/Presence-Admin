@@ -115,6 +115,7 @@ void Admin_Students_Update::displayDataFromDatabase(const QStringList &dataList)
     QString section = dataList[7];
     QString isRegular = dataList[8];
 
+    // Update the form with the current data
     if (isRegular == "1")
     {
         ui->regularRadio->setChecked(true);

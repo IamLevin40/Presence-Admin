@@ -55,8 +55,8 @@ namespace Colleges
         "BSBIO | BS in Biology",
         "BSCHEM | BS in Chemistry",
         // CBM
-        "BSBA-FM | BS in Business Administration major in Financial Management",
-        "BSBA-OM | BS in Business Administration major in Operation Management",
+        "BSBAFM | BS in Business Administration major in Financial Management",
+        "BSBAOM | BS in Business Administration major in Operation Management",
         "BSCM | BS in Cooperatives Management",
         "BSHM | BS in Hospitality Management",
         "BSTM | BS in Tourism Management",
@@ -75,14 +75,14 @@ namespace Colleges
         // COE
         "BECED | Bachelor of Early Childhood Education",
         "BEED | Bachelor of Elementary Education",
-        "BSED-ENG | Bachelor of Secondary Education major in English",
-        "BSED-FIL | Bachelor of Secondary Education major in Filipino",
-        "BSED-MATH | Bachelor of Secondary Education major in Mathematics",
-        "BSED-SCI | Bachelor of Secondary Education major in Science",
-        "BSED-SOCSTUD | Bachelor of Secondary Education major in Social Studies",
-        "BSED-VALED | Bachelor of Secondary Education major in Values Education",
-        "BSNED-ELEM | Bachelor of Special Needs Education major in Elementary School Teaching",
-        "BSNED-TDHL | Bachelor of Special Needs Education major in Teaching Deaf and Hard-of-Hearing Learners",
+        "BSEDENG | Bachelor of Secondary Education major in English",
+        "BSEDFIL | Bachelor of Secondary Education major in Filipino",
+        "BSEDMATH | Bachelor of Secondary Education major in Mathematics",
+        "BSEDSCI | Bachelor of Secondary Education major in Science",
+        "BSEDSOCSTUD | Bachelor of Secondary Education major in Social Studies",
+        "BSEDVALED | Bachelor of Secondary Education major in Values Education",
+        "BSNEDELEM | Bachelor of Special Needs Education major in Elementary School Teaching",
+        "BSNEDTDHL | Bachelor of Special Needs Education major in Teaching Deaf and Hard-of-Hearing Learners",
         // COL
         "JD | Juris Doctor",
         // COM
@@ -93,7 +93,7 @@ namespace Colleges
         "BCAED | Bachelor of Culture and Arts Education",
         "BPEA | Bachelor of Performing Arts",
         "BPED | Bachelor of Physical Education",
-        "BSESS-FSC | BS in Exercise and Sports Sciences major in Fitness and Sports Coaching"
+        "BSESSFSC | BS in Exercise and Sports Sciences major in Fitness and Sports Coaching"
     };
     const QStringList $years = {"", "1", "2", "3", "4"};
     const QStringList $sections = {"", "A", "B", "C", "D", "E", "F"};
@@ -117,8 +117,8 @@ namespace Colleges
             "CBM | College of Business & Management",
             {
                 "",
-                "BSBA-FM | BS in Business Administration major in Financial Management",
-                "BSBA-OM | BS in Business Administration major in Operation Management",
+                "BSBAFM | BS in Business Administration major in Financial Management",
+                "BSBAOM | BS in Business Administration major in Operation Management",
                 "BSCM | BS in Cooperatives Management",
                 "BSHM | BS in Hospitality Management",
                 "BSTM | BS in Tourism Management"
@@ -157,14 +157,14 @@ namespace Colleges
                 "",
                 "BECED | Bachelor of Early Childhood Education",
                 "BEED | Bachelor of Elementary Education",
-                "BSED-ENG | Bachelor of Secondary Education major in English",
-                "BSED-FIL | Bachelor of Secondary Education major in Filipino",
-                "BSED-MATH | Bachelor of Secondary Education major in Mathematics",
-                "BSED-SCI | Bachelor of Secondary Education major in Science",
-                "BSED-SOCSTUD | Bachelor of Secondary Education major in Social Studies",
-                "BSED-VALED | Bachelor of Secondary Education major in Values Education",
-                "BSNED-ELEM | Bachelor of Special Needs Education major in Elementary School Teaching",
-                "BSNED-TDHL | Bachelor of Special Needs Education major in Teaching Deaf and Hard-of-Hearing Learners"
+                "BSEDENG | Bachelor of Secondary Education major in English",
+                "BSEDFIL | Bachelor of Secondary Education major in Filipino",
+                "BSEDMATH | Bachelor of Secondary Education major in Mathematics",
+                "BSEDSCI | Bachelor of Secondary Education major in Science",
+                "BSEDSOCSTUD | Bachelor of Secondary Education major in Social Studies",
+                "BSEDVALED | Bachelor of Secondary Education major in Values Education",
+                "BSNEDELEM | Bachelor of Special Needs Education major in Elementary School Teaching",
+                "BSNEDTDHL | Bachelor of Special Needs Education major in Teaching Deaf and Hard-of-Hearing Learners"
             }
         },
         {
@@ -195,7 +195,7 @@ namespace Colleges
                 "BCAED | Bachelor of Culture and Arts Education",
                 "BPEA | Bachelor of Performing Arts",
                 "BPED | Bachelor of Physical Education",
-                "BSESS-FSC | BS in Exercise and Sports Sciences major in Fitness and Sports Coaching"
+                "BSESSFSC | BS in Exercise and Sports Sciences major in Fitness and Sports Coaching"
             }
         }
     };
@@ -248,18 +248,22 @@ void GlobalTimer::displayTextForDuration(QObject* object, const QString& text, i
 }
 
 
-// Check selected option from combobox
-void FilteringManager::checkComboboxIndex(QObject* object)
+// Convert school year to short year and vice versa
+QString FilteringManager::convertSchoolYear(const QString &schoolYear)
 {
-    // Get the sender object: combobox
-    QComboBox *comboBox = qobject_cast<QComboBox*>(object);
-    if (!comboBox)
-        return;
-
-    // Deselect the combobox if the current option has no string
-    QString selectedText = comboBox->currentText();
-    if (selectedText.isEmpty()) {
-        comboBox->setCurrentIndex(-1);
+    // Check if the input year has a dash, if yes, convert to short year
+    if (schoolYear.contains("-"))
+    {
+        QString firstPart = schoolYear.mid(2, 2);
+        QString secondPart = schoolYear.mid(7, 2);
+        return firstPart + secondPart;
+    }
+    // If the input year is already a short year, convert to full school year
+    else
+    {
+        QString firstPart = schoolYear.mid(0, 2);
+        QString lastPart = schoolYear.mid(2, 2);
+        return "20" + firstPart + "-" + "20" + lastPart;
     }
 }
 
@@ -333,6 +337,22 @@ void FilteringManager::selectOptionByText(QComboBox *comboBox, const QString &te
 }
 
 
+// Check selected option from combobox
+void FilteringManager::checkComboboxIndex(QObject* object)
+{
+    // Get the sender object: combobox
+    QComboBox *comboBox = qobject_cast<QComboBox*>(object);
+    if (!comboBox)
+        return;
+
+    // Deselect the combobox if the current option has no string
+    QString selectedText = comboBox->currentText();
+    if (selectedText.isEmpty()) {
+        comboBox->setCurrentIndex(-1);
+    }
+}
+
+
 // Disable combobox if the previous one has not been selected
 void FilteringManager::setupComboboxDependency(const QVector<QComboBox *> &comboBoxes)
 {
@@ -343,10 +363,8 @@ void FilteringManager::setupComboboxDependency(const QVector<QComboBox *> &combo
 
         QObject::connect(currentComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
             // Enable the next combobox if an item is selected in the current combobox, otherwise disable it
-            qDebug() << index;
             nextComboBox->setCurrentIndex(-1);
             nextComboBox->setEnabled(index != -1);
-            qDebug() << nextComboBox->isEnabled();
         });
 
         // Initialize the state of the next combobox based on the initial selection of the current combobox

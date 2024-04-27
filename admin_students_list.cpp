@@ -225,27 +225,27 @@ void Admin_Students_List::displayDataFromDatabase(const QList<QStringList> &data
         // Set up dataStudentIdLabel
         QLabel *dataStudentIdLabel = new QLabel(dataGroup);
         dataStudentIdLabel->setText(studentId);
-        dataStudentIdLabel->setStyleSheet("QLabel { color: #21C5DF; font-family: Poppins; font-size: 9px; font-style: normal; font-weight: 400; line-height: normal; }");
+        dataStudentIdLabel->setStyleSheet("QLabel { color: #15CAE3; font-family: Poppins; font-size: 9px; font-style: normal; font-weight: 400; line-height: normal; }");
         dataStudentIdLabel->setGeometry(60, 40, 70, 10);
 
         // Set up dataIsRegularLabel
         QLabel *dataIsRegularLabel = new QLabel(dataGroup);
         dataIsRegularLabel->setText(isRegular == "1" ? "Regular" : "Irregular");
-        dataIsRegularLabel->setStyleSheet("QLabel { color: #21C5DF; font-family: Poppins; font-size: 9px; font-style: normal; font-weight: 400; line-height: normal; }");
+        dataIsRegularLabel->setStyleSheet("QLabel { color: #15CAE3; font-family: Poppins; font-size: 9px; font-style: normal; font-weight: 400; line-height: normal; }");
         dataIsRegularLabel->setGeometry(130, 40, 70, 10);
 
         // Set up dataPinLabel
         QLabel *dataPinLabel = new QLabel(dataGroup);
         dataPinLabel->setText(pin);
         dataPinLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-        dataPinLabel->setStyleSheet("QLabel { color: #21C5DF; font-family: Poppins; font-size: 9px; font-style: normal; font-weight: 400; line-height: normal; }");
+        dataPinLabel->setStyleSheet("QLabel { color: #15CAE3; font-family: Poppins; font-size: 9px; font-style: normal; font-weight: 400; line-height: normal; }");
         dataPinLabel->setGeometry(240, 40, 60, 10);
 
         // Set up dataEditButton
         QPushButton *dataEditButton = new QPushButton(dataGroup);
         dataEditButton->setIcon(QIcon(":/res/assets/edit.png"));
         dataEditButton->setStyleSheet("QPushButton { border: 0px; border-radius: 0px; background: none; }");
-        dataEditButton->setGeometry(260, 8, 20, 20);
+        dataEditButton->setGeometry(265, 10, 15, 15);
         connect(dataEditButton, &QPushButton::clicked, this, [=]() {
             Admin_Students_List::switchWindow_AdminStudentsUpdate(studentId);
         });
@@ -254,7 +254,7 @@ void Admin_Students_List::displayDataFromDatabase(const QList<QStringList> &data
         QPushButton *dataDeleteButton = new QPushButton(dataGroup);
         dataDeleteButton->setIcon(QIcon(":/res/assets/delete.png"));
         dataDeleteButton->setStyleSheet("QPushButton { border: 0px; border-radius: 0px; background: none; }");
-        dataDeleteButton->setGeometry(280, 8, 20, 20);
+        dataDeleteButton->setGeometry(285, 10, 15, 15);
         connect(dataDeleteButton, &QPushButton::clicked, this, [=]() {
             Admin_Students_List::deleteDataFromDatabase(studentId);
         });

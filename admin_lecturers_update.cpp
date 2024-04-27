@@ -96,12 +96,14 @@ void Admin_Lecturers_Update::selectDataFromDatabase(const QString &key_lecturerI
 
 void Admin_Lecturers_Update::displayDataFromDatabase(const QStringList &dataList)
 {
+    // Assign members from dataList to variables
     QString lecturerId = dataList[0];
     QString pin = dataList[1];
     QString lastName = dataList[2];
     QString firstName = dataList[3];
     QString college = dataList[4];
 
+    // Update the form with the current data
     ui->lecturerIdLabel->setText(lecturerId);
     ui->lastNameTextbox->setText(lastName);
     ui->firstNameTextbox->setText(firstName);

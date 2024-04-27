@@ -8,6 +8,7 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QVector>
+#include <QChar>
 
 
 // Forward declaration of class files
@@ -54,6 +55,7 @@ class Admin_Classes_Create : public QMainWindow
                                   const QString &firstDay, const QString &firstStartTime, const QString &firstEndTime,
                                   const QString &secondDay, const QString &secondStartTime, const QString &secondEndTime,
                                   const QString &thirdDay, const QString &thirdStartTime, const QString &thirdEndTime);
+        void addDataToGeneratedTable(const QString &tableName, const QString &program, const QString &year, const QString &section);
         void populateCombobox();
         void switchWindow_AdminStudentsList();
         void switchWindow_AdminClassesList();

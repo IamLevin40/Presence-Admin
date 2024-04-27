@@ -3,6 +3,19 @@
 
 #include <QMainWindow>
 #include <QMoveEvent>
+#include <QtSql>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QVariant>
+
+#include <QLabel>
+#include <QPushButton>
+#include <QGroupBox>
+#include <QVBoxLayout>
+#include <QScrollArea>
+#include <QLayout>
+#include <QLayoutItem>
 
 
 // Forward declaration of class files
@@ -29,6 +42,8 @@ class Admin_Classes_Students_List : public QMainWindow
 
     private:
         Ui::Admin_Classes_Students_List *ui;
+        QSqlDatabase database;
+        QList<QGroupBox*> groupBoxList;
 
         // Reference the class files here
         Admin_Students_List *admin_students_list;
@@ -37,6 +52,13 @@ class Admin_Classes_Students_List : public QMainWindow
         Admin_Classes_Students_Add *admin_classes_students_add;
 
         // All custom functions() should be recognized upon here
+        void selectInfoFromDatabase(const QStringList &keys_classInfo);
+        void displayInfoFromDatabase(const QStringList &dataList);
+        QStringList getLecturerInfo(const QString &lecturerId);
+        void filterSearchCall();
+        void selectDataFromDatabase(const int &pageNumber);
+        void displayDataFromDatabase(const QList<QStringList> &dataList, const QList<QStringList> &recordList);
+        void deleteDataFromDatabase(const QString &studentId);
         void switchWindow_AdminStudentsList();
         void switchWindow_AdminClassesList();
         void switchWindow_AdminLecturersList();

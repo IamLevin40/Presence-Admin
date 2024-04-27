@@ -58,7 +58,7 @@ void Admin_Classes_Create::classCreateCall()
     QString program = ui->programCombobox->currentText();
     QString year = ui->yearCombobox->currentText();
     QString section = ui->sectionCombobox->currentText();
-    QString room = ui->roomTextbox->text();
+    QString room = ui->roomTextbox->text().toUpper();
     QString lecturerId = ui->lecturerIdTextbox->text();
     QString firstDay = ui->firstDayCombobox->currentText();
     QString firstStartTime = ui->firstStartCombobox->currentText();
@@ -71,6 +71,8 @@ void Admin_Classes_Create::classCreateCall()
     QString thirdEndTime = ui->thirdEndCombobox->currentText();
 
     // Extract unnecessary substring for data handling
+    static const QRegularExpression whitespace("\\s+");
+    subjectCode.replace(whitespace, "");
     int programIndex = program.indexOf('|');
     program = program.left(programIndex).trimmed();
 
@@ -112,15 +114,24 @@ QString Admin_Classes_Create::verifyClassCreate(const QString &subjectCode, cons
     if (year == "") { return Messages::noSelectedYear(); }
     if (section == "") { return Messages::noSelectedSection(); }
     if (room == "") { return Messages::emptyRoom(); }
+
     if (firstDay == "") { return Messages::noSelectedFirstDay(); }
     if (firstStartTime == "") { return Messages::noSelectedStartTimeFirstDay(); }
     if (firstEndTime == "") { return Messages::noSelectedEndTimeFirstDay(); }
-    if (secondDay == "") { return Messages::noSelectedSecondDay(); }
-    if (secondStartTime == "") { return Messages::noSelectedStartTimeSecondDay(); }
-    if (secondEndTime == "") { return Messages::noSelectedEndTimeSecondDay(); }
-    if (thirdDay == "") { return Messages::noSelectedThirdDay(); }
-    if (thirdStartTime == "") { return Messages::noSelectedStartTimeThirdDay(); }
-    if (thirdEndTime == "") { return Messages::noSelectedEndTimeThirdDay(); }
+
+    if (!secondDay.isEmpty())
+    {
+        if (secondStartTime == "") { return Messages::noSelectedStartTimeSecondDay(); }
+        if (secondEndTime == "") { return Messages::noSelectedEndTimeSecondDay(); }
+    }
+
+    if (!thirdDay.isEmpty())
+    {
+        if (thirdStartTime == "") { return Messages::noSelectedStartTimeThirdDay(); }
+        if (thirdEndTime == "") { return Messages::noSelectedEndTimeThirdDay(); }
+    }
+
+
     if (lecturerId == "") { return Messages::emptyLecturerId(); }
     if (lecturerId.length() != $lecturerIdLength) { return Messages::incompleteLengthLecturerId(); }
     if (lecturerId.contains(" ")) { return Messages::invalidLecturerId(); }
@@ -142,7 +153,7 @@ QString Admin_Classes_Create::verifyClassCreate(const QString &subjectCode, cons
     if (!query.exec())
     {
         QSqlDatabase::database().rollback();
-        return Messages::errorInsertData();
+        return Messages::errorSelectData();
     }
 
     query.next();
@@ -151,7 +162,7 @@ QString Admin_Classes_Create::verifyClassCreate(const QString &subjectCode, cons
 
     // Close the database after using
     QSqlDatabase::database().commit();
-    database.close();;
+    database.close();
 
     if (!isLecturerIdExist) { return Messages::notExistLecturerId(); }
 
@@ -166,7 +177,148 @@ void Admin_Classes_Create::insertDataToDatabase(const QString &subjectCode, cons
                                                 const QString &secondDay, const QString &secondStartTime, const QString &secondEndTime,
                                                 const QString &thirdDay, const QString &thirdStartTime, const QString &thirdEndTime)
 {
+    // Return error if unable to access the database
+    if (!database.open())
+    {
+        GlobalTimer::displayTextForDuration(ui->errorLabel, Messages::unaccessDatabase(), 5000);
+        return;
+    }
 
+    // Combine day and time into one QString
+    QString combinedDay = firstDay;
+    QString combinedTime = firstStartTime + "-" + firstEndTime;
+
+    if (!secondDay.isEmpty())
+    {
+        combinedDay += " | " + secondDay;
+        combinedTime += " | " + secondStartTime + "-" + secondEndTime;
+    }
+
+    if (!thirdDay.isEmpty())
+    {
+        combinedDay += " | " + thirdDay;
+        combinedTime += " | " + thirdStartTime + "-" + thirdEndTime;
+    }
+
+    // Set up queries for database
+    QSqlDatabase::database().transaction();
+    QSqlQuery query(database);
+
+    // Prepare sql command for inserting data
+    query.prepare("INSERT INTO ClassInfo(SubjectCode, SubjectDesc, SchoolYear, Semester, Program, Year, Section, Day, Time, Room, LecturerId) \
+                  VALUES(:subjectCode, :subjectDesc, :schoolYear, :semester, :program, :year, :section, :day, :time, :room, :lecturerId)");
+
+    // Bind values to the query
+    query.bindValue(":subjectCode", subjectCode);
+    query.bindValue(":subjectDesc", subjectDesc);
+    query.bindValue(":schoolYear", schoolYear);
+    query.bindValue(":semester", semester);
+    query.bindValue(":program", program);
+    query.bindValue(":year", year);
+    query.bindValue(":section", section);
+    query.bindValue(":day", combinedDay);
+    query.bindValue(":time", combinedTime);
+    query.bindValue(":room", room);
+    query.bindValue(":lecturerId", lecturerId);
+
+    // Return error if unable to insert data
+    if (!query.exec())
+    {
+        QSqlDatabase::database().rollback();
+        GlobalTimer::displayTextForDuration(ui->errorLabel, Messages::errorInsertData(), 5000);
+        return;
+    }
+    query.clear();
+
+    // Create separate table after successfully inserting data
+    QString tableName = subjectCode + program + year + section + "_" + "S" + semester + "SY" + FilteringManager::convertSchoolYear(schoolYear);
+
+    QString queryString = "CREATE TABLE " + $db_Database + "." + tableName + " (\
+                          `StudentId` CHAR(9) NOT NULL, \
+                          `PresentCount` TINYINT NOT NULL, \
+                          `AbsentCount` TINYINT NOT NULL, \
+                          PRIMARY KEY (`StudentId`(9)))";
+    query.prepare(queryString);
+
+    // Return error if unable to create table
+    if (!query.exec())
+    {
+        QSqlDatabase::database().rollback();
+        GlobalTimer::displayTextForDuration(ui->errorLabel, Messages::errorCreateTable(), 5000);
+        return;
+    }
+
+    // Close the database after using
+    QSqlDatabase::database().commit();
+    database.close();
+
+    Admin_Classes_Create::addDataToGeneratedTable(tableName, program, year, section);
+    Admin_Classes_Create::switchWindow_AdminClassesList();
+}
+
+
+void Admin_Classes_Create::addDataToGeneratedTable(const QString &tableName, const QString &program, const QString &year, const QString &section)
+{
+    // Return error if unable to access the database
+    if (!database.open())
+    {
+        GlobalTimer::displayTextForDuration(ui->errorLabel, Messages::unaccessDatabase(), 5000);
+        return;
+    }
+
+    // Set up data list and queries for database
+    QStringList studentIdList;
+    QSqlDatabase::database().transaction();
+    QSqlQuery query(database);
+
+    // Prepare sql command for selecting data
+    query.prepare("SELECT StudentId FROM StudentInfo WHERE \
+                  Program = :program AND Year = :year AND Section = :section");
+
+    // Bind values to the query
+    query.bindValue(":program", program);
+    query.bindValue(":year", year);
+    query.bindValue(":section", section);
+
+    // Return error if unable to select data
+    if (!query.exec())
+    {
+        QSqlDatabase::database().rollback();
+        GlobalTimer::displayTextForDuration(ui->errorLabel, Messages::errorSelectData(), 5000);
+        return;
+    }
+    else
+    {
+        // Fetch and store the result rows
+        while (query.next())
+        {
+            studentIdList << query.value(0).toString();
+        }
+    }
+    query.clear();
+
+    // Iterate all studentId from studentIdList
+    for (const auto &studentId : studentIdList)
+    {
+        // Prepare sql command for inserting data
+        QString queryString = "INSERT INTO " + tableName + "(StudentId) ";
+        queryString += "VALUES(:studentId)";
+        query.prepare(queryString);
+
+        // Bind values to the query
+        query.bindValue(":studentId", studentId);
+
+        if (!query.exec())
+        {
+            QSqlDatabase::database().rollback();
+            GlobalTimer::displayTextForDuration(ui->errorLabel, Messages::errorInsertData(), 5000);
+            return;
+        }
+    }
+
+    // Close the database after using
+    QSqlDatabase::database().commit();
+    database.close();
 }
 
 

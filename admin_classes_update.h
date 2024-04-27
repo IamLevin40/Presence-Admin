@@ -3,6 +3,10 @@
 
 #include <QMainWindow>
 #include <QMoveEvent>
+#include <QtSql>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
 
 
 // Forward declaration of class files
@@ -28,6 +32,7 @@ class Admin_Classes_Update : public QMainWindow
 
     private:
         Ui::Admin_Classes_Update *ui;
+        QSqlDatabase database;
 
         // Reference the class files here
         Admin_Students_List *admin_students_list;
@@ -35,6 +40,18 @@ class Admin_Classes_Update : public QMainWindow
         Admin_Lecturers_List *admin_lecturers_list;
 
         // All custom functions() should be recognized upon here
+        void selectDataFromDatabase(const QStringList &keys_classInfo);
+        void displayDataFromDatabase(const QStringList &dataList);
+        void classUpdateCall();
+        QString verifyClassUpdate(const QString &subjectDesc, const QString &room, const QString &lecturerId,
+                                  const QString &firstDay, const QString &firstStartTime, const QString &firstEndTime,
+                                  const QString &secondDay, const QString &secondStartTime, const QString &secondEndTime,
+                                  const QString &thirdDay, const QString &thirdStartTime, const QString &thirdEndTime);
+        void updateDataFromDatabase(const QString &subjectDesc, const QString &room, const QString &lecturerId,
+                                    const QString &firstDay, const QString &firstStartTime, const QString &firstEndTime,
+                                    const QString &secondDay, const QString &secondStartTime, const QString &secondEndTime,
+                                    const QString &thirdDay, const QString &thirdStartTime, const QString &thirdEndTime);
+        void populateCombobox();
         void switchWindow_AdminStudentsList();
         void switchWindow_AdminClassesList();
         void switchWindow_AdminLecturersList();

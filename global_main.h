@@ -80,6 +80,8 @@ namespace Messages
     inline QString errorSelectData() { return "Unable to select data from the database."; }
     inline QString errorDeleteData() { return "Unable to delete data from the database."; }
     inline QString errorUpdateData() { return "Unable to update data from the database."; }
+    inline QString errorCreateTable() { return "Unable to create table in the database."; }
+    inline QString errorDeleteTable() { return "Unable to delete table from the database."; }
 
     inline QString emptyAdminId() { return "Admin number is required."; }
     inline QString invalidAdminId() { return "Admin number is invalid."; }
@@ -91,11 +93,15 @@ namespace Messages
     inline QString incompleteLengthStudentId() { return "Student number should be exactly 9 characters long."; }
     inline QString invalidStudentId() { return "Student number is invalid."; }
     inline QString alreadyExistStudentId() { return "Student number already exist in the database."; }
+    inline QString alreadyEnrolledStudentId() { return "Student number already enrolled in this class."; }
+    inline QString notExistStudentId() { return "Student number does not exist."; }
+
     inline QString emptyLecturerId() { return "Lecturer number is required."; }
     inline QString incompleteLengthLecturerId() { return "Lecturer number should be exactly 4 characters long."; }
     inline QString invalidLecturerId() { return "Lecturer number is invalid."; }
     inline QString alreadyExistLecturerId() { return "Lecturer number already exist in the database."; }
     inline QString notExistLecturerId() { return "Lecturer number does not exist."; }
+
     inline QString emptyPin() { return "Pin is required."; }
     inline QString incompleteLengthPin() { return "Pin should be exactly 6 digits long"; }
     inline QString invalidPin() { return "Pin is invalid. Must only consist digits."; }
@@ -145,10 +151,11 @@ class GlobalTimer : public QObject
 class FilteringManager
 {
     public:
-        static void checkComboboxIndex(QObject *object);
+        static QString convertSchoolYear(const QString &schoolYear);
         static void incrementPage(QObject *object, const int &index);
         static void validatePageEdit(QObject *object);
         static void selectOptionByText(QComboBox *comboBox, const QString &textToSelect);
+        static void checkComboboxIndex(QObject *object);
         static void setupComboboxDependency(const QVector<QComboBox *> &comboBoxes);
 };
 

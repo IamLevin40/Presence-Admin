@@ -201,21 +201,21 @@ void Admin_Lecturers_List::displayDataFromDatabase(const QList<QStringList> &dat
         // Set up dataLecturerIdLabel
         QLabel *dataLecturerIdLabel = new QLabel(dataGroup);
         dataLecturerIdLabel->setText(lecturerId);
-        dataLecturerIdLabel->setStyleSheet("QLabel { color: #21C5DF; font-family: Poppins; font-size: 9px; font-style: normal; font-weight: 400; line-height: normal; }");
+        dataLecturerIdLabel->setStyleSheet("QLabel { color: #15CAE3; font-family: Poppins; font-size: 9px; font-style: normal; font-weight: 400; line-height: normal; }");
         dataLecturerIdLabel->setGeometry(60, 40, 70, 10);
 
         // Set up dataPinLabel
         QLabel *dataPinLabel = new QLabel(dataGroup);
         dataPinLabel->setText(pin);
         dataPinLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-        dataPinLabel->setStyleSheet("QLabel { color: #21C5DF; font-family: Poppins; font-size: 9px; font-style: normal; font-weight: 400; line-height: normal; }");
+        dataPinLabel->setStyleSheet("QLabel { color: #15CAE3; font-family: Poppins; font-size: 9px; font-style: normal; font-weight: 400; line-height: normal; }");
         dataPinLabel->setGeometry(240, 40, 60, 10);
 
         // Set up dataEditButton
         QPushButton *dataEditButton = new QPushButton(dataGroup);
         dataEditButton->setIcon(QIcon(":/res/assets/edit.png"));
         dataEditButton->setStyleSheet("QPushButton { border: 0px; border-radius: 0px; background: none; }");
-        dataEditButton->setGeometry(260, 8, 20, 20);
+        dataEditButton->setGeometry(265, 10, 15, 15);
         connect(dataEditButton, &QPushButton::clicked, this, [=]() {
             Admin_Lecturers_List::switchWindow_AdminLecturersUpdate(lecturerId);
         });
@@ -224,7 +224,7 @@ void Admin_Lecturers_List::displayDataFromDatabase(const QList<QStringList> &dat
         QPushButton *dataDeleteButton = new QPushButton(dataGroup);
         dataDeleteButton->setIcon(QIcon(":/res/assets/delete.png"));
         dataDeleteButton->setStyleSheet("QPushButton { border: 0px; border-radius: 0px; background: none; }");
-        dataDeleteButton->setGeometry(280, 8, 20, 20);
+        dataDeleteButton->setGeometry(285, 10, 15, 15);
         connect(dataDeleteButton, &QPushButton::clicked, this, [=]() {
             Admin_Lecturers_List::deleteDataFromDatabase(lecturerId);
         });
