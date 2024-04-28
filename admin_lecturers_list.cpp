@@ -29,6 +29,7 @@ Admin_Lecturers_List::Admin_Lecturers_List(QWidget *parent)
     // Initiate functions on awake
     Admin_Lecturers_List::populateCombobox();
     Admin_Lecturers_List::filterSearchCall();
+    DateTimeUtils::updateDateTimeUtils(ui->dateLabel, ui->timeLabel);
 
     // Connect ui objects to functions based on user interaction
     connect(ui->searchButton, &QPushButton::clicked, this, &Admin_Lecturers_List::filterSearchCall);

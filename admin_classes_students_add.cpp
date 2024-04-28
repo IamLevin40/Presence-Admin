@@ -25,6 +25,9 @@ Admin_Classes_Students_Add::Admin_Classes_Students_Add(QWidget *parent)
     database.setDatabaseName($db_Database);
     database.setPort($db_Port);
 
+    // Initiate functions on awake
+    DateTimeUtils::updateDateTimeUtils(ui->dateLabel, ui->timeLabel);
+
     // Connect ui objects to functions based on user interaction
     connect(ui->confirmButton, &QPushButton::clicked, this, &Admin_Classes_Students_Add::classStudentAddCall);
 
@@ -50,6 +53,7 @@ void Admin_Classes_Students_Add::classStudentAddCall()
 {
     // Fetch string input text() from textboxes and comboboxes
     QString studentId = ui->studentIdTextbox->text().toUpper();
+    QStringList keys_classInfo = $selectKeys_ClassInfo;
 
     // Must return result in QString from verify function
     QString result = Admin_Classes_Students_Add::verifyClassStudentAdd(studentId);
@@ -62,7 +66,7 @@ void Admin_Classes_Students_Add::classStudentAddCall()
     }
 
     // Proceed to inserting data to database
-    Admin_Classes_Students_Add::insertDataToDatabase(studentId);
+    Admin_Classes_Students_Add::insertDataToDatabase(studentId, keys_classInfo);
 }
 
 
@@ -106,7 +110,7 @@ QString Admin_Classes_Students_Add::verifyClassStudentAdd(const QString &student
 }
 
 
-void Admin_Classes_Students_Add::insertDataToDatabase(const QString &studentId)
+void Admin_Classes_Students_Add::insertDataToDatabase(const QString &studentId, const QStringList &keys_classInfo)
 {
     // Return error if unable to access the database
     if (!database.open())
@@ -116,14 +120,14 @@ void Admin_Classes_Students_Add::insertDataToDatabase(const QString &studentId)
     }
 
     // Get data from select key
-    QString key_subjectCode = $selectKeys_ClassInfo[0];
-    QString key_program = $selectKeys_ClassInfo[1];
-    QString key_year = $selectKeys_ClassInfo[2];
-    QString key_section = $selectKeys_ClassInfo[3];
-    QString key_semester = $selectKeys_ClassInfo[4];
-    QString key_schoolYear = $selectKeys_ClassInfo[5];
+    QString key_subjectCode = keys_classInfo[0];
+    QString key_program = keys_classInfo[1];
+    QString key_year = keys_classInfo[2];
+    QString key_section = keys_classInfo[3];
+    QString key_semester = keys_classInfo[4];
+    QString key_schoolYear = keys_classInfo[5];
 
-    QString tableName = key_subjectCode + key_program + key_year + key_section + "_" + "S" + key_semester + "SY" + FilteringManager::convertSchoolYear(key_schoolYear);
+    QString tableName = QString("%1%2%3%4_S%5SY%6").arg(key_subjectCode, key_program, key_year, key_section, key_semester, FilteringManager::convertSchoolYear(key_schoolYear));
 
     // Set up queries for database
     QSqlDatabase::database().transaction();

@@ -30,6 +30,7 @@ Admin_Classes_List::Admin_Classes_List(QWidget *parent)
     // Initiate functions on awake
     Admin_Classes_List::populateCombobox();
     Admin_Classes_List::filterSearchCall();
+    DateTimeUtils::updateDateTimeUtils(ui->dateLabel, ui->timeLabel);
 
     // Connect ui objects to functions based on user interaction
     connect(ui->searchButton, &QPushButton::clicked, this, &Admin_Classes_List::filterSearchCall);
@@ -346,7 +347,7 @@ void Admin_Classes_List::deleteDataFromDatabase(const QStringList &keys_classInf
     query.clear();
 
     // Delete table after successfully deleting data
-    QString tableName = key_subjectCode + key_program + key_year + key_section + "_" + "S" + key_semester + "SY" + FilteringManager::convertSchoolYear(key_schoolYear);
+    QString tableName = QString("%1%2%3%4_S%5SY%6").arg(key_subjectCode, key_program, key_year, key_section, key_semester, FilteringManager::convertSchoolYear(key_schoolYear));
 
     QString queryString = "DROP TABLE " + tableName;
     query.prepare(queryString);

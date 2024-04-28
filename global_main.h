@@ -6,6 +6,7 @@
 #include <QPoint>
 #include <QList>
 #include <QStringList>
+#include <QDateTime>
 #include <QTime>
 #include <QTimer>
 #include <QSettings>
@@ -144,6 +145,14 @@ class GlobalTimer : public QObject
 
     private:
         static QTimer* m_timer;
+};
+
+
+// Date and Time Utilities
+class DateTimeUtils
+{
+    public:
+        static void updateDateTimeUtils(QLabel *dateLabel, QLabel *timeLabel);
 };
 
 

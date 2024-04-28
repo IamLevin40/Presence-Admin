@@ -194,7 +194,7 @@
 }</string>
      </property>
      <property name="text">
-      <string>Date&lt;?&gt;</string>
+      <string/>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -222,7 +222,7 @@
 }</string>
      </property>
      <property name="text">
-      <string>Time&lt;?&gt;</string>
+      <string/>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

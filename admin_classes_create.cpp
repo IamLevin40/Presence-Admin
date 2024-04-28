@@ -26,6 +26,7 @@ Admin_Classes_Create::Admin_Classes_Create(QWidget *parent)
 
     // Initiate functions on awake
     Admin_Classes_Create::populateCombobox();
+    DateTimeUtils::updateDateTimeUtils(ui->dateLabel, ui->timeLabel);
 
     // Connect ui objects to functions based on user interaction
     connect(ui->confirmButton, &QPushButton::clicked, this, &Admin_Classes_Create::classCreateCall);
@@ -231,7 +232,7 @@ void Admin_Classes_Create::insertDataToDatabase(const QString &subjectCode, cons
     query.clear();
 
     // Create separate table after successfully inserting data
-    QString tableName = subjectCode + program + year + section + "_" + "S" + semester + "SY" + FilteringManager::convertSchoolYear(schoolYear);
+    QString tableName = QString("%1%2%3%4_S%5SY%6").arg(subjectCode, program, year, section, semester, FilteringManager::convertSchoolYear(schoolYear));
 
     QString queryString = "CREATE TABLE " + $db_Database + "." + tableName + " (\
                           `StudentId` CHAR(9) NOT NULL, \
@@ -243,6 +244,7 @@ void Admin_Classes_Create::insertDataToDatabase(const QString &subjectCode, cons
     // Return error if unable to create table
     if (!query.exec())
     {
+        qDebug() << query.lastError().text();
         QSqlDatabase::database().rollback();
         GlobalTimer::displayTextForDuration(ui->errorLabel, Messages::errorCreateTable(), 5000);
         return;

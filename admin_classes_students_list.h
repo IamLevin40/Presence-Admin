@@ -55,8 +55,9 @@ class Admin_Classes_Students_List : public QMainWindow
         void selectInfoFromDatabase(const QStringList &keys_classInfo);
         void displayInfoFromDatabase(const QStringList &dataList);
         QStringList getLecturerInfo(const QString &lecturerId);
+        void deleteUnknownFromDatabase(const QStringList &keys_classInfo);
         void filterSearchCall();
-        void selectDataFromDatabase(const int &pageNumber);
+        void selectDataFromDatabase(const int &pageNumber, const QStringList &keys_classInfo);
         void displayDataFromDatabase(const QList<QStringList> &dataList, const QList<QStringList> &recordList);
         void deleteDataFromDatabase(const QString &studentId);
         void switchWindow_AdminStudentsList();

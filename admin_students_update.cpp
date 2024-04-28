@@ -27,6 +27,7 @@ Admin_Students_Update::Admin_Students_Update(QWidget *parent)
     // Initiate functions on awake
     Admin_Students_Update::populateCombobox();
     Admin_Students_Update::selectDataFromDatabase($updateKey_StudentInfo);
+    DateTimeUtils::updateDateTimeUtils(ui->dateLabel, ui->timeLabel);
 
     // Connect ui objects to functions based on user interaction
     connect(ui->updateButton, &QPushButton::clicked, this, &Admin_Students_Update::studentUpdateCall);

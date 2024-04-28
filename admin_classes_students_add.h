@@ -44,7 +44,7 @@ class Admin_Classes_Students_Add : public QMainWindow
         // All custom functions() should be recognized upon here
         void classStudentAddCall();
         QString verifyClassStudentAdd(const QString &studentId);
-        void insertDataToDatabase(const QString &studentId);
+        void insertDataToDatabase(const QString &studentId, const QStringList &keys_classInfo);
         void switchWindow_AdminStudentsList();
         void switchWindow_AdminClassesList();
         void switchWindow_AdminLecturersList();

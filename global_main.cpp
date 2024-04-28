@@ -248,10 +248,28 @@ void GlobalTimer::displayTextForDuration(QObject* object, const QString& text, i
 }
 
 
+// Update date and time label text
+void DateTimeUtils::updateDateTimeUtils(QLabel *dateLabel, QLabel *timeLabel)
+{
+    QTimer *timer = new QTimer();
+
+    // Connect the timer's timeout signal to a lambda function that updates the labels
+    QObject::connect(timer, &QTimer::timeout, [=]() {
+        // Get current date and time
+        QDateTime currentDateTime = QDateTime::currentDateTime();
+        dateLabel->setText(currentDateTime.date().toString("MMM. dd, yyyy"));
+        timeLabel->setText(currentDateTime.time().toString("h:mm:ssAP"));
+    });
+
+    // Start the timer to trigger the update every second
+    timer->start(1000);
+}
+
+
 // Convert school year to short year and vice versa
 QString FilteringManager::convertSchoolYear(const QString &schoolYear)
 {
-    // Check if the input year has a dash, if yes, convert to short year
+    // Check if the input year has a dash; if yes, convert to short year
     if (schoolYear.contains("-"))
     {
         QString firstPart = schoolYear.mid(2, 2);
@@ -338,7 +356,7 @@ void FilteringManager::selectOptionByText(QComboBox *comboBox, const QString &te
 
 
 // Check selected option from combobox
-void FilteringManager::checkComboboxIndex(QObject* object)
+void FilteringManager::checkComboboxIndex(QObject *object)
 {
     // Get the sender object: combobox
     QComboBox *comboBox = qobject_cast<QComboBox*>(object);
@@ -379,7 +397,7 @@ QPoint WindowPositionManager::loadWindowPosition()
 {
     // Return value of "windowPosition" from HKEY_CURRENT_USER\Software\$appCompany\$appName
     QSettings settings($appCompany, $appName);
-    return settings.value("windowPosition", QPoint(0, 0)).toPoint();
+    return settings.value("windowPosition", QPoint(0, 30)).toPoint();
 }
 
 void WindowPositionManager::saveWindowPosition(const QPoint &position)

@@ -27,7 +27,9 @@ Admin_Classes_Students_List::Admin_Classes_Students_List(QWidget *parent)
 
     // Initiate functions on awake
     Admin_Classes_Students_List::selectInfoFromDatabase($selectKeys_ClassInfo);
+    Admin_Classes_Students_List::deleteUnknownFromDatabase($selectKeys_ClassInfo);
     Admin_Classes_Students_List::filterSearchCall();
+    DateTimeUtils::updateDateTimeUtils(ui->dateLabel, ui->timeLabel);
 
     // Connect ui objects to functions based on user interaction
     connect(ui->prevPageButton, &QPushButton::clicked, this, [=](){ FilteringManager::incrementPage(ui->numberPageTextbox, -1); });
@@ -97,7 +99,6 @@ void Admin_Classes_Students_List::selectInfoFromDatabase(const QStringList &keys
     // Return error if unable to select data
     if (!query.exec())
     {
-        qDebug() << query.lastError().text();
         QSqlDatabase::database().rollback();
         GlobalTimer::displayTextForDuration(ui->errorLabel, Messages::errorSelectData(), 5000);
         return;
@@ -149,10 +150,10 @@ void Admin_Classes_Students_List::displayInfoFromDatabase(const QStringList &dat
     // Display class information on top of students data
     ui->subjectCodeLabel->setText(subjectCode);
     ui->subjectDescLabel->setText(subjectDesc);
-    ui->lecturerNameLabel->setText(lastName + ", " + firstName);
-    ui->schoolYearLabel->setText("SY " + schoolYear + "   " + "SEM " + semester);
-    ui->programLabel->setText(program + " " + year + section);
-    ui->scheduleLabel->setText(day + "   " + time);
+    ui->lecturerNameLabel->setText(QString("%1, %2").arg(lastName, firstName));
+    ui->schoolYearLabel->setText(QString("SY %1   SEM %2").arg(schoolYear, semester));
+    ui->programLabel->setText(QString("%1 %2%3").arg(program, year, section));
+    ui->scheduleLabel->setText(QString("%1   %2").arg(day, time));
     ui->roomLabel->setText(room);
 }
 
@@ -191,17 +192,7 @@ QStringList Admin_Classes_Students_List::getLecturerInfo(const QString &lecturer
 }
 
 
-void Admin_Classes_Students_List::filterSearchCall()
-{
-    // Fetch string input text() from textboxes
-    int pageNumber = ui->numberPageTextbox->text().toInt();
-
-    // Proceed to selecting data from database
-    Admin_Classes_Students_List::selectDataFromDatabase(pageNumber);
-}
-
-
-void Admin_Classes_Students_List::selectDataFromDatabase(const int &pageNumber)
+void Admin_Classes_Students_List::deleteUnknownFromDatabase(const QStringList &keys_classInfo)
 {
     // Return error if unable to access the database
     if (!database.open())
@@ -211,14 +202,116 @@ void Admin_Classes_Students_List::selectDataFromDatabase(const int &pageNumber)
     }
 
     // Get data from select key
-    QString key_subjectCode = $selectKeys_ClassInfo[0];
-    QString key_program = $selectKeys_ClassInfo[1];
-    QString key_year = $selectKeys_ClassInfo[2];
-    QString key_section = $selectKeys_ClassInfo[3];
-    QString key_semester = $selectKeys_ClassInfo[4];
-    QString key_schoolYear = $selectKeys_ClassInfo[5];
+    QString key_subjectCode = keys_classInfo[0];
+    QString key_program = keys_classInfo[1];
+    QString key_year = keys_classInfo[2];
+    QString key_section = keys_classInfo[3];
+    QString key_semester = keys_classInfo[4];
+    QString key_schoolYear = keys_classInfo[5];
 
-    QString tableName = key_subjectCode + key_program + key_year + key_section + "_" + "S" + key_semester + "SY" + FilteringManager::convertSchoolYear(key_schoolYear);
+    QString tableName = QString("%1%2%3%4_S%5SY%6").arg(key_subjectCode, key_program, key_year, key_section, key_semester, FilteringManager::convertSchoolYear(key_schoolYear));
+
+    // Set up data list and queries for database
+    QStringList studentDataList;
+    QSqlDatabase::database().transaction();
+    QSqlQuery query(database);
+
+    // Prepare sql command for selecting data
+    query.prepare("SELECT * FROM " + tableName);
+
+    // Return error if unable to select data
+    if (!query.exec())
+    {
+        QSqlDatabase::database().rollback();
+        GlobalTimer::displayTextForDuration(ui->errorLabel, Messages::errorSelectData(), 5000);
+        return;
+    }
+    else
+    {
+        // Fetch and store the result rows
+        while (query.next())
+        {
+            studentDataList << query.value(0).toString();   // StudentId
+        }
+    }
+    query.clear();
+
+    for (const auto &studentId : studentDataList)
+    {
+        // Prepare sql command for finding data
+        query.prepare("SELECT COUNT(*) FROM StudentInfo WHERE StudentId = :studentId");
+
+        // Bind values to the query
+        query.bindValue(":studentId", studentId);
+
+        // Return error if unable to insert data
+        if (!query.exec())
+        {
+            QSqlDatabase::database().rollback();
+            GlobalTimer::displayTextForDuration(ui->errorLabel, Messages::errorSelectData(), 5000);
+            return;
+        }
+
+        query.next();
+        int count = query.value(0).toInt();
+        bool isStudentIdExist = count > 0;
+
+        query.clear();
+        if (!isStudentIdExist)
+        {
+            // Prepare sql command for deleting data
+            query.prepare("DELETE FROM " + tableName + " WHERE StudentId = :studentId");
+
+            // Bind values to the query
+            query.bindValue(":studentId", studentId);
+
+            // Return error if unable to delete data
+            if (!query.exec())
+            {
+                QSqlDatabase::database().rollback();
+                GlobalTimer::displayTextForDuration(ui->errorLabel, Messages::errorDeleteData(), 5000);
+                return;
+            }
+
+            query.clear();
+        }
+    }
+
+    // Close the database after using
+    QSqlDatabase::database().commit();
+    database.close();
+}
+
+
+void Admin_Classes_Students_List::filterSearchCall()
+{
+    // Fetch string input text() from textboxes
+    int pageNumber = ui->numberPageTextbox->text().toInt();
+    QStringList keys_classInfo = $selectKeys_ClassInfo;
+
+    // Proceed to selecting data from database
+    Admin_Classes_Students_List::selectDataFromDatabase(pageNumber, keys_classInfo);
+}
+
+
+void Admin_Classes_Students_List::selectDataFromDatabase(const int &pageNumber, const QStringList &keys_classInfo)
+{
+    // Return error if unable to access the database
+    if (!database.open())
+    {
+        GlobalTimer::displayTextForDuration(ui->errorLabel, Messages::unaccessDatabase(), 5000);
+        return;
+    }
+
+    // Get data from select key
+    QString key_subjectCode = keys_classInfo[0];
+    QString key_program = keys_classInfo[1];
+    QString key_year = keys_classInfo[2];
+    QString key_section = keys_classInfo[3];
+    QString key_semester = keys_classInfo[4];
+    QString key_schoolYear = keys_classInfo[5];
+
+    QString tableName = QString("%1%2%3%4_S%5SY%6").arg(key_subjectCode, key_program, key_year, key_section, key_semester, FilteringManager::convertSchoolYear(key_schoolYear));
 
     // Calculate offset for pagination
     int offset = (pageNumber - 1) * $dataLimitPerPage;
@@ -293,6 +386,8 @@ void Admin_Classes_Students_List::selectDataFromDatabase(const int &pageNumber)
 
             studentDataList.append(rowData);
         }
+
+        query.clear();
     }
 
     // Close the database after using
@@ -436,7 +531,7 @@ void Admin_Classes_Students_List::deleteDataFromDatabase(const QString &studentI
     QString key_semester = $selectKeys_ClassInfo[4];
     QString key_schoolYear = $selectKeys_ClassInfo[5];
 
-    QString tableName = key_subjectCode + key_program + key_year + key_section + "_" + "S" + key_semester + "SY" + FilteringManager::convertSchoolYear(key_schoolYear);
+    QString tableName = QString("%1%2%3%4_S%5SY%6").arg(key_subjectCode, key_program, key_year, key_section, key_semester, FilteringManager::convertSchoolYear(key_schoolYear));
 
     // Set up queries for database
     QSqlDatabase::database().transaction();

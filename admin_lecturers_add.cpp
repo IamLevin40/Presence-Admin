@@ -26,6 +26,7 @@ Admin_Lecturers_Add::Admin_Lecturers_Add(QWidget *parent)
 
     // Initiate functions on awake
     Admin_Lecturers_Add::populateCombobox();
+    DateTimeUtils::updateDateTimeUtils(ui->dateLabel, ui->timeLabel);
 
     // Connect ui objects to functions based on user interaction
     connect(ui->confirmButton, &QPushButton::clicked, this, &Admin_Lecturers_Add::lecturerAddCall);
