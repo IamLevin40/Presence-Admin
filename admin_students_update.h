@@ -46,6 +46,7 @@ class Admin_Students_Update : public QMainWindow
         // All custom functions() should be recognized upon here
         void selectDataFromDatabase(const QString &key_studentId);
         void displayDataFromDatabase(const QStringList &dataList);
+
         void studentUpdateCall();
         QString verifyStudentUpdate(const QString &lastname, const QString &firstName,
                                     const QString &college, const QString &program,
@@ -53,8 +54,10 @@ class Admin_Students_Update : public QMainWindow
         void updateDataFromDatabase(const QString &lastname, const QString &firstName,
                                     const QString &college, const QString &program,
                                     const QString &year, const QString &section, const QString &pin);
+
         void handleIsRegularRadio(const QString &option);
         void populateCombobox();
+
         void switchWindow_AdminStudentsList();
         void switchWindow_AdminClassesList();
         void switchWindow_AdminLecturersList();

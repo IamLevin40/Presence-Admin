@@ -63,7 +63,9 @@ class Admin_Students_List : public QMainWindow
                                     const QString &searchText);
         void displayDataFromDatabase(const QList<QStringList> &dataList);
         void deleteDataFromDatabase(const QString &key_studentId);
+
         void populateCombobox();
+
         void switchWindow_AdminLoginForm();
         void switchWindow_AdminClassesList();
         void switchWindow_AdminLecturersList();

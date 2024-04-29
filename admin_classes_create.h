@@ -49,6 +49,7 @@ class Admin_Classes_Create : public QMainWindow
                                   const QString &firstDay, const QString &firstStartTime, const QString &firstEndTime,
                                   const QString &secondDay, const QString &secondStartTime, const QString &secondEndTime,
                                   const QString &thirdDay, const QString &thirdStartTime, const QString &thirdEndTime);
+
         void insertDataToDatabase(const QString &subjectCode, const QString &subjectDesc,
                                   const QString &schoolYear, const QString &semester, const QString &program,
                                   const QString &year, const QString &section, const QString &room, const QString &lecturerId,
@@ -56,7 +57,9 @@ class Admin_Classes_Create : public QMainWindow
                                   const QString &secondDay, const QString &secondStartTime, const QString &secondEndTime,
                                   const QString &thirdDay, const QString &thirdStartTime, const QString &thirdEndTime);
         void addDataToGeneratedTable(const QString &tableName, const QString &program, const QString &year, const QString &section);
+
         void populateCombobox();
+
         void switchWindow_AdminStudentsList();
         void switchWindow_AdminClassesList();
         void switchWindow_AdminLecturersList();

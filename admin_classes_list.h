@@ -61,9 +61,12 @@ class Admin_Classes_List : public QMainWindow
                                     const QString &program, const QString &year, const QString &section,
                                     const QString &searchText);
         void displayDataFromDatabase(const QList<QStringList> &dataList);
+
         void deleteDataFromDatabase(const QStringList &keys_classInfo);
+
         void populateCombobox();
         QStringList getLecturerInfo(const QString &lecturerId);
+
         void switchWindow_AdminLoginForm();
         void switchWindow_AdminStudentsList();
         void switchWindow_AdminLecturersList();

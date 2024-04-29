@@ -33,6 +33,7 @@ class Admin_Login_Form : public QMainWindow
         // All custom functions() should be recognized upon here
         void loginCall();
         QString authenticateAdmin(const QString &adminId, const QString &adminPin);
+
         void switchWindow_AdminStudentsList();
 };
 

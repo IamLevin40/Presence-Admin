@@ -52,8 +52,10 @@ class Admin_Students_Enroll : public QMainWindow
         void insertDataToDatabase(const QString &studentId, const QString &lastName, const QString &firstName,
                                   const QString &college, const QString &program,
                                   const QString &year, const QString &section);
+
         void handleIsRegularRadio(const QString &option);
         void populateCombobox();
+
         void switchWindow_AdminStudentsList();
         void switchWindow_AdminClassesList();
         void switchWindow_AdminLecturersList();

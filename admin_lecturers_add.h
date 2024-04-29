@@ -44,7 +44,9 @@ class Admin_Lecturers_Add : public QMainWindow
         void lecturerAddCall();
         QString verifyLecturerAdd(const QString &lecturerId, const QString &lastName, const QString &firstName, const QString &college);
         void insertDataToDatabase(const QString &lecturerId, const QString &lastName, const QString &firstName, const QString &college);
+
         void populateCombobox();
+
         void switchWindow_AdminStudentsList();
         void switchWindow_AdminClassesList();
         void switchWindow_AdminLecturersList();
