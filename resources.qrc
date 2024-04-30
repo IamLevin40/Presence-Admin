@@ -2,7 +2,10 @@
     <qresource prefix="/res">
         <file>assets/add_lecturer.png</file>
         <file>assets/add_student.png</file>
+        <file>assets/alternative_attendance.png</file>
         <file>assets/attendance.png</file>
+        <file>assets/auth_code_selected.png</file>
+        <file>assets/auth_code_unselected.png</file>
         <file>assets/back.png</file>
         <file>assets/calendar.png</file>
         <file>assets/camera_corner_bottomleft.png</file>
@@ -48,6 +51,8 @@
         <file>assets/pescar_avatar.png</file>
         <file>assets/presence_logo.png</file>
         <file>assets/prev_arrow.png</file>
+        <file>assets/qr_code_selected.png</file>
+        <file>assets/qr_code_unselected.png</file>
         <file>assets/search.png</file>
         <file>assets/search_field_short.png</file>
         <file>assets/student_record.png</file>
@@ -56,6 +61,7 @@
         <file>assets/student_unselected.png</file>
         <file>assets/take_attendance.png</file>
         <file>assets/update.png</file>
+        <file>assets/verify.png</file>
         <file>assets/white_box.png</file>
         <file>assets/yes.png</file>
     </qresource>

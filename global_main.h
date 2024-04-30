@@ -148,7 +148,7 @@ class GlobalTimer : public QObject
 };
 
 
-// Date and Time Utilities
+// Date and time utilities
 class DateTimeUtils
 {
     public:
