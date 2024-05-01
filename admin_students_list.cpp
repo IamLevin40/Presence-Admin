@@ -119,6 +119,7 @@ void Admin_Students_List::selectStudentInfo(const int &pageNumber, const QString
                 (Year = :year OR :year IS NULL) AND \
                 (Section = :section OR :section IS NULL) AND \
                 (IsRegular = :isRegular OR :isRegular IS NULL) \
+                ORDER BY LastName, FirstName ASC \
                 LIMIT :limit OFFSET :offset";
     query.prepare(sqlQuery);
 

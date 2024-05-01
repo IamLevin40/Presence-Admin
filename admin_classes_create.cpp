@@ -275,7 +275,8 @@ void Admin_Classes_Create::addStudentsToClass(const QString &tableName, const QS
 
     // Prepare sql command for selecting data
     query.prepare("SELECT StudentId FROM StudentInfo WHERE \
-                  Program = :program AND Year = :year AND Section = :section");
+                  Program = :program AND Year = :year AND Section = :section \
+                  ORDER BY LastName, FirstName ASC");
 
     // Bind values to the query
     query.bindValue(":program", program);

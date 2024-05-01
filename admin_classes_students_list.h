@@ -17,6 +17,9 @@
 #include <QLayout>
 #include <QLayoutItem>
 
+#include <QtWidgets>
+#include <QAxObject>
+
 
 // Forward declaration of class files
 class Admin_Students_List;
@@ -60,9 +63,11 @@ class Admin_Classes_Students_List : public QMainWindow
 
         void filterSearchCall();
         void selectEnlistedStudents(const int &pageNumber, const QStringList &keys_classInfo);
-        void displayEnlistedStudents(const QList<QStringList> &dataList, const QList<QStringList> &recordList);
+        void displayEnlistedStudents(const QList<QStringList> &dataList);
 
         void deleteStudentFromClass(const QString &studentId);
+
+        void createExcelFile(const QStringList &keys_classInfo);
 
         void switchWindow_AdminStudentsList();
         void switchWindow_AdminClassesList();

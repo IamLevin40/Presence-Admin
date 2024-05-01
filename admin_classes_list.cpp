@@ -116,6 +116,7 @@ void Admin_Classes_List::selectClassInfo(const int &pageNumber, const QString &s
                 (Program = :program OR :program IS NULL) AND \
                 (Year = :year OR :year IS NULL) AND \
                 (Section = :section OR :section IS NULL) \
+                ORDER BY SchoolYear, Semester DESC, SubjectCode, Program, Year, Section ASC \
                 LIMIT :limit OFFSET :offset";
     query.prepare(sqlQuery);
 
