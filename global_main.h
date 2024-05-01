@@ -156,11 +156,19 @@ class DateTimeUtils
 };
 
 
+// String manipulator
+class StringManipulator
+{
+    public:
+        static QString separateSubjectCode(const QString &subjectCode);
+        static QString convertSchoolYear(const QString &schoolYear);
+};
+
+
 // Filtering manager
 class FilteringManager
 {
     public:
-        static QString convertSchoolYear(const QString &schoolYear);
         static void incrementPage(QObject *object, const int &index);
         static void validatePageEdit(QObject *object);
         static void selectOptionByText(QComboBox *comboBox, const QString &textToSelect);

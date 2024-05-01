@@ -223,7 +223,7 @@ void Admin_Classes_List::displayClassInfo(const QList<QStringList> &dataList)
 
         // Set up dataSubjectCodeLabel
         QLabel *dataSubjectCodeLabel = new QLabel(dataGroup);
-        dataSubjectCodeLabel->setText(subjectCode);
+        dataSubjectCodeLabel->setText(StringManipulator::separateSubjectCode(subjectCode));
         dataSubjectCodeLabel->setStyleSheet("QLabel { color: #FFFFFF; font-family: Poppins; font-size: 9px; font-style: normal; font-weight: 600; line-height: normal; }");
         dataSubjectCodeLabel->setGeometry(10, 12, 45, 10);
 
@@ -347,7 +347,7 @@ void Admin_Classes_List::deleteClassInfo(const QStringList &keys_classInfo)
     query.clear();
 
     // Delete table after successfully deleting data
-    QString tableName = QString("%1%2%3%4_S%5SY%6").arg(key_subjectCode, key_program, key_year, key_section, key_semester, FilteringManager::convertSchoolYear(key_schoolYear));
+    QString tableName = QString("%1%2%3%4_S%5SY%6").arg(key_subjectCode, key_program, key_year, key_section, key_semester, StringManipulator::convertSchoolYear(key_schoolYear));
 
     QString queryString = "DROP TABLE " + tableName;
     query.prepare(queryString);

@@ -169,7 +169,7 @@ void Admin_Classes_Update::updateField(const QStringList &dataList)
     }
 
     // Update the form with the current data
-    ui->subjectCodeLabel->setText(subjectCode);
+    ui->subjectCodeLabel->setText(StringManipulator::separateSubjectCode(subjectCode));
     ui->subjectDescTextbox->setText(subjectDesc);
     ui->schoolYearLabel->setText(schoolYear);
     ui->semesterLabel->setText(semester);

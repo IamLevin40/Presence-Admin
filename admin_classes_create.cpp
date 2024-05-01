@@ -232,7 +232,7 @@ void Admin_Classes_Create::insertClassData(const QString &subjectCode, const QSt
     query.clear();
 
     // Create separate table after successfully inserting data
-    QString tableName = QString("%1%2%3%4_S%5SY%6").arg(subjectCode, program, year, section, semester, FilteringManager::convertSchoolYear(schoolYear));
+    QString tableName = QString("%1%2%3%4_S%5SY%6").arg(subjectCode, program, year, section, semester, StringManipulator::convertSchoolYear(schoolYear));
 
     QString queryString = "CREATE TABLE " + $db_Database + "." + tableName + " (\
                           `StudentId` CHAR(9) NOT NULL, \

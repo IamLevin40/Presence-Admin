@@ -127,7 +127,7 @@ void Admin_Classes_Students_Add::insertStudentToClass(const QString &studentId, 
     QString key_semester = keys_classInfo[4];
     QString key_schoolYear = keys_classInfo[5];
 
-    QString tableName = QString("%1%2%3%4_S%5SY%6").arg(key_subjectCode, key_program, key_year, key_section, key_semester, FilteringManager::convertSchoolYear(key_schoolYear));
+    QString tableName = QString("%1%2%3%4_S%5SY%6").arg(key_subjectCode, key_program, key_year, key_section, key_semester, StringManipulator::convertSchoolYear(key_schoolYear));
 
     // Set up queries for database
     QSqlDatabase::database().transaction();

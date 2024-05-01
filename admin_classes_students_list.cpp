@@ -148,7 +148,7 @@ void Admin_Classes_Students_List::displayClassInfo(const QStringList &dataList)
     QString firstName = lecturerInfo[1];
 
     // Display class information on top of students data
-    ui->subjectCodeLabel->setText(subjectCode);
+    ui->subjectCodeLabel->setText(StringManipulator::separateSubjectCode(subjectCode));
     ui->subjectDescLabel->setText(subjectDesc);
     ui->lecturerNameLabel->setText(QString("%1, %2").arg(lastName, firstName));
     ui->schoolYearLabel->setText(QString("SY %1   SEM %2").arg(schoolYear, semester));
@@ -209,7 +209,7 @@ void Admin_Classes_Students_List::deleteUnknownStudents(const QStringList &keys_
     QString key_semester = keys_classInfo[4];
     QString key_schoolYear = keys_classInfo[5];
 
-    QString tableName = QString("%1%2%3%4_S%5SY%6").arg(key_subjectCode, key_program, key_year, key_section, key_semester, FilteringManager::convertSchoolYear(key_schoolYear));
+    QString tableName = QString("%1%2%3%4_S%5SY%6").arg(key_subjectCode, key_program, key_year, key_section, key_semester, StringManipulator::convertSchoolYear(key_schoolYear));
 
     // Set up data list and queries for database
     QStringList studentDataList;
@@ -311,7 +311,7 @@ void Admin_Classes_Students_List::selectEnlistedStudents(const int &pageNumber, 
     QString key_semester = keys_classInfo[4];
     QString key_schoolYear = keys_classInfo[5];
 
-    QString tableName = QString("%1%2%3%4_S%5SY%6").arg(key_subjectCode, key_program, key_year, key_section, key_semester, FilteringManager::convertSchoolYear(key_schoolYear));
+    QString tableName = QString("%1%2%3%4_S%5SY%6").arg(key_subjectCode, key_program, key_year, key_section, key_semester, StringManipulator::convertSchoolYear(key_schoolYear));
 
     // Calculate offset for pagination
     int offset = (pageNumber - 1) * $dataLimitPerPage;
@@ -531,7 +531,7 @@ void Admin_Classes_Students_List::deleteStudentFromClass(const QString &studentI
     QString key_semester = $selectKeys_ClassInfo[4];
     QString key_schoolYear = $selectKeys_ClassInfo[5];
 
-    QString tableName = QString("%1%2%3%4_S%5SY%6").arg(key_subjectCode, key_program, key_year, key_section, key_semester, FilteringManager::convertSchoolYear(key_schoolYear));
+    QString tableName = QString("%1%2%3%4_S%5SY%6").arg(key_subjectCode, key_program, key_year, key_section, key_semester, StringManipulator::convertSchoolYear(key_schoolYear));
 
     // Set up queries for database
     QSqlDatabase::database().transaction();
