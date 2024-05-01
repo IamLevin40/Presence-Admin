@@ -40,7 +40,7 @@ class Admin_Students_Enroll : public QMainWindow
         QSqlDatabase database;
 
         // Reference the class files here
-        Admin_Students_List *admin_students_List;
+        Admin_Students_List *admin_students_list;
         Admin_Classes_List *admin_classes_list;
         Admin_Lecturers_List *admin_lecturers_list;
 
@@ -49,9 +49,9 @@ class Admin_Students_Enroll : public QMainWindow
         QString verifyStudentEnroll(const QString &studentId, const QString &lastName, const QString &firstName,
                                     const QString &college, const QString &program,
                                     const QString &year, const QString &section);
-        void insertDataToDatabase(const QString &studentId, const QString &lastName, const QString &firstName,
-                                  const QString &college, const QString &program,
-                                  const QString &year, const QString &section);
+        void insertStudentData(const QString &studentId, const QString &lastName, const QString &firstName,
+                               const QString &college, const QString &program,
+                               const QString &year, const QString &section);
 
         void handleIsRegularRadio(const QString &option);
         void populateCombobox();

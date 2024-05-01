@@ -26,7 +26,7 @@ Admin_Students_Update::Admin_Students_Update(QWidget *parent)
 
     // Initiate functions on awake
     Admin_Students_Update::populateCombobox();
-    Admin_Students_Update::selectDataFromDatabase($updateKey_StudentInfo);
+    Admin_Students_Update::selectStudentInfo($updateKey_StudentInfo);
     DateTimeUtils::updateDateTimeUtils(ui->dateLabel, ui->timeLabel);
 
     // Connect ui objects to functions based on user interaction
@@ -54,7 +54,7 @@ Admin_Students_Update::~Admin_Students_Update()
 }
 
 
-void Admin_Students_Update::selectDataFromDatabase(const QString &key_studentId)
+void Admin_Students_Update::selectStudentInfo(const QString &key_studentId)
 {
     // Return error if unable to access the database
     if (!database.open())
@@ -99,11 +99,11 @@ void Admin_Students_Update::selectDataFromDatabase(const QString &key_studentId)
     database.close();
 
     // Proceed to display data list
-    Admin_Students_Update::displayDataFromDatabase(studentDataList);
+    Admin_Students_Update::updateField(studentDataList);
 }
 
 
-void Admin_Students_Update::displayDataFromDatabase(const QStringList &dataList)
+void Admin_Students_Update::updateField(const QStringList &dataList)
 {
     // Assign members from dataList to variables
     QString studentId = dataList[0];
@@ -168,7 +168,7 @@ void Admin_Students_Update::studentUpdateCall()
     }
 
     // Proceed to updating data from database
-    Admin_Students_Update::updateDataFromDatabase(lastName, firstName, college, program, year, section, pin);
+    Admin_Students_Update::updateStudentInfo(lastName, firstName, college, program, year, section, pin);
 }
 
 
@@ -196,9 +196,9 @@ QString Admin_Students_Update::verifyStudentUpdate(const QString &lastName, cons
 }
 
 
-void Admin_Students_Update::updateDataFromDatabase(const QString &lastname, const QString &firstName,
-                                                   const QString &college, const QString &program,
-                                                   const QString &year, const QString &section, const QString &pin)
+void Admin_Students_Update::updateStudentInfo(const QString &lastname, const QString &firstName,
+                                              const QString &college, const QString &program,
+                                              const QString &year, const QString &section, const QString &pin)
 {
     // Return error if unable to access the database
     if (!database.open())
@@ -290,8 +290,8 @@ void Admin_Students_Update::collegeIndexChanged(int index)
 void Admin_Students_Update::switchWindow_AdminStudentsList()
 {
     // Switch ui window to Admin_Students_List
-    admin_students_List = new Admin_Students_List;
-    admin_students_List->show();
+    admin_students_list = new Admin_Students_List;
+    admin_students_list->show();
     this->hide();
 }
 

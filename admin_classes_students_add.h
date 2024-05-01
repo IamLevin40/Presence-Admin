@@ -45,7 +45,7 @@ class Admin_Classes_Students_Add : public QMainWindow
         void classStudentAddCall();
         QString verifyClassStudentAdd(const QString &studentId);
 
-        void insertDataToDatabase(const QString &studentId, const QStringList &keys_classInfo);
+        void insertStudentToClass(const QString &studentId, const QStringList &keys_classInfo);
 
         void switchWindow_AdminStudentsList();
         void switchWindow_AdminClassesList();

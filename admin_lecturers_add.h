@@ -43,7 +43,7 @@ class Admin_Lecturers_Add : public QMainWindow
         // All custom functions() should be recognized upon here
         void lecturerAddCall();
         QString verifyLecturerAdd(const QString &lecturerId, const QString &lastName, const QString &firstName, const QString &college);
-        void insertDataToDatabase(const QString &lecturerId, const QString &lastName, const QString &firstName, const QString &college);
+        void insertLecturerData(const QString &lecturerId, const QString &lastName, const QString &firstName, const QString &college);
 
         void populateCombobox();
 

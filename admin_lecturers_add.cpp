@@ -72,7 +72,7 @@ void Admin_Lecturers_Add::lecturerAddCall()
     }
 
     // Proceed to inserting data to database
-    Admin_Lecturers_Add::insertDataToDatabase(lecturerId, lastName, firstName, college);
+    Admin_Lecturers_Add::insertLecturerData(lecturerId, lastName, firstName, college);
 }
 
 
@@ -93,7 +93,7 @@ QString Admin_Lecturers_Add::verifyLecturerAdd(const QString &lecturerId, const 
 }
 
 
-void Admin_Lecturers_Add::insertDataToDatabase(const QString &lecturerId, const QString &lastName, const QString &firstName, const QString &college)
+void Admin_Lecturers_Add::insertLecturerData(const QString &lecturerId, const QString &lastName, const QString &firstName, const QString &college)
 {
     // Return error if unable to access the database
     if (!database.open())

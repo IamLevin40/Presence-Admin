@@ -76,13 +76,13 @@ void Admin_Students_List::filterSearchCall()
     program = program.left(programIndex).trimmed();
 
     // Proceed to selecting data from database
-    Admin_Students_List::selectDataFromDatabase(pageNumber, college, program, year, section, isRegular, searchText);
+    Admin_Students_List::selectStudentInfo(pageNumber, college, program, year, section, isRegular, searchText);
 }
 
 
-void Admin_Students_List::selectDataFromDatabase(const int &pageNumber, const QString &college, const QString &program,
-                                                 const QString &year, const QString &section, const QString &isRegular,
-                                                 const QString &searchText)
+void Admin_Students_List::selectStudentInfo(const int &pageNumber, const QString &college, const QString &program,
+                                            const QString &year, const QString &section, const QString &isRegular,
+                                            const QString &searchText)
 {
     // Return error if unable to access the database
     if (!database.open())
@@ -167,11 +167,11 @@ void Admin_Students_List::selectDataFromDatabase(const int &pageNumber, const QS
     database.close();
 
     // Proceed to display data list
-    Admin_Students_List::displayDataFromDatabase(studentDataList);
+    Admin_Students_List::displayStudentInfo(studentDataList);
 }
 
 
-void Admin_Students_List::displayDataFromDatabase(const QList<QStringList> &dataList)
+void Admin_Students_List::displayStudentInfo(const QList<QStringList> &dataList)
 {
     // Clear existing QGroupBox objects
     qDeleteAll(groupBoxList);
@@ -257,7 +257,7 @@ void Admin_Students_List::displayDataFromDatabase(const QList<QStringList> &data
         dataDeleteButton->setStyleSheet("QPushButton { border: 0px; border-radius: 0px; background: none; }");
         dataDeleteButton->setGeometry(285, 10, 15, 15);
         connect(dataDeleteButton, &QPushButton::clicked, this, [=]() {
-            Admin_Students_List::deleteDataFromDatabase(studentId);
+            Admin_Students_List::deleteStudentInfo(studentId);
         });
 
         // Add data group box to contents layout
@@ -268,7 +268,7 @@ void Admin_Students_List::displayDataFromDatabase(const QList<QStringList> &data
 }
 
 
-void Admin_Students_List::deleteDataFromDatabase(const QString &key_studentId)
+void Admin_Students_List::deleteStudentInfo(const QString &key_studentId)
 {
     // Return error if unable to access the database
     if (!database.open())

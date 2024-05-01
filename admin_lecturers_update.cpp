@@ -26,7 +26,7 @@ Admin_Lecturers_Update::Admin_Lecturers_Update(QWidget *parent)
 
     // Initiate functions on awake
     Admin_Lecturers_Update::populateCombobox();
-    Admin_Lecturers_Update::selectDataFromDatabase($updateKey_LecturerInfo);
+    Admin_Lecturers_Update::selectLecturerInfo($updateKey_LecturerInfo);
     DateTimeUtils::updateDateTimeUtils(ui->dateLabel, ui->timeLabel);
 
     // Connect ui objects to functions based on user interaction
@@ -50,7 +50,7 @@ Admin_Lecturers_Update::~Admin_Lecturers_Update()
 }
 
 
-void Admin_Lecturers_Update::selectDataFromDatabase(const QString &key_lecturerId)
+void Admin_Lecturers_Update::selectLecturerInfo(const QString &key_lecturerId)
 {
     // Return error if unable to access the database
     if (!database.open())
@@ -91,11 +91,11 @@ void Admin_Lecturers_Update::selectDataFromDatabase(const QString &key_lecturerI
     database.close();
 
     // Proceed to display data list
-    Admin_Lecturers_Update::displayDataFromDatabase(lecturerDataList);
+    Admin_Lecturers_Update::updateField(lecturerDataList);
 }
 
 
-void Admin_Lecturers_Update::displayDataFromDatabase(const QStringList &dataList)
+void Admin_Lecturers_Update::updateField(const QStringList &dataList)
 {
     // Assign members from dataList to variables
     QString lecturerId = dataList[0];
@@ -137,7 +137,7 @@ void Admin_Lecturers_Update::lecturerUpdateCall()
     }
 
     // Proceed to updating data from database
-    Admin_Lecturers_Update::updateDataToDatabase(lastName, firstName, college, pin);
+    Admin_Lecturers_Update::updateLecturerInfo(lastName, firstName, college, pin);
 }
 
 
@@ -159,7 +159,7 @@ QString Admin_Lecturers_Update::verifyLecturerUpdate(const QString &lastName, co
 }
 
 
-void Admin_Lecturers_Update::updateDataToDatabase(const QString &lastName, const QString &firstName, const QString &college, const QString &pin)
+void Admin_Lecturers_Update::updateLecturerInfo(const QString &lastName, const QString &firstName, const QString &college, const QString &pin)
 {
     // Return error if unable to access the database
     if (!database.open())

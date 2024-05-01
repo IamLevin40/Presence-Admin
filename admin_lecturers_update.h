@@ -40,12 +40,12 @@ class Admin_Lecturers_Update : public QMainWindow
         Admin_Lecturers_List *admin_lecturers_list;
 
         // All custom functions() should be recognized upon here
-        void selectDataFromDatabase(const QString &key_lecturerId);
-        void displayDataFromDatabase(const QStringList &dataList);
+        void selectLecturerInfo(const QString &key_lecturerId);
+        void updateField(const QStringList &dataList);
 
         void lecturerUpdateCall();
         QString verifyLecturerUpdate(const QString &lastName, const QString &firstName, const QString &college, const QString &pin);
-        void updateDataToDatabase(const QString &lastName, const QString &firstName, const QString &college, const QString &pin);
+        void updateLecturerInfo(const QString &lastName, const QString &firstName, const QString &college, const QString &pin);
 
         void populateCombobox();
 

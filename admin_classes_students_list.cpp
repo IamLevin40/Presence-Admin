@@ -26,8 +26,8 @@ Admin_Classes_Students_List::Admin_Classes_Students_List(QWidget *parent)
     database.setPort($db_Port);
 
     // Initiate functions on awake
-    Admin_Classes_Students_List::selectInfoFromDatabase($selectKeys_ClassInfo);
-    Admin_Classes_Students_List::deleteUnknownFromDatabase($selectKeys_ClassInfo);
+    Admin_Classes_Students_List::selectClassInfo($selectKeys_ClassInfo);
+    Admin_Classes_Students_List::deleteUnknownStudents($selectKeys_ClassInfo);
     Admin_Classes_Students_List::filterSearchCall();
     DateTimeUtils::updateDateTimeUtils(ui->dateLabel, ui->timeLabel);
 
@@ -57,7 +57,7 @@ Admin_Classes_Students_List::~Admin_Classes_Students_List()
 }
 
 
-void Admin_Classes_Students_List::selectInfoFromDatabase(const QStringList &keys_classInfo)
+void Admin_Classes_Students_List::selectClassInfo(const QStringList &keys_classInfo)
 {
     // Return error if unable to access the database
     if (!database.open())
@@ -123,11 +123,11 @@ void Admin_Classes_Students_List::selectInfoFromDatabase(const QStringList &keys
     database.close();
 
     // Proceed to display data list
-    Admin_Classes_Students_List::displayInfoFromDatabase(classDataList);
+    Admin_Classes_Students_List::displayClassInfo(classDataList);
 }
 
 
-void Admin_Classes_Students_List::displayInfoFromDatabase(const QStringList &dataList)
+void Admin_Classes_Students_List::displayClassInfo(const QStringList &dataList)
 {
     // Assign members from dataList to variables
     QString subjectCode = dataList[0];
@@ -192,7 +192,7 @@ QStringList Admin_Classes_Students_List::getLecturerInfo(const QString &lecturer
 }
 
 
-void Admin_Classes_Students_List::deleteUnknownFromDatabase(const QStringList &keys_classInfo)
+void Admin_Classes_Students_List::deleteUnknownStudents(const QStringList &keys_classInfo)
 {
     // Return error if unable to access the database
     if (!database.open())
@@ -290,11 +290,11 @@ void Admin_Classes_Students_List::filterSearchCall()
     QStringList keys_classInfo = $selectKeys_ClassInfo;
 
     // Proceed to selecting data from database
-    Admin_Classes_Students_List::selectDataFromDatabase(pageNumber, keys_classInfo);
+    Admin_Classes_Students_List::selectEnlistedStudents(pageNumber, keys_classInfo);
 }
 
 
-void Admin_Classes_Students_List::selectDataFromDatabase(const int &pageNumber, const QStringList &keys_classInfo)
+void Admin_Classes_Students_List::selectEnlistedStudents(const int &pageNumber, const QStringList &keys_classInfo)
 {
     // Return error if unable to access the database
     if (!database.open())
@@ -395,11 +395,11 @@ void Admin_Classes_Students_List::selectDataFromDatabase(const int &pageNumber, 
     database.close();
 
     // Proceed to display data list
-    Admin_Classes_Students_List::displayDataFromDatabase(studentDataList, studentRecordList);
+    Admin_Classes_Students_List::displayEnlistedStudents(studentDataList, studentRecordList);
 }
 
 
-void Admin_Classes_Students_List::displayDataFromDatabase(const QList<QStringList> &dataList, const QList<QStringList> &recordList)
+void Admin_Classes_Students_List::displayEnlistedStudents(const QList<QStringList> &dataList, const QList<QStringList> &recordList)
 {
     // Clear existing QGroupBox objects
     qDeleteAll(groupBoxList);
@@ -503,7 +503,7 @@ void Admin_Classes_Students_List::displayDataFromDatabase(const QList<QStringLis
         dataDeleteButton->setStyleSheet("QPushButton { border: 0px; border-radius: 0px; background: none; }");
         dataDeleteButton->setGeometry(285, 10, 15, 15);
         connect(dataDeleteButton, &QPushButton::clicked, this, [=]() {
-            Admin_Classes_Students_List::deleteDataFromDatabase(studentId);
+            Admin_Classes_Students_List::deleteStudentFromClass(studentId);
         });
 
         // Add data group box to contents layout
@@ -514,7 +514,7 @@ void Admin_Classes_Students_List::displayDataFromDatabase(const QList<QStringLis
 }
 
 
-void Admin_Classes_Students_List::deleteDataFromDatabase(const QString &studentId)
+void Admin_Classes_Students_List::deleteStudentFromClass(const QString &studentId)
 {
     // Return error if unable to access the database
     if (!database.open())

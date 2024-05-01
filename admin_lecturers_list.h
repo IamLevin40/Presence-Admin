@@ -55,9 +55,9 @@ class Admin_Lecturers_List : public QMainWindow
 
         // All custom functions() should be recognized upon here
         void filterSearchCall();
-        void selectDataFromDatabase(const int &pageNumber, const QString &college, const QString &searchText);
-        void displayDataFromDatabase(const QList<QStringList> &dataList);
-        void deleteDataFromDatabase(const QString &key_lecturerId);
+        void selectLecturerInfo(const int &pageNumber, const QString &college, const QString &searchText);
+        void displayLecturerInfo(const QList<QStringList> &dataList);
+        void deleteLecturerInfo(const QString &key_lecturerId);
 
         void populateCombobox();
 

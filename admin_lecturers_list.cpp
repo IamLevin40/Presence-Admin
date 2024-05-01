@@ -70,11 +70,11 @@ void Admin_Lecturers_List::filterSearchCall()
     college = college.left(collegeIndex).trimmed();
 
     // Proceed to selecting data from database
-    Admin_Lecturers_List::selectDataFromDatabase(pageNumber, college, searchText);
+    Admin_Lecturers_List::selectLecturerInfo(pageNumber, college, searchText);
 }
 
 
-void Admin_Lecturers_List::selectDataFromDatabase(const int &pageNumber, const QString &college, const QString &searchText)
+void Admin_Lecturers_List::selectLecturerInfo(const int &pageNumber, const QString &college, const QString &searchText)
 {
     // Return error if unable to access the database
     if (!database.open())
@@ -147,11 +147,11 @@ void Admin_Lecturers_List::selectDataFromDatabase(const int &pageNumber, const Q
     database.close();
 
     // Proceed to display data list
-    Admin_Lecturers_List::displayDataFromDatabase(lecturerDataList);
+    Admin_Lecturers_List::displayLecturerInfo(lecturerDataList);
 }
 
 
-void Admin_Lecturers_List::displayDataFromDatabase(const QList<QStringList> &dataList)
+void Admin_Lecturers_List::displayLecturerInfo(const QList<QStringList> &dataList)
 {
     // Clear existing QGroupBox objects
     qDeleteAll(groupBoxList);
@@ -227,7 +227,7 @@ void Admin_Lecturers_List::displayDataFromDatabase(const QList<QStringList> &dat
         dataDeleteButton->setStyleSheet("QPushButton { border: 0px; border-radius: 0px; background: none; }");
         dataDeleteButton->setGeometry(285, 10, 15, 15);
         connect(dataDeleteButton, &QPushButton::clicked, this, [=]() {
-            Admin_Lecturers_List::deleteDataFromDatabase(lecturerId);
+            Admin_Lecturers_List::deleteLecturerInfo(lecturerId);
         });
 
         // Add data group box to contents layout
@@ -238,7 +238,7 @@ void Admin_Lecturers_List::displayDataFromDatabase(const QList<QStringList> &dat
 }
 
 
-void Admin_Lecturers_List::deleteDataFromDatabase(const QString &key_lecturerId)
+void Admin_Lecturers_List::deleteLecturerInfo(const QString &key_lecturerId)
 {
     // Return error if unable to access the database
     if (!database.open())

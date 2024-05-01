@@ -66,7 +66,7 @@ void Admin_Classes_Students_Add::classStudentAddCall()
     }
 
     // Proceed to inserting data to database
-    Admin_Classes_Students_Add::insertDataToDatabase(studentId, keys_classInfo);
+    Admin_Classes_Students_Add::insertStudentToClass(studentId, keys_classInfo);
 }
 
 
@@ -110,7 +110,7 @@ QString Admin_Classes_Students_Add::verifyClassStudentAdd(const QString &student
 }
 
 
-void Admin_Classes_Students_Add::insertDataToDatabase(const QString &studentId, const QStringList &keys_classInfo)
+void Admin_Classes_Students_Add::insertStudentToClass(const QString &studentId, const QStringList &keys_classInfo)
 {
     // Return error if unable to access the database
     if (!database.open())

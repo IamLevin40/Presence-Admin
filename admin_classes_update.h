@@ -40,18 +40,18 @@ class Admin_Classes_Update : public QMainWindow
         Admin_Lecturers_List *admin_lecturers_list;
 
         // All custom functions() should be recognized upon here
-        void selectDataFromDatabase(const QStringList &keys_classInfo);
-        void displayDataFromDatabase(const QStringList &dataList);
+        void selectClassInfo(const QStringList &keys_classInfo);
+        void updateField(const QStringList &dataList);
 
         void classUpdateCall();
         QString verifyClassUpdate(const QString &subjectDesc, const QString &room, const QString &lecturerId,
                                   const QString &firstDay, const QString &firstStartTime, const QString &firstEndTime,
                                   const QString &secondDay, const QString &secondStartTime, const QString &secondEndTime,
                                   const QString &thirdDay, const QString &thirdStartTime, const QString &thirdEndTime);
-        void updateDataFromDatabase(const QString &subjectDesc, const QString &room, const QString &lecturerId,
-                                    const QString &firstDay, const QString &firstStartTime, const QString &firstEndTime,
-                                    const QString &secondDay, const QString &secondStartTime, const QString &secondEndTime,
-                                    const QString &thirdDay, const QString &thirdStartTime, const QString &thirdEndTime);
+        void updateClassInfo(const QString &subjectDesc, const QString &room, const QString &lecturerId,
+                             const QString &firstDay, const QString &firstStartTime, const QString &firstEndTime,
+                             const QString &secondDay, const QString &secondStartTime, const QString &secondEndTime,
+                             const QString &thirdDay, const QString &thirdStartTime, const QString &thirdEndTime);
 
         void populateCombobox();
 

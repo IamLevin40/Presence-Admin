@@ -81,7 +81,7 @@ void Admin_Students_Enroll::studentEnrollCall()
     }
 
     // Proceed to inserting data to database
-    Admin_Students_Enroll::insertDataToDatabase(studentId, lastName, firstName, college, program, year, section);
+    Admin_Students_Enroll::insertStudentData(studentId, lastName, firstName, college, program, year, section);
 }
 
 
@@ -103,9 +103,9 @@ QString Admin_Students_Enroll::verifyStudentEnroll(const QString &studentId, con
 }
 
 
-void Admin_Students_Enroll::insertDataToDatabase(const QString &studentId, const QString &lastName, const QString &firstName,
-                                                 const QString &college, const QString &program,
-                                                 const QString &year, const QString &section)
+void Admin_Students_Enroll::insertStudentData(const QString &studentId, const QString &lastName, const QString &firstName,
+                                              const QString &college, const QString &program,
+                                              const QString &year, const QString &section)
 {
     // Return error if unable to access the database
     if (!database.open())
@@ -207,8 +207,8 @@ void Admin_Students_Enroll::collegeIndexChanged(int index)
 void Admin_Students_Enroll::switchWindow_AdminStudentsList()
 {
     // Switch ui window to Admin_Students_List
-    admin_students_List = new Admin_Students_List;
-    admin_students_List->show();
+    admin_students_list = new Admin_Students_List;
+    admin_students_list->show();
     this->hide();
 }
 

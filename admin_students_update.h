@@ -39,21 +39,21 @@ class Admin_Students_Update : public QMainWindow
         QSqlDatabase database;
 
         // Reference the class files here
-        Admin_Students_List *admin_students_List;
+        Admin_Students_List *admin_students_list;
         Admin_Classes_List *admin_classes_list;
         Admin_Lecturers_List *admin_lecturers_list;
 
         // All custom functions() should be recognized upon here
-        void selectDataFromDatabase(const QString &key_studentId);
-        void displayDataFromDatabase(const QStringList &dataList);
+        void selectStudentInfo(const QString &key_studentId);
+        void updateField(const QStringList &dataList);
 
         void studentUpdateCall();
         QString verifyStudentUpdate(const QString &lastname, const QString &firstName,
                                     const QString &college, const QString &program,
                                     const QString &year, const QString &section, const QString &pin);
-        void updateDataFromDatabase(const QString &lastname, const QString &firstName,
-                                    const QString &college, const QString &program,
-                                    const QString &year, const QString &section, const QString &pin);
+        void updateStudentInfo(const QString &lastname, const QString &firstName,
+                               const QString &college, const QString &program,
+                               const QString &year, const QString &section, const QString &pin);
 
         void handleIsRegularRadio(const QString &option);
         void populateCombobox();

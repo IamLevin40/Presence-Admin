@@ -57,12 +57,12 @@ class Admin_Classes_List : public QMainWindow
 
         // All custom functions() should be recognized upon here
         void filterSearchCall();
-        void selectDataFromDatabase(const int &pageNumber, const QString &schoolYear, const QString &semester,
-                                    const QString &program, const QString &year, const QString &section,
-                                    const QString &searchText);
-        void displayDataFromDatabase(const QList<QStringList> &dataList);
+        void selectClassInfo(const int &pageNumber, const QString &schoolYear, const QString &semester,
+                             const QString &program, const QString &year, const QString &section,
+                             const QString &searchText);
+        void displayClassInfo(const QList<QStringList> &dataList);
 
-        void deleteDataFromDatabase(const QStringList &keys_classInfo);
+        void deleteClassInfo(const QStringList &keys_classInfo);
 
         void populateCombobox();
         QStringList getLecturerInfo(const QString &lecturerId);

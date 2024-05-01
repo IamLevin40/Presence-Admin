@@ -26,7 +26,7 @@ Admin_Classes_Update::Admin_Classes_Update(QWidget *parent)
 
     // Initiate functions on awake
     Admin_Classes_Update::populateCombobox();
-    Admin_Classes_Update::selectDataFromDatabase($updateKeys_ClassInfo);
+    Admin_Classes_Update::selectClassInfo($updateKeys_ClassInfo);
     DateTimeUtils::updateDateTimeUtils(ui->dateLabel, ui->timeLabel);
 
     // Connect ui objects to functions based on user interaction
@@ -50,7 +50,7 @@ Admin_Classes_Update::~Admin_Classes_Update()
 }
 
 
-void Admin_Classes_Update::selectDataFromDatabase(const QStringList &keys_classInfo)
+void Admin_Classes_Update::selectClassInfo(const QStringList &keys_classInfo)
 {
     // Return error if unable to access the database
     if (!database.open())
@@ -116,11 +116,11 @@ void Admin_Classes_Update::selectDataFromDatabase(const QStringList &keys_classI
     database.close();
 
     // Proceed to display data list
-    Admin_Classes_Update::displayDataFromDatabase(classDataList);
+    Admin_Classes_Update::updateField(classDataList);
 }
 
 
-void Admin_Classes_Update::displayDataFromDatabase(const QStringList &dataList)
+void Admin_Classes_Update::updateField(const QStringList &dataList)
 {
     // Assign members from dataList to variables
     QString subjectCode = dataList[0];
@@ -221,7 +221,7 @@ void Admin_Classes_Update::classUpdateCall()
     }
 
     // Proceed to updating data from database
-    Admin_Classes_Update::updateDataFromDatabase(subjectDesc, room, lecturerId,
+    Admin_Classes_Update::updateClassInfo(subjectDesc, room, lecturerId,
                                                  firstDay, firstStartTime, firstEndTime,
                                                  secondDay, secondStartTime, secondEndTime,
                                                  thirdDay, thirdStartTime, thirdEndTime);
@@ -290,10 +290,10 @@ QString Admin_Classes_Update::verifyClassUpdate(const QString &subjectDesc, cons
 }
 
 
-void Admin_Classes_Update::updateDataFromDatabase(const QString &subjectDesc, const QString &room, const QString &lecturerId,
-                                                  const QString &firstDay, const QString &firstStartTime, const QString &firstEndTime,
-                                                  const QString &secondDay, const QString &secondStartTime, const QString &secondEndTime,
-                                                  const QString &thirdDay, const QString &thirdStartTime, const QString &thirdEndTime)
+void Admin_Classes_Update::updateClassInfo(const QString &subjectDesc, const QString &room, const QString &lecturerId,
+                                           const QString &firstDay, const QString &firstStartTime, const QString &firstEndTime,
+                                           const QString &secondDay, const QString &secondStartTime, const QString &secondEndTime,
+                                           const QString &thirdDay, const QString &thirdStartTime, const QString &thirdEndTime)
 {
     // Return error if unable to access the database
     if (!database.open())

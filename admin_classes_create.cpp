@@ -92,7 +92,7 @@ void Admin_Classes_Create::classCreateCall()
     }
 
     // Proceed to inserting data to database
-    Admin_Classes_Create::insertDataToDatabase(subjectCode, subjectDesc, schoolYear, semester,
+    Admin_Classes_Create::insertClassData(subjectCode, subjectDesc, schoolYear, semester,
                                                program, year, section, room, lecturerId,
                                                firstDay, firstStartTime, firstEndTime,
                                                secondDay, secondStartTime, secondEndTime,
@@ -171,12 +171,12 @@ QString Admin_Classes_Create::verifyClassCreate(const QString &subjectCode, cons
 }
 
 
-void Admin_Classes_Create::insertDataToDatabase(const QString &subjectCode, const QString &subjectDesc,
-                                                const QString &schoolYear, const QString &semester, const QString &program,
-                                                const QString &year, const QString &section, const QString &room, const QString &lecturerId,
-                                                const QString &firstDay, const QString &firstStartTime, const QString &firstEndTime,
-                                                const QString &secondDay, const QString &secondStartTime, const QString &secondEndTime,
-                                                const QString &thirdDay, const QString &thirdStartTime, const QString &thirdEndTime)
+void Admin_Classes_Create::insertClassData(const QString &subjectCode, const QString &subjectDesc,
+                                           const QString &schoolYear, const QString &semester, const QString &program,
+                                           const QString &year, const QString &section, const QString &room, const QString &lecturerId,
+                                           const QString &firstDay, const QString &firstStartTime, const QString &firstEndTime,
+                                           const QString &secondDay, const QString &secondStartTime, const QString &secondEndTime,
+                                           const QString &thirdDay, const QString &thirdStartTime, const QString &thirdEndTime)
 {
     // Return error if unable to access the database
     if (!database.open())
@@ -254,12 +254,12 @@ void Admin_Classes_Create::insertDataToDatabase(const QString &subjectCode, cons
     QSqlDatabase::database().commit();
     database.close();
 
-    Admin_Classes_Create::addDataToGeneratedTable(tableName, program, year, section);
+    Admin_Classes_Create::addStudentsToClass(tableName, program, year, section);
     Admin_Classes_Create::switchWindow_AdminClassesList();
 }
 
 
-void Admin_Classes_Create::addDataToGeneratedTable(const QString &tableName, const QString &program, const QString &year, const QString &section)
+void Admin_Classes_Create::addStudentsToClass(const QString &tableName, const QString &program, const QString &year, const QString &section)
 {
     // Return error if unable to access the database
     if (!database.open())
