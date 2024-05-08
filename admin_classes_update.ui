@@ -14,7 +14,7 @@
    <string>Admin Classes Update</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="resources.qrc">
+   <iconset resource="../Presence/resources.qrc">
     <normaloff>:/res/assets/presence_logo.png</normaloff>:/res/assets/presence_logo.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -57,7 +57,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="resources.qrc">:/res/assets/header_short.png</pixmap>
+      <pixmap resource="../Presence/resources.qrc">:/res/assets/header_short.png</pixmap>
      </property>
     </widget>
     <widget class="QPushButton" name="backButton">
@@ -74,13 +74,17 @@
 	border: 0px;
 	border-radius: 0px;
 	background: none;
+}
+
+QPushButton:focus { 
+	outline: none; 
 }</string>
      </property>
      <property name="text">
       <string/>
      </property>
      <property name="icon">
-      <iconset resource="resources.qrc">
+      <iconset resource="../Presence/resources.qrc">
        <normaloff>:/res/assets/back.png</normaloff>:/res/assets/back.png</iconset>
      </property>
      <property name="iconSize">
@@ -106,7 +110,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="resources.qrc">:/res/assets/cict_avatar.png</pixmap>
+      <pixmap resource="../Presence/resources.qrc">:/res/assets/cict_avatar.png</pixmap>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -252,7 +256,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="resources.qrc">:/res/assets/footer.png</pixmap>
+      <pixmap resource="../Presence/resources.qrc">:/res/assets/footer.png</pixmap>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -272,13 +276,17 @@
 	border: 0px;
 	border-radius: 0px;
 	background: none;
+}
+
+QPushButton:focus { 
+	outline: none; 
 }</string>
      </property>
      <property name="text">
       <string/>
      </property>
      <property name="icon">
-      <iconset resource="resources.qrc">
+      <iconset resource="../Presence/resources.qrc">
        <normaloff>:/res/assets/home_unselected.png</normaloff>:/res/assets/home_unselected.png</iconset>
      </property>
      <property name="iconSize">
@@ -332,13 +340,17 @@
 	border: 0px;
 	border-radius: 0px;
 	background: none;
+}
+
+QPushButton:focus { 
+	outline: none; 
 }</string>
      </property>
      <property name="text">
       <string/>
      </property>
      <property name="icon">
-      <iconset resource="resources.qrc">
+      <iconset resource="../Presence/resources.qrc">
        <normaloff>:/res/assets/class_list_selected.png</normaloff>:/res/assets/class_list_selected.png</iconset>
      </property>
      <property name="iconSize">
@@ -392,13 +404,17 @@
 	border: 0px;
 	border-radius: 0px;
 	background: none;
+}
+
+QPushButton:focus { 
+	outline: none; 
 }</string>
      </property>
      <property name="text">
       <string/>
      </property>
      <property name="icon">
-      <iconset resource="resources.qrc">
+      <iconset resource="../Presence/resources.qrc">
        <normaloff>:/res/assets/lecturer_unselected.png</normaloff>:/res/assets/lecturer_unselected.png</iconset>
      </property>
      <property name="iconSize">
@@ -494,13 +510,17 @@
 	border: 0px;
 	border-radius: 0px;
 	background: none;
+}
+
+QPushButton:focus { 
+	outline: none; 
 }</string>
      </property>
      <property name="text">
       <string/>
      </property>
      <property name="icon">
-      <iconset resource="resources.qrc">
+      <iconset resource="../Presence/resources.qrc">
        <normaloff>:/res/assets/update.png</normaloff>:/res/assets/update.png</iconset>
      </property>
      <property name="iconSize">
@@ -538,7 +558,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="resources.qrc">:/res/assets/data_field_long.png</pixmap>
+       <pixmap resource="../Presence/resources.qrc">:/res/assets/data_field_long.png</pixmap>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -593,7 +613,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="resources.qrc">:/res/assets/data_field_long.png</pixmap>
+       <pixmap resource="../Presence/resources.qrc">:/res/assets/data_field_long.png</pixmap>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -648,7 +668,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="resources.qrc">:/res/assets/data_field_medium.png</pixmap>
+       <pixmap resource="../Presence/resources.qrc">:/res/assets/data_field_medium.png</pixmap>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -703,7 +723,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="resources.qrc">:/res/assets/data_field_medium.png</pixmap>
+       <pixmap resource="../Presence/resources.qrc">:/res/assets/data_field_medium.png</pixmap>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -758,7 +778,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="resources.qrc">:/res/assets/data_field_long.png</pixmap>
+       <pixmap resource="../Presence/resources.qrc">:/res/assets/data_field_long.png</pixmap>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -818,7 +838,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="resources.qrc">:/res/assets/data_field_medium.png</pixmap>
+       <pixmap resource="../Presence/resources.qrc">:/res/assets/data_field_medium.png</pixmap>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -873,7 +893,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="resources.qrc">:/res/assets/data_field_medium.png</pixmap>
+       <pixmap resource="../Presence/resources.qrc">:/res/assets/data_field_medium.png</pixmap>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -928,7 +948,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="resources.qrc">:/res/assets/data_field_medium.png</pixmap>
+       <pixmap resource="../Presence/resources.qrc">:/res/assets/data_field_medium.png</pixmap>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -988,7 +1008,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="resources.qrc">:/res/assets/data_field_medium.png</pixmap>
+       <pixmap resource="../Presence/resources.qrc">:/res/assets/data_field_medium.png</pixmap>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -1083,7 +1103,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="resources.qrc">:/res/assets/data_field_short.png</pixmap>
+        <pixmap resource="../Presence/resources.qrc">:/res/assets/data_field_short.png</pixmap>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -1167,7 +1187,7 @@ QComboBox QScrollBar::sub-page:vertical {
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="resources.qrc">:/res/assets/data_field_short.png</pixmap>
+        <pixmap resource="../Presence/resources.qrc">:/res/assets/data_field_short.png</pixmap>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -1251,7 +1271,7 @@ QComboBox QScrollBar::sub-page:vertical {
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="resources.qrc">:/res/assets/data_field_short.png</pixmap>
+        <pixmap resource="../Presence/resources.qrc">:/res/assets/data_field_short.png</pixmap>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -1371,7 +1391,7 @@ QComboBox QScrollBar::sub-page:vertical {
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="resources.qrc">:/res/assets/data_field_short.png</pixmap>
+        <pixmap resource="../Presence/resources.qrc">:/res/assets/data_field_short.png</pixmap>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -1455,7 +1475,7 @@ QComboBox QScrollBar::sub-page:vertical {
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="resources.qrc">:/res/assets/data_field_short.png</pixmap>
+        <pixmap resource="../Presence/resources.qrc">:/res/assets/data_field_short.png</pixmap>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -1539,7 +1559,7 @@ QComboBox QScrollBar::sub-page:vertical {
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="resources.qrc">:/res/assets/data_field_short.png</pixmap>
+        <pixmap resource="../Presence/resources.qrc">:/res/assets/data_field_short.png</pixmap>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -1689,7 +1709,7 @@ QComboBox QScrollBar::sub-page:vertical {
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="resources.qrc">:/res/assets/data_field_short.png</pixmap>
+        <pixmap resource="../Presence/resources.qrc">:/res/assets/data_field_short.png</pixmap>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -1773,7 +1793,7 @@ QComboBox QScrollBar::sub-page:vertical {
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="resources.qrc">:/res/assets/data_field_short.png</pixmap>
+        <pixmap resource="../Presence/resources.qrc">:/res/assets/data_field_short.png</pixmap>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -1857,7 +1877,7 @@ QComboBox QScrollBar::sub-page:vertical {
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="resources.qrc">:/res/assets/data_field_short.png</pixmap>
+        <pixmap resource="../Presence/resources.qrc">:/res/assets/data_field_short.png</pixmap>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -1920,8 +1940,6 @@ QComboBox QScrollBar::sub-page:vertical {
    </widget>
   </widget>
  </widget>
- <resources>
-  <include location="resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

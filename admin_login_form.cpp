@@ -16,6 +16,7 @@ Admin_Login_Form::Admin_Login_Form(QWidget *parent)
 
     // Connect ui objects to functions based on user interaction
     connect(ui->loginButton, &QPushButton::clicked, this, &Admin_Login_Form::loginCall);
+    connect(ui->adminPinToggle, &QPushButton::clicked, this, [=](){ ToggleManager::toggleEchoMode(ui->adminPinTextbox, ui->adminPinToggle); });
 
     // Load window position
     QPoint windowPos = WindowPositionManager::loadWindowPosition();

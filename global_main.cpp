@@ -227,6 +227,147 @@ namespace Schedules
 }
 
 
+// Global email message
+namespace EmailMsg
+{
+    const QString preSubjectForStudent = "Student Log-in Credentials for WVSU Presence";
+    const QString preSubjectForLecturer = "Lecturer Log-in Credentials for WVSU Presence";
+
+    const QString preBodyForStudent =
+        "Dear, %1 \n"
+        "\n"
+        "Good day! \n"
+        "\n"
+        "This is to inform you that you are registered for WVSU Presence. "
+        "You may download the application and log in for class attendance checking. Below is your log-in credentials: \n"
+        "\n"
+        "Student Number:   %2 \n"
+        "Pin:   %3 \n"
+        "College:   %4 \n"
+        "\n"
+        "Thank you. \n"
+        "\n"
+        "This is a system generated e-mail. Please do not reply.";
+
+    const QString preBodyForLecturer =
+        "Dear, %1 \n"
+        "\n"
+        "Good day! \n"
+        "\n"
+        "This is to inform you that you are registered for WVSU Presence. "
+        "You may download the application and log in for tracking students' attendance. Below is your log-in credentials: \n"
+        "\n"
+        "Lecturer Number:   %2 \n"
+        "Pin:   %3 \n"
+        "College:   %4 \n"
+        "\n"
+        "Thank you. \n"
+        "\n"
+        "This is a system generated e-mail. Please do not reply.";
+
+    void sendEmailViaGmail(const QString &adminGmail, const QString &adminPassword,
+                           const QString &recipient, const QString &subject, const QString &body,
+                           QLabel *errorLabel)
+    {
+        // Create a TCP socket for connecting to the SMTP server
+        QSslSocket socket;
+        socket.connectToHostEncrypted("smtp.gmail.com", 465); // Gmail SMTP server and port
+
+        if (!socket.waitForConnected())
+        {
+            GlobalTimer::displayTextForDuration(errorLabel, Messages::errorAccessGmail(), 5000);
+            return;
+        }
+
+        // Wait for the socket to be encrypted
+        if (!socket.waitForEncrypted())
+        {
+            GlobalTimer::displayTextForDuration(errorLabel, Messages::errorAccessGmail(), 5000);
+            return;
+        }
+
+        qDebug() << "Connected to SMTP (gmail) server";
+
+        // Send the email data
+        QTextStream stream(&socket);
+
+        stream << "HELO gmail.com\r\n";
+        stream << "AUTH LOGIN\r\n";
+
+        stream << QByteArray().fromStdString(adminGmail.toStdString()).toBase64() << "\r\n"; // Gmail username in base64
+        stream << QByteArray().fromStdString(adminPassword.toStdString()).toBase64() << "\r\n"; // Gmail password in base64
+
+        if (!EmailMsg::waitForServerResponse(stream, 250))
+        {
+            GlobalTimer::displayTextForDuration(errorLabel, Messages::somethingWentWrong(), 5000);
+            qDebug() << "Authentication failed.";
+            socket.close();
+            return;
+        }
+
+        stream << "MAIL FROM: <" << adminGmail << ">\r\n";
+        stream << "RCPT TO: <" << recipient << ">\r\n";
+        stream << "DATA\r\n";
+
+        stream << "Content-Type: text/plain; charset=UTF-8\r\n";
+        stream << "Date: " << QDateTime::currentDateTime().toString(Qt::RFC2822Date) << "\r\n";
+
+        stream << "From: " << adminGmail << "\r\n";
+        stream << "To: " << recipient << "\r\n";
+
+        stream << "Subject: " << subject << "\r\n";
+        stream << "\r\n" << body << "\r\n";
+
+        stream << ".\r\n";
+        stream << "QUIT\r\n";
+
+        stream.flush();
+
+        if (!EmailMsg::waitForServerResponse(stream, 250))
+        {
+            GlobalTimer::displayTextForDuration(errorLabel, Messages::somethingWentWrong(), 5000);
+            qDebug() << "Failed to send email.";
+            socket.close();
+            return;
+        }
+
+        socket.close();
+        GlobalTimer::displayTextForDuration(errorLabel, Messages::sendEmailSuccessful(), 5000);
+    }
+
+    bool waitForServerResponse(QTextStream &stream, int expectedCode)
+    {
+        QString responseLine = stream.readLine();
+        if (responseLine.isEmpty()) {
+            // Handle empty response (unexpected)
+            return false;
+        }
+
+        int statusCode = responseLine.split(' ')[0].toInt();
+        if (statusCode != expectedCode) {
+            // Handle unexpected status code
+            qDebug() << "Error: Unexpected response from server: " << responseLine;
+            return false;
+        }
+
+        return true;
+    }
+}
+
+
+// Toggling echo mode for textboxes
+void ToggleManager::toggleEchoMode(QLineEdit *textbox, QPushButton *toggle)
+{
+    // Check if these objects are valid
+    if (!textbox || !toggle)
+        return;
+
+    // Toggle echo mode of textbox
+    textbox->setEchoMode((textbox->echoMode() == QLineEdit::Normal) ? QLineEdit::Password : QLineEdit::Normal);
+    toggle->setIcon(QIcon(QString(":/res/assets/%1.png").arg((textbox->echoMode() == QLineEdit::Password) ? "hide" : "view")));
+}
+
+
 // Global timer
 QTimer* GlobalTimer::m_timer = new QTimer();
 void GlobalTimer::displayTextForDuration(QObject* object, const QString& text, int duration)

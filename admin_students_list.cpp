@@ -10,6 +10,7 @@
 #include "admin_lecturers_list.h"
 #include "admin_students_enroll.h"
 #include "admin_students_update.h"
+#include "admin_students_send_email.h"
 
 
 Admin_Students_List::Admin_Students_List(QWidget *parent)
@@ -119,7 +120,7 @@ void Admin_Students_List::selectStudentInfo(const int &pageNumber, const QString
                 (Year = :year OR :year IS NULL) AND \
                 (Section = :section OR :section IS NULL) AND \
                 (IsRegular = :isRegular OR :isRegular IS NULL) \
-                ORDER BY LastName, FirstName ASC \
+                ORDER BY College, LastName, FirstName ASC \
                 LIMIT :limit OFFSET :offset";
     query.prepare(sqlQuery);
 
@@ -242,6 +243,16 @@ void Admin_Students_List::displayStudentInfo(const QList<QStringList> &dataList)
         dataPinLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
         dataPinLabel->setStyleSheet("QLabel { color: #15CAE3; font-family: Poppins; font-size: 9px; font-style: normal; font-weight: 400; line-height: normal; }");
         dataPinLabel->setGeometry(240, 40, 60, 10);
+
+        // Set up dataSendMailButton
+        QPushButton *dataSendMailButton = new QPushButton(dataGroup);
+        dataSendMailButton->setIcon(QIcon(":/res/assets/send_mail.png"));
+        dataSendMailButton->setStyleSheet("QPushButton { border: 0px; border-radius: 0px; background: none; }");
+        dataSendMailButton->setGeometry(245, 10, 15, 15);
+        connect(dataSendMailButton, &QPushButton::clicked, this, [=]() {
+            Admin_Students_List::switchWindow_AdminStudentsSendEmail(studentId);
+        });
+
 
         // Set up dataEditButton
         QPushButton *dataEditButton = new QPushButton(dataGroup);
@@ -393,6 +404,18 @@ void Admin_Students_List::switchWindow_AdminStudentsUpdate(const QString &key_st
     // Switch ui window to Admin_Students_Update
     admin_students_update = new Admin_Students_Update;
     admin_students_update->show();
+    this->hide();
+}
+
+
+void Admin_Students_List::switchWindow_AdminStudentsSendEmail(const QString &key_studentId)
+{
+    // Set primary key for sending email with student info
+    $updateKey_StudentInfo = key_studentId;
+
+    // Switch ui window to Admin_Students_Send_Email
+    admin_students_send_email = new Admin_Students_Send_Email;
+    admin_students_send_email->show();
     this->hide();
 }
 

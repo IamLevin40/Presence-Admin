@@ -24,6 +24,7 @@ class Admin_Classes_List;
 class Admin_Lecturers_List;
 class Admin_Students_Enroll;
 class Admin_Students_Update;
+class Admin_Students_Send_Email;
 
 
 namespace Ui {
@@ -55,6 +56,7 @@ class Admin_Students_List : public QMainWindow
         Admin_Lecturers_List *admin_lecturers_list;
         Admin_Students_Enroll *admin_students_enroll;
         Admin_Students_Update *admin_students_update;
+        Admin_Students_Send_Email *admin_students_send_email;
 
         // All custom functions() should be recognized upon here
         void filterSearchCall();
@@ -71,6 +73,7 @@ class Admin_Students_List : public QMainWindow
         void switchWindow_AdminLecturersList();
         void switchWindow_AdminStudentsEnroll();
         void switchWindow_AdminStudentsUpdate(const QString &key_studentId);
+        void switchWindow_AdminStudentsSendEmail(const QString &key_studentId);
 };
 
 #endif // ADMIN_STUDENTS_LIST_H

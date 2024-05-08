@@ -1,6 +1,7 @@
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+ANDROID_ARCHITECTURES = armeabi-v7a arm64-v8a x86 x86_64
 
-QT += core gui sql axcontainer
+QT += core gui sql axcontainer network networkauth
 CONFIG += c++17
 
 
@@ -20,6 +21,7 @@ SOURCES += \
     admin_login_form.cpp \
     admin_students_enroll.cpp \
     admin_students_list.cpp \
+    admin_students_send_email.cpp \
     admin_students_update.cpp \
     global_main.cpp \
     main.cpp
@@ -36,6 +38,7 @@ HEADERS += \
     admin_login_form.h \
     admin_students_enroll.h \
     admin_students_list.h \
+    admin_students_send_email.h \
     admin_students_update.h \
     global_main.h
 
@@ -51,6 +54,7 @@ FORMS += \
     admin_login_form.ui \
     admin_students_enroll.ui \
     admin_students_list.ui \
+    admin_students_send_email.ui \
     admin_students_update.ui \
     design_area.ui
 
@@ -61,3 +65,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resources.qrc
+

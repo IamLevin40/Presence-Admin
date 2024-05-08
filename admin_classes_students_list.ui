@@ -14,7 +14,7 @@
    <string>Admin Classes Students List</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="resources.qrc">
+   <iconset resource="../Presence/resources.qrc">
     <normaloff>:/res/assets/presence_logo.png</normaloff>:/res/assets/presence_logo.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -57,7 +57,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="resources.qrc">:/res/assets/header_short.png</pixmap>
+      <pixmap resource="../Presence/resources.qrc">:/res/assets/header_short.png</pixmap>
      </property>
     </widget>
     <widget class="QPushButton" name="backButton">
@@ -74,13 +74,17 @@
 	border: 0px;
 	border-radius: 0px;
 	background: none;
+}
+
+QPushButton:focus { 
+	outline: none; 
 }</string>
      </property>
      <property name="text">
       <string/>
      </property>
      <property name="icon">
-      <iconset resource="resources.qrc">
+      <iconset resource="../Presence/resources.qrc">
        <normaloff>:/res/assets/back.png</normaloff>:/res/assets/back.png</iconset>
      </property>
      <property name="iconSize">
@@ -106,7 +110,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="resources.qrc">:/res/assets/cict_avatar.png</pixmap>
+      <pixmap resource="../Presence/resources.qrc">:/res/assets/cict_avatar.png</pixmap>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -252,7 +256,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="resources.qrc">:/res/assets/footer.png</pixmap>
+      <pixmap resource="../Presence/resources.qrc">:/res/assets/footer.png</pixmap>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -272,13 +276,17 @@
 	border: 0px;
 	border-radius: 0px;
 	background: none;
+}
+
+QPushButton:focus { 
+	outline: none; 
 }</string>
      </property>
      <property name="text">
       <string/>
      </property>
      <property name="icon">
-      <iconset resource="resources.qrc">
+      <iconset resource="../Presence/resources.qrc">
        <normaloff>:/res/assets/home_unselected.png</normaloff>:/res/assets/home_unselected.png</iconset>
      </property>
      <property name="iconSize">
@@ -332,13 +340,17 @@
 	border: 0px;
 	border-radius: 0px;
 	background: none;
+}
+
+QPushButton:focus { 
+	outline: none; 
 }</string>
      </property>
      <property name="text">
       <string/>
      </property>
      <property name="icon">
-      <iconset resource="resources.qrc">
+      <iconset resource="../Presence/resources.qrc">
        <normaloff>:/res/assets/class_list_selected.png</normaloff>:/res/assets/class_list_selected.png</iconset>
      </property>
      <property name="iconSize">
@@ -391,7 +403,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="resources.qrc">:/res/assets/white_box.png</pixmap>
+      <pixmap resource="../Presence/resources.qrc">:/res/assets/white_box.png</pixmap>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -411,13 +423,17 @@
 	border: 0px;
 	border-radius: 0px;
 	background: none;
+}
+
+QPushButton:focus { 
+	outline: none; 
 }</string>
      </property>
      <property name="text">
       <string/>
      </property>
      <property name="icon">
-      <iconset resource="resources.qrc">
+      <iconset resource="../Presence/resources.qrc">
        <normaloff>:/res/assets/add_student.png</normaloff>:/res/assets/add_student.png</iconset>
      </property>
      <property name="iconSize">
@@ -444,13 +460,17 @@
 	border: 0px;
 	border-radius: 0px;
 	background: none;
+}
+
+QPushButton:focus { 
+	outline: none; 
 }</string>
      </property>
      <property name="text">
       <string/>
      </property>
      <property name="icon">
-      <iconset resource="resources.qrc">
+      <iconset resource="../Presence/resources.qrc">
        <normaloff>:/res/assets/lecturer_unselected.png</normaloff>:/res/assets/lecturer_unselected.png</iconset>
      </property>
      <property name="iconSize">
@@ -769,13 +789,17 @@
 	border: 0px;
 	border-radius: 0px;
 	background: none;
+}
+
+QPushButton:focus { 
+	outline: none; 
 }</string>
      </property>
      <property name="text">
       <string/>
      </property>
      <property name="icon">
-      <iconset resource="resources.qrc">
+      <iconset resource="../Presence/resources.qrc">
        <normaloff>:/res/assets/next_arrow.png</normaloff>:/res/assets/next_arrow.png</iconset>
      </property>
      <property name="flat">
@@ -796,13 +820,17 @@
 	border: 0px;
 	border-radius: 0px;
 	background: none;
+}
+
+QPushButton:focus { 
+	outline: none; 
 }</string>
      </property>
      <property name="text">
       <string/>
      </property>
      <property name="icon">
-      <iconset resource="resources.qrc">
+      <iconset resource="../Presence/resources.qrc">
        <normaloff>:/res/assets/prev_arrow.png</normaloff>:/res/assets/prev_arrow.png</iconset>
      </property>
      <property name="flat">
@@ -852,13 +880,17 @@
 	border: 0px;
 	border-radius: 0px;
 	background: none;
+}
+
+QPushButton:focus { 
+	outline: none; 
 }</string>
     </property>
     <property name="text">
      <string/>
     </property>
     <property name="icon">
-     <iconset resource="resources.qrc">
+     <iconset resource="../Presence/resources.qrc">
       <normaloff>:/res/assets/download.png</normaloff>:/res/assets/download.png</iconset>
     </property>
     <property name="iconSize">
@@ -900,8 +932,6 @@
    <zorder>footerGroup</zorder>
   </widget>
  </widget>
- <resources>
-  <include location="resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

@@ -107,7 +107,7 @@ void Admin_Lecturers_List::selectLecturerInfo(const int &pageNumber, const QStri
         sqlQuery += searchType + " AND ";
     }
     sqlQuery += "(College = :college OR :college IS NULL) \
-                ORDER BY LastName, FirstName ASC \
+                ORDER BY College, LastName, FirstName ASC \
                 LIMIT :limit OFFSET :offset";
     query.prepare(sqlQuery);
 

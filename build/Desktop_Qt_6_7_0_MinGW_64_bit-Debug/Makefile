@@ -134,6 +134,8 @@ Makefile: ../../Presence-Admin.pro C:/Qt/6.7.0/mingw_64/mkspecs/win32-g++/qmake.
 		C:/Qt/6.7.0/mingw_64/mkspecs/modules/qt_lib_multimediawidgets_private.pri \
 		C:/Qt/6.7.0/mingw_64/mkspecs/modules/qt_lib_network.pri \
 		C:/Qt/6.7.0/mingw_64/mkspecs/modules/qt_lib_network_private.pri \
+		C:/Qt/6.7.0/mingw_64/mkspecs/modules/qt_lib_networkauth.pri \
+		C:/Qt/6.7.0/mingw_64/mkspecs/modules/qt_lib_networkauth_private.pri \
 		C:/Qt/6.7.0/mingw_64/mkspecs/modules/qt_lib_opengl.pri \
 		C:/Qt/6.7.0/mingw_64/mkspecs/modules/qt_lib_opengl_private.pri \
 		C:/Qt/6.7.0/mingw_64/mkspecs/modules/qt_lib_openglwidgets.pri \
@@ -301,6 +303,8 @@ Makefile: ../../Presence-Admin.pro C:/Qt/6.7.0/mingw_64/mkspecs/win32-g++/qmake.
 		C:/Qt/6.7.0/mingw_64/lib/Qt6Widgets.prl \
 		C:/Qt/6.7.0/mingw_64/lib/Qt6Gui.prl \
 		C:/Qt/6.7.0/mingw_64/lib/Qt6Sql.prl \
+		C:/Qt/6.7.0/mingw_64/lib/Qt6NetworkAuth.prl \
+		C:/Qt/6.7.0/mingw_64/lib/Qt6Network.prl \
 		C:/Qt/6.7.0/mingw_64/lib/Qt6Core.prl \
 		C:/Qt/6.7.0/mingw_64/lib/Qt6EntryPoint.prl \
 		C:/Qt/6.7.0/mingw_64/mkspecs/features/build_pass.prf \
@@ -370,6 +374,8 @@ C:/Qt/6.7.0/mingw_64/mkspecs/modules/qt_lib_multimediawidgets.pri:
 C:/Qt/6.7.0/mingw_64/mkspecs/modules/qt_lib_multimediawidgets_private.pri:
 C:/Qt/6.7.0/mingw_64/mkspecs/modules/qt_lib_network.pri:
 C:/Qt/6.7.0/mingw_64/mkspecs/modules/qt_lib_network_private.pri:
+C:/Qt/6.7.0/mingw_64/mkspecs/modules/qt_lib_networkauth.pri:
+C:/Qt/6.7.0/mingw_64/mkspecs/modules/qt_lib_networkauth_private.pri:
 C:/Qt/6.7.0/mingw_64/mkspecs/modules/qt_lib_opengl.pri:
 C:/Qt/6.7.0/mingw_64/mkspecs/modules/qt_lib_opengl_private.pri:
 C:/Qt/6.7.0/mingw_64/mkspecs/modules/qt_lib_openglwidgets.pri:
@@ -537,6 +543,8 @@ C:/Qt/6.7.0/mingw_64/lib/Qt6AxContainer.prl:
 C:/Qt/6.7.0/mingw_64/lib/Qt6Widgets.prl:
 C:/Qt/6.7.0/mingw_64/lib/Qt6Gui.prl:
 C:/Qt/6.7.0/mingw_64/lib/Qt6Sql.prl:
+C:/Qt/6.7.0/mingw_64/lib/Qt6NetworkAuth.prl:
+C:/Qt/6.7.0/mingw_64/lib/Qt6Network.prl:
 C:/Qt/6.7.0/mingw_64/lib/Qt6Core.prl:
 C:/Qt/6.7.0/mingw_64/lib/Qt6EntryPoint.prl:
 C:/Qt/6.7.0/mingw_64/mkspecs/features/build_pass.prf:

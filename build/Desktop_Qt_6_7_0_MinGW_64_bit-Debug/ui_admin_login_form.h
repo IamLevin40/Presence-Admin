@@ -37,6 +37,7 @@ public:
     QGroupBox *adminPinGroup;
     QLabel *adminPinHud;
     QLineEdit *adminPinTextbox;
+    QPushButton *adminPinToggle;
     QPushButton *loginButton;
     QLabel *errorLabel;
 
@@ -176,7 +177,7 @@ public:
         adminPinHud->setAlignment(Qt::AlignCenter);
         adminPinTextbox = new QLineEdit(adminPinGroup);
         adminPinTextbox->setObjectName("adminPinTextbox");
-        adminPinTextbox->setGeometry(QRect(15, 0, 220, 30));
+        adminPinTextbox->setGeometry(QRect(15, 0, 200, 30));
         adminPinTextbox->setFont(font2);
         adminPinTextbox->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
 "	background-color: transparent;\n"
@@ -190,6 +191,22 @@ public:
 "}"));
         adminPinTextbox->setMaxLength(6);
         adminPinTextbox->setEchoMode(QLineEdit::Password);
+        adminPinToggle = new QPushButton(adminPinGroup);
+        adminPinToggle->setObjectName("adminPinToggle");
+        adminPinToggle->setGeometry(QRect(215, 4, 25, 25));
+        adminPinToggle->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"	border: 0px;\n"
+"	border-radius: 0px;\n"
+"	background: none;\n"
+"}\n"
+"\n"
+"QPushButton:focus { \n"
+"	outline: none; \n"
+"}"));
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8(":/res/assets/hide.png"), QSize(), QIcon::Normal, QIcon::Off);
+        adminPinToggle->setIcon(icon1);
+        adminPinToggle->setIconSize(QSize(25, 25));
         loginButton = new QPushButton(formGroup);
         loginButton->setObjectName("loginButton");
         loginButton->setGeometry(QRect(75, 330, 210, 40));
@@ -197,10 +214,14 @@ public:
 "	border: 0px;\n"
 "	border-radius: 0px;\n"
 "	background: none;\n"
+"}\n"
+"\n"
+"QPushButton:focus { \n"
+"	outline: none; \n"
 "}"));
-        QIcon icon1;
-        icon1.addFile(QString::fromUtf8(":/res/assets/login_button.png"), QSize(), QIcon::Normal, QIcon::Off);
-        loginButton->setIcon(icon1);
+        QIcon icon2;
+        icon2.addFile(QString::fromUtf8(":/res/assets/login_button.png"), QSize(), QIcon::Normal, QIcon::Off);
+        loginButton->setIcon(icon2);
         loginButton->setIconSize(QSize(210, 40));
         loginButton->setFlat(true);
         errorLabel = new QLabel(formGroup);
@@ -237,6 +258,7 @@ public:
         adminPinGroup->setTitle(QString());
         adminPinHud->setText(QString());
         adminPinTextbox->setPlaceholderText(QCoreApplication::translate("Admin_Login_Form", "Pin", nullptr));
+        adminPinToggle->setText(QString());
         loginButton->setText(QString());
         errorLabel->setText(QString());
     } // retranslateUi

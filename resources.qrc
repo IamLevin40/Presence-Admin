@@ -29,6 +29,7 @@
         <file>assets/data_field_long.png</file>
         <file>assets/data_field_medium.png</file>
         <file>assets/data_field_short.png</file>
+        <file>assets/data_field_tall.png</file>
         <file>assets/delete.png</file>
         <file>assets/delete_warning.png</file>
         <file>assets/download.png</file>
@@ -38,6 +39,7 @@
         <file>assets/form_background.png</file>
         <file>assets/header_large.png</file>
         <file>assets/header_short.png</file>
+        <file>assets/hide.png</file>
         <file>assets/home_selected.png</file>
         <file>assets/home_unselected.png</file>
         <file>assets/lecturer_selected.png</file>
@@ -55,6 +57,8 @@
         <file>assets/qr_code_unselected.png</file>
         <file>assets/search.png</file>
         <file>assets/search_field_short.png</file>
+        <file>assets/send.png</file>
+        <file>assets/send_mail.png</file>
         <file>assets/student_record.png</file>
         <file>assets/student_selected.png</file>
         <file>assets/student_selection.png</file>
@@ -62,6 +66,7 @@
         <file>assets/take_attendance.png</file>
         <file>assets/update.png</file>
         <file>assets/verify.png</file>
+        <file>assets/view.png</file>
         <file>assets/white_box.png</file>
         <file>assets/yes.png</file>
     </qresource>

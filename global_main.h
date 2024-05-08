@@ -1,6 +1,14 @@
 #ifndef GLOBAL_MAIN_H
 #define GLOBAL_MAIN_H
 
+#include <QObject>
+#include <QLabel>
+#include <QComboBox>
+#include <QLineEdit>
+#include <QTextEdit>
+#include <QPushButton>
+#include <QIcon>
+
 #include <QString>
 #include <QVector>
 #include <QPoint>
@@ -10,10 +18,11 @@
 #include <QTime>
 #include <QTimer>
 #include <QSettings>
-#include <QObject>
-#include <QLabel>
-#include <QComboBox>
-#include <QLineEdit>
+
+#include <QtNetwork/QtNetwork>
+#include <QSslSocket>
+#include <QSslError>
+#include <QTextStream>
 
 
 // Global variables
@@ -83,6 +92,7 @@ namespace Messages
     inline QString errorUpdateData() { return "Unable to update data from the database."; }
     inline QString errorCreateTable() { return "Unable to create table in the database."; }
     inline QString errorDeleteTable() { return "Unable to delete table from the database."; }
+    inline QString errorAccessGmail() { return "Unable to access gmail account."; }
 
     inline QString emptyAdminId() { return "Admin number is required."; }
     inline QString invalidAdminId() { return "Admin number is invalid."; }
@@ -131,7 +141,41 @@ namespace Messages
     inline QString noSelectedThirdDay() { return "No selected third day."; }
     inline QString noSelectedStartTimeThirdDay() { return "No selected start time on the third day."; }
     inline QString noSelectedEndTimeThirdDay() { return "No selected end time on the third day."; }
+
+    inline QString emptyAdminGmail() { return "Admin Gmail is required."; }
+    inline QString invalidAdminGmail() { return "Admin Gmail is invalid."; }
+    inline QString emptyAdminPassword() { return "Admin Password is required."; }
+    inline QString emptyRecipient() { return "Recipient is required."; }
+    inline QString invalidRecipient() { return "Recipient is invalid."; }
+    inline QString emptySubjectEmail() { return "Subject for e-mail is required."; }
+    inline QString emptyBodyEmail() { return "Body for e-mail is required."; }
+
+    inline QString sendEmailSuccessful() { return "The e-mail is sent successfully."; }
+    inline QString somethingWentWrong() { return "Something went wrong. Please try again."; }
 }
+
+
+// Global email messages (for pre-generated email)
+namespace EmailMsg
+{
+    extern const QString preSubjectForStudent;
+    extern const QString preSubjectForLecturer;
+    extern const QString preBodyForStudent;
+    extern const QString preBodyForLecturer;
+
+    void sendEmailViaGmail(const QString &adminGmail, const QString &adminPassword,
+                           const QString &recipient, const QString &subject, const QString &body,
+                           QLabel *errorLabel);
+
+    bool waitForServerResponse(QTextStream &stream, int expectedCode);
+}
+
+
+// Toggle manager
+class ToggleManager {
+    public:
+        static void toggleEchoMode(QLineEdit *textbox, QPushButton *toggle);
+};
 
 
 // Global timer

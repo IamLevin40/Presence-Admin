@@ -658,7 +658,9 @@ void Admin_Classes_Students_List::createExcelFile(const QStringList &keys_classI
                         }
 
                         // Save the Excel file
-                        workbook->dynamicCall("SaveAs(const QString&)", QDir::toNativeSeparators(fileName));
+                        QString fullPath = QFileDialog::getSaveFileName(nullptr, "Save Excel File", "", "*.xlsx");
+                        workbook->dynamicCall("SaveAs(const QString&)", QDir::toNativeSeparators(fullPath.isEmpty() ? fileName : fullPath));
+
                         workbook->dynamicCall("Close()");
                         delete worksheet;
                     }
