@@ -65,7 +65,9 @@ class Admin_Classes_Students_List : public QMainWindow
         void selectEnlistedStudents(const int &pageNumber, const QStringList &keys_classInfo);
         void displayEnlistedStudents(const QList<QStringList> &dataList);
 
+        void displayDeleteWarning(const QString &studentId);
         void deleteStudentFromClass(const QString &studentId);
+        void disregardDelete();
 
         void createExcelFile(const QStringList &keys_classInfo);
 

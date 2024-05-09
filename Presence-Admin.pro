@@ -17,6 +17,7 @@ SOURCES += \
     admin_classes_update.cpp \
     admin_lecturers_add.cpp \
     admin_lecturers_list.cpp \
+    admin_lecturers_send_email.cpp \
     admin_lecturers_update.cpp \
     admin_login_form.cpp \
     admin_students_enroll.cpp \
@@ -34,6 +35,7 @@ HEADERS += \
     admin_classes_update.h \
     admin_lecturers_add.h \
     admin_lecturers_list.h \
+    admin_lecturers_send_email.h \
     admin_lecturers_update.h \
     admin_login_form.h \
     admin_students_enroll.h \
@@ -50,6 +52,7 @@ FORMS += \
     admin_classes_update.ui \
     admin_lecturers_add.ui \
     admin_lecturers_list.ui \
+    admin_lecturers_send_email.ui \
     admin_lecturers_update.ui \
     admin_login_form.ui \
     admin_students_enroll.ui \

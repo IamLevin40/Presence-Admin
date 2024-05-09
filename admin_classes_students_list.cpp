@@ -471,7 +471,7 @@ void Admin_Classes_Students_List::displayEnlistedStudents(const QList<QStringLis
         dataDeleteButton->setStyleSheet("QPushButton { border: 0px; border-radius: 0px; background: none; }");
         dataDeleteButton->setGeometry(285, 10, 15, 15);
         connect(dataDeleteButton, &QPushButton::clicked, this, [=]() {
-            Admin_Classes_Students_List::deleteStudentFromClass(studentId);
+            Admin_Classes_Students_List::displayDeleteWarning(studentId);
         });
 
         // Add data group box to contents layout
@@ -479,6 +479,52 @@ void Admin_Classes_Students_List::displayEnlistedStudents(const QList<QStringLis
         dataGroup->setVisible(true);
         dataGroup->raise();
     }
+}
+
+
+void Admin_Classes_Students_List::displayDeleteWarning(const QString &studentId)
+{
+    // Find and delete the existing group box
+    QGroupBox *existingGroupBox = ui->centralwidget->findChild<QGroupBox*>("deleteWarningGroup");
+    if (existingGroupBox) { delete existingGroupBox; }
+
+    // Create deleteWarningGroup
+    QGroupBox *deleteWarningGroup = new QGroupBox(ui->centralwidget);
+    deleteWarningGroup->setObjectName("deleteWarningGroup");
+    deleteWarningGroup->setStyleSheet("QGroupBox { border: 0px; border-radius: 0px; background-color: rgba(255, 255, 255, 128); }");
+    deleteWarningGroup->setGeometry(0, 95, 360, 420);
+
+    // Set up deleteWarningBox
+    QGroupBox *deleteWarningBox = new QGroupBox(deleteWarningGroup);
+    deleteWarningBox->setStyleSheet("QGroupBox { border: 0px; border-radius: 0px; background: none; }");
+    deleteWarningBox->setGeometry(55, 110, 250, 110);
+
+    // Set up deleteWarningLabel
+    QLabel *deleteWarningLabel = new QLabel(deleteWarningBox);
+    deleteWarningLabel->setPixmap(QPixmap(":/res/assets/delete_warning.png"));
+    deleteWarningLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    deleteWarningLabel->setGeometry(0, 0, 250, 90);
+
+    // Set up deleteYesButton
+    QPushButton *deleteYesButton = new QPushButton(deleteWarningBox);
+    deleteYesButton->setIcon(QIcon(":/res/assets/yes.png"));
+    deleteYesButton->setIconSize(QSize(90, 40));
+    deleteYesButton->setStyleSheet("QPushButton { border: 0px; border-radius: 0px; background: none; }");
+    deleteYesButton->setGeometry(35, 60, 80, 40);
+    connect(deleteYesButton, &QPushButton::clicked, this, [=]() {
+        Admin_Classes_Students_List::deleteStudentFromClass(studentId);
+    });
+
+    // Set up deleteNoButton
+    QPushButton *deleteNoButton = new QPushButton(deleteWarningBox);
+    deleteNoButton->setIcon(QIcon(":/res/assets/no.png"));
+    deleteNoButton->setIconSize(QSize(90, 40));
+    deleteNoButton->setStyleSheet("QPushButton { border: 0px; border-radius: 0px; background: none; }");
+    deleteNoButton->setGeometry(135, 60, 80, 40);
+    connect(deleteNoButton, &QPushButton::clicked, this, Admin_Classes_Students_List::disregardDelete);
+
+    deleteWarningGroup->setVisible(true);
+    deleteWarningGroup->raise();
 }
 
 
@@ -523,7 +569,16 @@ void Admin_Classes_Students_List::deleteStudentFromClass(const QString &studentI
     QSqlDatabase::database().commit();
     database.close();
 
+    Admin_Classes_Students_List::disregardDelete();
     Admin_Classes_Students_List::filterSearchCall();
+}
+
+
+void Admin_Classes_Students_List::disregardDelete()
+{
+    // Find and delete the existing group box
+    QGroupBox *existingGroupBox = ui->centralwidget->findChild<QGroupBox*>("deleteWarningGroup");
+    if (existingGroupBox) { delete existingGroupBox; }
 }
 
 
@@ -588,7 +643,7 @@ void Admin_Classes_Students_List::createExcelFile(const QStringList &keys_classI
 
     // Set up excel file object
     QString fileName = tableName;
-    QStringList columnNames = {"StudentId", "LastName", "FirstName", "P", "A"};
+    QStringList columnNames = {"No.", "StudentId", "LastName", "FirstName", "Presents", "Absents"};
 
     QAxObject excel("Excel.Application");
 
@@ -609,7 +664,14 @@ void Admin_Classes_Students_List::createExcelFile(const QStringList &keys_classI
                     QAxObject *worksheet = worksheets->querySubObject("Item(int)", 1); // Get the first worksheet
                     if (worksheet)
                     {
-                        // Set column names starting from B2
+                        // Set font family for all text to Times New Roman
+                        QAxObject *font = worksheet->querySubObject("Range(const QString&)", "A1:Z128")->querySubObject("Font");
+                        if (font) {
+                            font->setProperty("Name", "Times New Roman");
+                            delete font;
+                        }
+
+                        // Insert column names for each column
                         for (int i = 0; i < columnNames.size(); ++i) {
                             QAxObject *cell = worksheet->querySubObject("Cells(int,int)", 2, i + 2);
                             if (cell) {
@@ -629,11 +691,21 @@ void Admin_Classes_Students_List::createExcelFile(const QStringList &keys_classI
                             }
                         }
 
-                        // Set row data starting from B4
+                        // Set index number for each row
+                        for (int row = 0; row < studentDataList.size(); ++row) {
+                            QAxObject *cell = worksheet->querySubObject("Cells(int,int)", row + 4, 2);
+                            if (cell) {
+                                cell->setProperty("Value", row + 1);
+                                cell->setProperty("HorizontalAlignment", -4108);
+                                delete cell;
+                            }
+                        }
+
+                        // Insert row of data
                         for (int row = 0; row < studentDataList.size(); ++row) {
                             const QStringList &rowValues = studentDataList.at(row);
                             for (int col = 0; col < rowValues.size(); ++col) {
-                                QAxObject *cell = worksheet->querySubObject("Cells(int,int)", row + 4, col + 2);
+                                QAxObject *cell = worksheet->querySubObject("Cells(int,int)", row + 4, col + 3);
                                 if (cell) {
                                     cell->setProperty("Value", rowValues.at(col));
                                     delete cell;
@@ -650,9 +722,9 @@ void Admin_Classes_Students_List::createExcelFile(const QStringList &keys_classI
                                 }
                             }
                             // Set the width of the column to accommodate the maximum length of data
-                            QAxObject *range = worksheet->querySubObject("Columns(int)", col + 2);
+                            QAxObject *range = worksheet->querySubObject("Columns(int)", col + 3);
                             if (range) {
-                                range->setProperty("ColumnWidth", maxLength + 5);  // Add extra padding
+                                range->setProperty("ColumnWidth", maxLength + 8);  // Add extra padding
                                 delete range;
                             }
                         }

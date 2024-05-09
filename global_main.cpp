@@ -1,6 +1,5 @@
 #include "global_main.h"
 
-
 // Global variables
 QString $appCompany = "BSCS1B";
 QString $appName = "Presence-Admin";
@@ -230,13 +229,13 @@ namespace Schedules
 // Global email message
 namespace EmailMsg
 {
-    const QString preSubjectForStudent = "Student Log-in Credentials for WVSU Presence";
-    const QString preSubjectForLecturer = "Lecturer Log-in Credentials for WVSU Presence";
+    const QString preSubjectForStudent = "WVSU Presence: Student Log-in Credentials";
+    const QString preSubjectForLecturer = "WVSU Presence: Lecturer Log-in Credentials";
 
     const QString preBodyForStudent =
         "Dear, %1 \n"
         "\n"
-        "Good day! \n"
+        "Greetings! \n"
         "\n"
         "This is to inform you that you are registered for WVSU Presence. "
         "You may download the application and log in for class attendance checking. Below is your log-in credentials: \n"
@@ -252,7 +251,7 @@ namespace EmailMsg
     const QString preBodyForLecturer =
         "Dear, %1 \n"
         "\n"
-        "Good day! \n"
+        "Greetings! \n"
         "\n"
         "This is to inform you that you are registered for WVSU Presence. "
         "You may download the application and log in for tracking students' attendance. Below is your log-in credentials: \n"

@@ -64,7 +64,10 @@ class Admin_Students_List : public QMainWindow
                                const QString &year, const QString &section, const QString &isRegular,
                                const QString &searchText);
         void displayStudentInfo(const QList<QStringList> &dataList);
+
+        void displayDeleteWarning(const QString &key_studentId);
         void deleteStudentInfo(const QString &key_studentId);
+        void disregardDelete();
 
         void populateCombobox();
 

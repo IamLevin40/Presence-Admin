@@ -62,7 +62,9 @@ class Admin_Classes_List : public QMainWindow
                              const QString &searchText);
         void displayClassInfo(const QList<QStringList> &dataList);
 
+        void displayDeleteWarning(const QStringList &keys_classInfo);
         void deleteClassInfo(const QStringList &keys_classInfo);
+        void disregardDelete();
 
         void populateCombobox();
         QStringList getLecturerInfo(const QString &lecturerId);

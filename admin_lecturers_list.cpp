@@ -10,6 +10,7 @@
 #include "admin_classes_list.h"
 #include "admin_lecturers_add.h"
 #include "admin_lecturers_update.h"
+#include "admin_lecturers_send_email.h"
 
 
 Admin_Lecturers_List::Admin_Lecturers_List(QWidget *parent)
@@ -213,6 +214,15 @@ void Admin_Lecturers_List::displayLecturerInfo(const QList<QStringList> &dataLis
         dataPinLabel->setStyleSheet("QLabel { color: #15CAE3; font-family: Poppins; font-size: 9px; font-style: normal; font-weight: 400; line-height: normal; }");
         dataPinLabel->setGeometry(240, 40, 60, 10);
 
+        // Set up dataSendMailButton
+        QPushButton *dataSendMailButton = new QPushButton(dataGroup);
+        dataSendMailButton->setIcon(QIcon(":/res/assets/send_mail.png"));
+        dataSendMailButton->setStyleSheet("QPushButton { border: 0px; border-radius: 0px; background: none; }");
+        dataSendMailButton->setGeometry(245, 10, 15, 15);
+        connect(dataSendMailButton, &QPushButton::clicked, this, [=]() {
+            Admin_Lecturers_List::switchWindow_AdminLecturersSendEmail(lecturerId);
+        });
+
         // Set up dataEditButton
         QPushButton *dataEditButton = new QPushButton(dataGroup);
         dataEditButton->setIcon(QIcon(":/res/assets/edit.png"));
@@ -228,7 +238,7 @@ void Admin_Lecturers_List::displayLecturerInfo(const QList<QStringList> &dataLis
         dataDeleteButton->setStyleSheet("QPushButton { border: 0px; border-radius: 0px; background: none; }");
         dataDeleteButton->setGeometry(285, 10, 15, 15);
         connect(dataDeleteButton, &QPushButton::clicked, this, [=]() {
-            Admin_Lecturers_List::deleteLecturerInfo(lecturerId);
+            Admin_Lecturers_List::displayDeleteWarning(lecturerId);
         });
 
         // Add data group box to contents layout
@@ -236,6 +246,52 @@ void Admin_Lecturers_List::displayLecturerInfo(const QList<QStringList> &dataLis
         dataGroup->setVisible(true);
         dataGroup->raise();
     }
+}
+
+
+void Admin_Lecturers_List::displayDeleteWarning(const QString &key_lecturerId)
+{
+    // Find and delete the existing group box
+    QGroupBox *existingGroupBox = ui->centralwidget->findChild<QGroupBox*>("deleteWarningGroup");
+    if (existingGroupBox) { delete existingGroupBox; }
+
+    // Create deleteWarningGroup
+    QGroupBox *deleteWarningGroup = new QGroupBox(ui->centralwidget);
+    deleteWarningGroup->setObjectName("deleteWarningGroup");
+    deleteWarningGroup->setStyleSheet("QGroupBox { border: 0px; border-radius: 0px; background-color: rgba(255, 255, 255, 128); }");
+    deleteWarningGroup->setGeometry(0, 95, 360, 420);
+
+    // Set up deleteWarningBox
+    QGroupBox *deleteWarningBox = new QGroupBox(deleteWarningGroup);
+    deleteWarningBox->setStyleSheet("QGroupBox { border: 0px; border-radius: 0px; background: none; }");
+    deleteWarningBox->setGeometry(55, 110, 250, 110);
+
+    // Set up deleteWarningLabel
+    QLabel *deleteWarningLabel = new QLabel(deleteWarningBox);
+    deleteWarningLabel->setPixmap(QPixmap(":/res/assets/delete_warning.png"));
+    deleteWarningLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    deleteWarningLabel->setGeometry(0, 0, 250, 90);
+
+    // Set up deleteYesButton
+    QPushButton *deleteYesButton = new QPushButton(deleteWarningBox);
+    deleteYesButton->setIcon(QIcon(":/res/assets/yes.png"));
+    deleteYesButton->setIconSize(QSize(90, 40));
+    deleteYesButton->setStyleSheet("QPushButton { border: 0px; border-radius: 0px; background: none; }");
+    deleteYesButton->setGeometry(35, 60, 80, 40);
+    connect(deleteYesButton, &QPushButton::clicked, this, [=]() {
+        Admin_Lecturers_List::deleteLecturerInfo(key_lecturerId);
+    });
+
+    // Set up deleteNoButton
+    QPushButton *deleteNoButton = new QPushButton(deleteWarningBox);
+    deleteNoButton->setIcon(QIcon(":/res/assets/no.png"));
+    deleteNoButton->setIconSize(QSize(90, 40));
+    deleteNoButton->setStyleSheet("QPushButton { border: 0px; border-radius: 0px; background: none; }");
+    deleteNoButton->setGeometry(135, 60, 80, 40);
+    connect(deleteNoButton, &QPushButton::clicked, this, Admin_Lecturers_List::disregardDelete);
+
+    deleteWarningGroup->setVisible(true);
+    deleteWarningGroup->raise();
 }
 
 
@@ -270,7 +326,16 @@ void Admin_Lecturers_List::deleteLecturerInfo(const QString &key_lecturerId)
     QSqlDatabase::database().commit();
     database.close();
 
+    Admin_Lecturers_List::disregardDelete();
     Admin_Lecturers_List::filterSearchCall();
+}
+
+
+void Admin_Lecturers_List::disregardDelete()
+{
+    // Find and delete the existing group box
+    QGroupBox *existingGroupBox = ui->centralwidget->findChild<QGroupBox*>("deleteWarningGroup");
+    if (existingGroupBox) { delete existingGroupBox; }
 }
 
 
@@ -330,6 +395,18 @@ void Admin_Lecturers_List::switchWindow_AdminLecturersUpdate(const QString &key_
     // Switch ui window to Admin_Lecturers_Update
     admin_lecturers_update = new Admin_Lecturers_Update;
     admin_lecturers_update->show();
+    this->hide();
+}
+
+
+void Admin_Lecturers_List::switchWindow_AdminLecturersSendEmail(const QString &key_lecturerId)
+{
+    // Set primary key for updating student info
+    $updateKey_LecturerInfo = key_lecturerId;
+
+    // Switch ui window to Admin_Lecturers_Send_Email
+    admin_lecturers_send_email = new Admin_Lecturers_Send_Email;
+    admin_lecturers_send_email->show();
     this->hide();
 }
 

@@ -24,6 +24,7 @@ class Admin_Students_List;
 class Admin_Classes_List;
 class Admin_Lecturers_Add;
 class Admin_Lecturers_Update;
+class Admin_Lecturers_Send_Email;
 
 
 namespace Ui {
@@ -52,12 +53,16 @@ class Admin_Lecturers_List : public QMainWindow
         Admin_Classes_List *admin_classes_list;
         Admin_Lecturers_Add *admin_lecturers_add;
         Admin_Lecturers_Update *admin_lecturers_update;
+        Admin_Lecturers_Send_Email *admin_lecturers_send_email;
 
         // All custom functions() should be recognized upon here
         void filterSearchCall();
         void selectLecturerInfo(const int &pageNumber, const QString &college, const QString &searchText);
         void displayLecturerInfo(const QList<QStringList> &dataList);
+
+        void displayDeleteWarning(const QString &key_lecturerId);
         void deleteLecturerInfo(const QString &key_lecturerId);
+        void disregardDelete();
 
         void populateCombobox();
 
@@ -66,6 +71,7 @@ class Admin_Lecturers_List : public QMainWindow
         void switchWindow_AdminClassesList();
         void switchWindow_AdminLecturersAdd();
         void switchWindow_AdminLecturersUpdate(const QString &key_lecturerId);
+        void switchWindow_AdminLecturersSendEmail(const QString &key_lecturerId);
 };
 
 #endif // ADMIN_LECTURERS_LIST_H
