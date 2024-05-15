@@ -54,3 +54,9 @@ class Admin_Classes_Students_Add : public QMainWindow
 };
 
 #endif // ADMIN_CLASSES_STUDENTS_ADD_H
+
+
+/*
+ *   Copyright (c) 2024 - WVSU-CICT BSCS 1B: Batch 2027
+ *   All rights reserved.
+ */

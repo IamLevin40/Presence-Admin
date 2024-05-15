@@ -53,3 +53,9 @@ class Admin_Lecturers_Send_Email : public QMainWindow
 };
 
 #endif // ADMIN_LECTURERS_SEND_EMAIL_H
+
+
+/*
+ *   Copyright (c) 2024 - WVSU-CICT BSCS 1B: Batch 2027
+ *   All rights reserved.
+ */

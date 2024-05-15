@@ -188,3 +188,9 @@ void Admin_Lecturers_Add::moveEvent(QMoveEvent *event)
     QMainWindow::moveEvent(event);
     WindowPositionManager::saveWindowPosition(event->pos());
 }
+
+
+/*
+ *   Copyright (c) 2024 - WVSU-CICT BSCS 1B: Batch 2027
+ *   All rights reserved.
+ */

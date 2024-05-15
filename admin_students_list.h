@@ -80,3 +80,9 @@ class Admin_Students_List : public QMainWindow
 };
 
 #endif // ADMIN_STUDENTS_LIST_H
+
+
+/*
+ *   Copyright (c) 2024 - WVSU-CICT BSCS 1B: Batch 2027
+ *   All rights reserved.
+ */

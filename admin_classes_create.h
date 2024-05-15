@@ -66,3 +66,9 @@ class Admin_Classes_Create : public QMainWindow
 };
 
 #endif // ADMIN_CLASSES_CREATE_H
+
+
+/*
+ *   Copyright (c) 2024 - WVSU-CICT BSCS 1B: Batch 2027
+ *   All rights reserved.
+ */

@@ -24,3 +24,9 @@ int main(int argc, char *argv[])
 
     return a.exec();
 }
+
+
+/*
+ *   Copyright (c) 2024 - WVSU-CICT BSCS 1B: Batch 2027
+ *   All rights reserved.
+ */
